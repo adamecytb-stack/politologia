@@ -124,6 +124,8 @@
   }
   .tab.on{background:var(--ink);border-color:var(--ink);color:#fff;}
   .foot{font-size:13px;color:var(--muted);line-height:1.5;}
+  .lbar{height:4px;border-radius:999px;background:var(--line);overflow:hidden;}
+  .lbar span{display:block;height:4px;background:var(--ink);border-radius:999px;}
   .homegrid{display:flex;flex-direction:column;gap:36px;}
 
   /* ---- tema ---- */
@@ -132,6 +134,7 @@
     border-top:1px solid var(--line);padding:14px 0;color:var(--ink);cursor:pointer;font-size:16px;
   }
   .crow .cb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+  .crow .chev{flex:0 0 18px;color:var(--faint);}
   .crow .ct{font-weight:600;}
   .crow .cs{font-size:13.5px;color:var(--muted);}
   .pill{font-size:12.5px;font-weight:600;padding:4px 9px;border-radius:999px;white-space:nowrap;background:var(--soft);color:var(--muted);}
@@ -961,14 +964,42 @@ var BYID = {};
 })();
 function cardsOf(ti){ return CARDS.filter(function(c){ return c.t === ti; }); }
 
-/* ===== OPAKOVANIE (krabicky) =====
-   b: 0 = prave nauceny, 1 = raz vedel, 2+ = pise sam; od 3 "vie napisat"
-   d: kedy sa ma pojem znova objavit */
-var MIN = 60000, HOUR = 3600000, DAY = 86400000;
-var IV = [0, 10 * MIN, 20 * HOUR, 2 * DAY, 4 * DAY, 8 * DAY];
+/* ===== LEKCIE =====
+   ucivo ide po lekciach: v kazdej sa precitaju 1 - 3 pojmy, potom pridu otazky na ne
+   pomiesane s otazkami z predoslych lekcii a na konci este raz tazsie otazky na nove pojmy */
+var LESSONS = [
+  {t:0, ids:["stat", "znaky"]},
+  {t:0, ids:["moc", "legit"]},
+  {t:0, ids:["konc", "delba"]},
+  {t:0, ids:["horiz"]},
+  {t:1, ids:["obc", "ziskanie"]},
+  {t:1, ids:["uzemie", "zmena"]},
+  {t:2, ids:["suver", "vnutorna", "vonkajsia"]},
+  {t:2, ids:["symboly", "vlajka", "hymna"]},
+  {t:3, ids:["hladiska", "republika", "monarchia"]},
+  {t:3, ids:["unitarne", "zlozene"]},
+  {t:3, ids:["rezimy", "diktatura", "demokracia"]}
+];
+var LESSON_OF = {};
+(function indexLessons(){
+  var i, j;
+  for(i = 0; i < LESSONS.length; i++){
+    for(j = 0; j < LESSONS[i].ids.length; j++){ LESSON_OF[LESSONS[i].ids[j]] = i; }
+  }
+})();
+function lessonTitle(li){ return LESSONS[li].ids.map(function(id){ return BYID[id].h; }).join(" · "); }
+function lessonsOf(ti){
+  var out = [], i;
+  for(i = 0; i < LESSONS.length; i++){ if(LESSONS[i].t === ti){ out.push(i); } }
+  return out;
+}
+
+/* ===== POKROK =====
+   b: ako dobre pojem vie (0 = prave precitany, 1 = raz vedel, 2+ = pise sam, od 3 "vie napisat")
+   last: poradie otazky, ked sa nan naposledy pytal, aby sa z minuleho uciva striedali pojmy */
 var KNOW = 3;
-var KEY = "polit-pokrok-v1";
-var P = {c:{}, best:null, sound:true};
+var KEY = "polit-pokrok-v2";
+var P = {c:{}, done:{}, tick:0, best:null, sound:true};
 
 function loadProgress(){
   try {
@@ -977,6 +1008,8 @@ function loadProgress(){
     var o = JSON.parse(raw);
     if(o && typeof o === "object"){
       if(o.c && typeof o.c === "object"){ P.c = o.c; }
+      if(o.done && typeof o.done === "object"){ P.done = o.done; }
+      if(typeof o.tick === "number"){ P.tick = o.tick; }
       if(o.best && typeof o.best === "object"){ P.best = o.best; }
       if(o.sound === false){ P.sound = false; }
     }
@@ -986,7 +1019,6 @@ function saveProgress(){
   try { window.localStorage.setItem(KEY, JSON.stringify(P)); }
   catch(err){ /* sukromne okno alebo plne ulozisko */ }
 }
-function now(){ return Date.now(); }
 function stOf(id){ return P.c[id] || null; }
 function stateOf(id){
   var s = stOf(id);
@@ -994,50 +1026,38 @@ function stateOf(id){
   return s.b >= KNOW ? "know" : "learn";
 }
 function learn(id){
-  if(!P.c[id]){ P.c[id] = {b:0, d:now(), n:0, w:0}; saveProgress(); }
+  if(!P.c[id]){ P.c[id] = {b:0, n:0, w:0, last:P.tick}; saveProgress(); }
 }
 function record(id, ok){
-  var s = P.c[id] || (P.c[id] = {b:0, d:now(), n:0, w:0});
+  var s = P.c[id] || (P.c[id] = {b:0, n:0, w:0, last:0});
   var before = s.b;
+  P.tick++;
   s.n++;
-  if(ok){
-    s.b = Math.min(s.b + 1, 5);
-    s.d = now() + IV[s.b];
-  } else {
-    s.w++;
-    s.b = s.b >= 2 ? 1 : 0;
-    s.d = now();
-  }
+  s.last = P.tick;
+  if(ok){ s.b = Math.min(s.b + 1, 5); }
+  else { s.w++; s.b = s.b >= 2 ? 1 : 0; }
   saveProgress();
-  return {before:before, after:s.b, due:s.d};
+  return {before:before, after:s.b};
 }
-function dueCards(ti){
-  var t = now();
-  return CARDS.filter(function(c){
-    var s = stOf(c.id);
-    return s && s.d <= t && (ti === undefined || ti < 0 || c.t === ti);
-  }).sort(function(x, y){ return stOf(x.id).d - stOf(y.id).d; });
+function nextLesson(){
+  var i;
+  for(i = 0; i < LESSONS.length; i++){ if(!P.done[i]){ return i; } }
+  return -1;
 }
-function freshCards(ti){
-  return CARDS.filter(function(c){ return !stOf(c.id) && (ti === undefined || ti < 0 || c.t === ti); });
+function doneCount(){
+  var n = 0, i;
+  for(i = 0; i < LESSONS.length; i++){ if(P.done[i]){ n++; } }
+  return n;
 }
-function newPerRound(due){ return due >= 6 ? 2 : 3; }
-function nextDue(){
-  var best = 0, id, s;
-  for(id in P.c){
-    s = P.c[id];
-    if(!best || s.d < best){ best = s.d; }
-  }
-  return best;
+function learnedCards(ti){
+  return CARDS.filter(function(c){ return stOf(c.id) && (ti < 0 || c.t === ti); });
 }
-/* "zajtra", "o 2 dni"... */
-function whenText(ts){
-  var diff = ts - now(), days;
-  if(diff < 30 * MIN){ return "o chvíľu"; }
-  if(diff < 6 * HOUR){ return "ešte dnes"; }
-  if(diff < 36 * HOUR){ return "zajtra"; }
-  days = Math.round(diff / DAY);
-  return "o " + days + (days < 5 ? " dni" : " dní");
+/* najprv pojmy, ktore ide najmenej, a z nich tie, na ktore sa najdlhsie nepytal */
+function weakest(list){
+  return list.slice().sort(function(x, y){
+    var a = stOf(x.id), b = stOf(y.id);
+    return (a.b - b.b) || (a.last - b.last);
+  });
 }
 
 /* ===== ZVUK (Web Audio, ziadne subory) ===== */
@@ -1363,56 +1383,40 @@ var S = {
 };
 var app = document.getElementById("app");
 
-/* ===== KOLO: poradie krokov =====
-   nove pojmy: najprv karticka, otazka na ne az o 3 kroky neskor;
-   medzitym idu opakovania z inych pojmov */
-function buildRound(ti, force){
-  var reviews, news, Q = [], pending = [], ri = 0, ni = 0, sinceCard = 9, guard = 0, k, pi, cand;
-  if(force){
-    cand = CARDS.filter(function(c){ return stOf(c.id) && (ti < 0 || c.t === ti); });
-    cand.sort(function(x, y){ return (stOf(x.id).b - stOf(y.id).b) || (stOf(x.id).d - stOf(y.id).d); });
-    reviews = cand.slice(0, 8);
-  } else {
-    reviews = dueCards(ti).slice(0, 8);
-  }
+/* ===== LEKCIA: poradie krokov =====
+   1. karticky novych pojmov
+   2. otazka na kazdy novy pojem, medzi nimi otazky z predoslych lekcii (jedna z tej tesne pred nou)
+   3. na konci este raz kazdy novy pojem, uz tazsia otazka */
+function buildLesson(li){
+  var news = LESSONS[li].ids.slice(), reviews = [], Q = [], prev, rest, i, n;
+  prev = li > 0 ? LESSONS[li - 1].ids.filter(function(id){ return !!stOf(id); }) : [];
+  if(prev.length){ reviews.push(pick(prev)); }
+  rest = weakest(CARDS.filter(function(c){
+    return stOf(c.id) && LESSON_OF[c.id] < li && reviews.indexOf(c.id) < 0;
+  }));
+  for(i = 0; i < rest.length && reviews.length < 3; i++){ reviews.push(rest[i].id); }
   shuffle(reviews);
-  news = freshCards(ti).slice(0, newPerRound(reviews.length));
-  while((ri < reviews.length || ni < news.length || pending.length) && guard < 200){
-    guard++;
-    pi = -1;
-    for(k = 0; k < pending.length; k++){ if(pending[k].wait <= 0){ pi = k; break; } }
-    if(pi >= 0){
-      Q.push({k:"q", id:pending[pi].id});
-      pending.splice(pi, 1);
-      sinceCard++;
-    } else if(ni < news.length && (sinceCard >= 2 || ri >= reviews.length)){
-      Q.push({k:"card", id:news[ni].id});
-      pending.push({id:news[ni].id, wait:3});
-      ni++;
-      sinceCard = 0;
-      continue;
-    } else if(ri < reviews.length){
-      Q.push({k:"q", id:reviews[ri].id});
-      ri++;
-      sinceCard++;
-    } else {
-      pending.sort(function(x, y){ return x.wait - y.wait; });
-      Q.push({k:"q", id:pending[0].id});
-      pending.shift();
-      sinceCard++;
-    }
-    for(k = 0; k < pending.length; k++){ pending[k].wait--; }
+  for(i = 0; i < news.length; i++){ Q.push({k:"card", id:news[i]}); }
+  n = Math.max(news.length, reviews.length);
+  for(i = 0; i < n; i++){
+    if(i < news.length){ Q.push({k:"q", id:news[i], role:"new"}); }
+    if(i < reviews.length){ Q.push({k:"q", id:reviews[i], role:"old"}); }
   }
+  for(i = 0; i < news.length; i++){ Q.push({k:"q", id:news[i], role:"again"}); }
   return Q;
 }
-function startRound(ti, force){
-  var Q = buildRound(ti, force);
-  if(!Q.length){ return; }
-  S.run = {kind:"round", ti:ti, queue:Q, i:0, q:null, ans:null, locked:false, ok:false, note:"",
-    learned:{}, again:{}, reasks:{}, log:[]};
+function newRun(kind, li, ti, Q){
+  S.run = {kind:kind, li:li, ti:ti, queue:Q, i:0, q:null, ans:null, locked:false, ok:false, note:"", reasks:{}, log:[]};
   enterStep();
   S.screen = "run";
   render();
+}
+function startLesson(li){ newRun("lesson", li, LESSONS[li].t, buildLesson(li)); }
+/* opakovanie: najslabsie pojmy z toho, co sa uz ucil */
+function startReview(ti){
+  var list = weakest(learnedCards(ti)).slice(0, 10);
+  if(!list.length){ return; }
+  newRun("review", -1, ti, shuffle(list).map(function(c){ return {k:"q", id:c.id, role:"old"}; }));
 }
 function startTest(){
   var pools = [], order = [], out = [], i, any = true, c, q;
@@ -1432,11 +1436,7 @@ function startTest(){
       }
     }
   }
-  S.run = {kind:"test", ti:-1, queue:shuffle(out), i:0, q:null, ans:null, locked:false, ok:false, note:"",
-    learned:{}, again:{}, reasks:{}, log:[]};
-  enterStep();
-  S.screen = "run";
-  render();
+  newRun("test", -1, -1, shuffle(out));
 }
 function enterStep(){
   var R = S.run, st = R.queue[R.i];
@@ -1449,36 +1449,34 @@ function enterStep(){
   }
 }
 function lockRun(){
-  var R = S.run, q = R.q, ok = isOk(q, R.ans), r, s;
+  var R = S.run, q = R.q, st = R.queue[R.i], ok = isOk(q, R.ans), r, s;
   R.locked = true;
   R.ok = ok;
   R.log.push({q:q, ans:R.ans, ok:ok, id:q.id});
   if(ok){ sGood(); } else { sBad(); }
-  if(R.kind === "round"){
+  if(R.kind !== "test"){
     r = record(q.id, ok);
     if(!ok){
       if((R.reasks[q.id] || 0) < 2){
         R.reasks[q.id] = (R.reasks[q.id] || 0) + 1;
-        R.queue.splice(Math.min(R.i + 4, R.queue.length), 0, {k:"q", id:q.id});
-        R.note = "Vráti sa ti to ešte v tomto kole, trochu ľahšie.";
+        R.queue.splice(Math.min(R.i + 3, R.queue.length), 0, {k:"q", id:q.id, role:"retry"});
+        R.note = "Vráti sa ti to ešte o chvíľu, trochu ľahšie.";
       } else {
-        R.note = "Vráti sa ti to v ďalšom kole.";
+        R.note = R.kind === "lesson" ? "Vrátime sa k tomu v ďalšej lekcii." : "Vrátime sa k tomu pri ďalšom opakovaní.";
       }
-    } else if(R.learned[q.id] && !R.again[q.id] && r.after === 1){
-      R.again[q.id] = true;
-      R.queue.push({k:"q", id:q.id});
-      R.note = "Na konci kola sa ťa na to spýtam ešte raz, trochu ťažšie.";
-    } else if(r.after >= 2 && r.before < 2){
-      R.note = "Nabudúce (" + whenText(r.due) + ") to už napíšeš sám, bez možností.";
+    } else if(st.role === "new"){
+      R.note = "Na konci lekcie sa ťa na to spýtam ešte raz, ťažšie.";
+    } else if(r.after === 2){
+      R.note = "Nabudúce to už napíšeš sám, bez možností.";
+    } else if(r.after >= KNOW && r.before < KNOW){
+      R.note = "Výborne, toto už vieš napísať.";
     } else {
-      R.note = "Znova sa ťa na to spýtam " + whenText(r.due) + ".";
+      R.note = "";
     }
   } else if(!ok){
-    /* chyba v pisomke: pojem sa vrati do opakovania */
+    /* chyba v pisomke: pojem pride v opakovani medzi prvymi */
     s = P.c[q.id];
-    if(s){ s.b = Math.min(s.b, 1); s.d = now(); }
-    else { P.c[q.id] = {b:0, d:now(), n:1, w:1}; }
-    saveProgress();
+    if(s){ s.b = Math.min(s.b, 1); saveProgress(); }
   }
   renderRun(false);
 }
@@ -1492,6 +1490,7 @@ function nextStep(){
 function finishRun(){
   var R = S.run, correct = 0, i, pct;
   for(i = 0; i < R.log.length; i++){ if(R.log[i].ok){ correct++; } }
+  if(R.kind === "lesson"){ P.done[R.li] = true; saveProgress(); }
   if(R.kind === "test" && R.log.length){
     pct = Math.round((correct / R.log.length) * 100);
     if(!P.best || pct > P.best.pct){ P.best = {pct:pct, grade:gradeOf(pct)}; }
@@ -1519,22 +1518,28 @@ function countKnow(ti){
 }
 
 function viewHome(){
-  var due = dueCards(-1).length, fresh = freshCards(-1).length, nn = Math.min(fresh, newPerRound(due)), seen = Object.keys(P.c).length;
-  var html = '<div class="wrap home">' +
+  var nl = nextLesson(), done = doneCount(), total = LESSONS.length, learned = learnedCards(-1).length, L, html;
+  html = '<div class="wrap home">' +
     '<div class="top"><div class="brand"><b>Politológia</b><span>Štát a typy štátov · 9. ročník</span></div><div class="sp"></div>' +
     '<button class="tbtn" data-act="cheat">' + IC.doc + 'Ťahák</button>' + soundBtn() + '</div>' +
     '<div class="homegrid"><div class="stack loose">';
 
-  html += '<div class="hero"><div class="label">Dnes</div>';
-  if(due + nn > 0){
-    html += '<div class="big"><span class="n">' + (due + nn) + '</span><span class="t">' +
-      (seen ? plural(due + nn, "pojem", "pojmy", "pojmov") + '<br>na dnes' : plural(due + nn, "nový pojem", "nové pojmy", "nových pojmov") + '<br>na začiatok') + '</span></div>' +
-      '<p class="muted">' + heroText(due, nn) + '</p>' +
-      '<button class="btn" data-act="round" data-val="-1">Začať kolo ' + IC.arrow + '</button>';
+  html += '<div class="hero">';
+  if(nl >= 0){
+    L = LESSONS[nl];
+    html += '<div class="label">Lekcia ' + (nl + 1) + ' z ' + total + ' · ' + TOPICS[L.t].title + '</div>' +
+      '<h1>' + lessonTitle(nl) + '</h1>' +
+      '<p class="muted">' + lessonText(nl) + '</p>' +
+      '<button class="btn" data-act="lesson" data-val="' + nl + '">' + (done ? "Pokračovať" : "Začať prvú lekciu") + ' ' + IC.arrow + '</button>';
   } else {
-    html += '<div class="big"><span class="n">0</span><span class="t">Na dnes máš<br>hotovo</span></div>' +
-      '<p class="muted">Všetko, čo si sa naučil, sa ti vráti ' + whenText(nextDue()) + '. Ak máš písomku skôr, precvič si to aj tak.</p>' +
-      '<button class="btn" data-act="force" data-val="-1">Precvičiť aj tak ' + IC.arrow + '</button>';
+    html += '<div class="label">Celé učivo</div><h1>Všetkých ' + total + ' lekcií máš za sebou</h1>' +
+      '<p class="muted">Teraz už len opakuj. Najprv prídu pojmy, ktoré ti idú najmenej.</p>' +
+      '<button class="btn" data-act="review" data-val="-1">Opakovať všetko ' + IC.arrow + '</button>';
+  }
+  html += '<div class="stack tight"><div class="lbar"><span style="width:' + Math.round((done / total) * 100) + '%"></span></div>' +
+    '<span class="small muted">Hotové lekcie: ' + done + ' z ' + total + ' · celé učivo asi na 30 minút</span></div>';
+  if(nl >= 0 && learned){
+    html += '<button class="btn soft" data-act="review" data-val="-1">Zopakovať, čo som sa už učil</button>';
   }
   html += '</div>';
 
@@ -1550,38 +1555,45 @@ function viewHome(){
 
   html += '<div class="topics"><div class="top" style="min-height:0;padding-bottom:8px;"><span class="label">Témy</span><div class="sp"></div><span class="small muted">bodka = jeden pojem</span></div>';
   TOPICS.forEach(function(t, i){
-    var n = cardsOf(i).length;
+    var ls = lessonsOf(i);
     html += '<button class="trow" data-act="topic" data-val="' + i + '"><span class="tn">' + (i + 1) + '</span>' +
       '<span class="tb"><span class="tt">' + t.title + '</span>' + dotsHtml(i) +
-      '<span class="small muted">vieš napísať ' + countKnow(i) + ' z ' + n + '</span></span>' + IC.chev + '</button>';
+      '<span class="small muted">vieš napísať ' + countKnow(i) + ' z ' + cardsOf(i).length + ' · lekcie ' + (ls[0] + 1) + (ls.length > 1 ? ' – ' + (ls[ls.length - 1] + 1) : '') + '</span></span>' + IC.chev + '</button>';
   });
   html += '<div class="legend"><span><span class="dot k"></span>vieš napísať</span><span><span class="dot l"></span>učíš sa</span><span><span class="dot"></span>ešte nové</span></div>';
-  html += '<p class="foot" style="margin-top:20px;">Čo vieš, sa ti vráti o pár dní. Čo nevieš, vráti sa ešte v tom istom kole. Nový pojem najprv spájaš alebo dopĺňaš, neskôr ho píšeš sám. ' +
-    'Pokrok sa ukladá len v tomto prehliadači. ' + (seen || P.best ? '<button class="linkbtn" data-act="reset">Vymazať pokrok</button>' : '') + '</p>';
+  html += '<p class="foot" style="margin-top:20px;">V každej lekcii si prečítaš 1 – 3 pojmy. Potom dostaneš otázky na ne a pomedzi ne otázky z predošlých lekcií. ' +
+    'Nový pojem najprv spájaš alebo dopĺňaš, keď ho už vieš, píšeš ho sám. Pokrok sa ukladá len v tomto prehliadači. ' +
+    (learned || P.best ? '<button class="linkbtn" data-act="reset">Vymazať pokrok</button>' : '') + '</p>';
   html += '</div></div></div>';
   app.innerHTML = html;
 }
-function heroText(due, nn){
-  var parts = [];
-  if(!Object.keys(P.c).length){ return "Najprv si ich prečítaš a o chvíľu neskôr sa ťa na ne spýtam. Kolo trvá pár minút."; }
-  if(due){ parts.push(due + " " + plural(due, "pojem", "pojmy", "pojmov") + " na zopakovanie"); }
-  if(nn){ parts.push(nn + " " + plural(nn, "nový pojem", "nové pojmy", "nových pojmov")); }
-  return parts.join(" a ") + ". Kolo trvá pár minút.";
+function lessonText(li){
+  var n = LESSONS[li].ids.length, old = 0;
+  if(li > 0){ old = Math.min(3, CARDS.filter(function(c){ return stOf(c.id) && LESSON_OF[c.id] < li; }).length); }
+  return "Prečítaš " + n + " " + plural(n, "pojem", "pojmy", "pojmov") + ", potom otázky " + (n === 1 ? "naň" : "na ne") +
+    (old ? " a " + old + " " + plural(old, "otázku", "otázky", "otázok") + " z predošlých lekcií" : "") + ". Asi 3 minúty.";
 }
 
 function viewTopic(){
-  var t = TOPICS[S.ti], cs = cardsOf(S.ti), html, anySeen = cs.some(function(c){ return !!stOf(c.id); });
+  var t = TOPICS[S.ti], cs = cardsOf(S.ti), ls = lessonsOf(S.ti), nl = nextLesson(), any = learnedCards(S.ti).length > 0, html;
   html = '<div class="wrap">' +
     '<div class="top"><button class="back" data-act="home">' + IC.back + 'Domov</button><div class="sp"></div>' + soundBtn() + '</div>' +
     '<div class="stack tight"><span class="label">Téma ' + (S.ti + 1) + ' z ' + TOPICS.length + '</span><h1>' + t.title + '</h1><p class="muted">' + t.short + '</p></div>' +
     '<div class="stack">' +
-      '<button class="btn" data-act="' + (anySeen ? "force" : "round") + '" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>' +
+      (any ? '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>' : '') +
       '<button class="btn ghost" data-act="read" data-val="' + S.ti + '">Prečítať celú tému</button>' +
-    '</div><div class="topics">';
+    '</div>';
+  html += '<div class="topics"><div class="label" style="padding-bottom:8px;">Lekcie</div>';
+  ls.forEach(function(li){
+    var pill = P.done[li] ? '<span class="pill k">hotová</span>' : (li === nl ? '<span class="pill l">ďalšia</span>' : '');
+    html += '<button class="crow" data-act="lesson" data-val="' + li + '"><span class="cb"><span class="ct">Lekcia ' + (li + 1) + '</span>' +
+      '<span class="cs">' + lessonTitle(li) + '</span></span>' + pill + IC.chev + '</button>';
+  });
+  html += '</div><div class="topics"><div class="label" style="padding-bottom:8px;">Pojmy</div>';
   cs.forEach(function(c){
-    var st = stateOf(c.id), s = stOf(c.id), sub;
-    sub = st === "new" ? "ešte si sa ho neučil" : (s.d <= now() ? "zopakovať teraz" : "zopakovať " + whenText(s.d));
-    html += '<button class="crow" data-act="card" data-val="' + c.id + '"><span class="cb"><span class="ct">' + c.h + '</span><span class="cs">' + sub + '</span></span>' +
+    var st = stateOf(c.id);
+    html += '<button class="crow" data-act="card" data-val="' + c.id + '"><span class="cb"><span class="ct">' + c.h + '</span>' +
+      '<span class="cs">lekcia ' + (LESSON_OF[c.id] + 1) + '</span></span>' +
       '<span class="pill ' + (st === "know" ? "k" : (st === "learn" ? "l" : "")) + '">' + (st === "know" ? "vieš napísať" : (st === "learn" ? "učíš sa" : "nové")) + '</span></button>';
   });
   html += '</div></div>';
@@ -1601,14 +1613,18 @@ function viewCard(){
   app.innerHTML = html;
 }
 function viewRead(){
-  var t = TOPICS[S.ti], cs = cardsOf(S.ti), html, anySeen = cs.some(function(c){ return !!stOf(c.id); });
+  var t = TOPICS[S.ti], cs = cardsOf(S.ti), any = learnedCards(S.ti).length > 0, ls = lessonsOf(S.ti), first = ls[0], html, i;
+  for(i = 0; i < ls.length; i++){ if(!P.done[ls[i]]){ first = ls[i]; break; } }
   html = '<div class="wrap flow">' +
     '<div class="top"><button class="back" data-act="topic" data-val="' + S.ti + '">' + IC.back + t.title + '</button></div>' +
     '<div class="stack tight"><span class="label">Celá téma na čítanie</span><h1>' + t.title + '</h1></div>';
   cs.forEach(function(c, i){
     html += (i ? '<hr class="cardsep">' : '') + '<div class="stack"><h2>' + c.h + '</h2>' + cardBody(c) + '</div>';
   });
-  html += '<div class="dock"><button class="btn" data-act="' + (anySeen ? "force" : "round") + '" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button></div></div>';
+  html += '<div class="dock">' + (any ?
+    '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>' :
+    '<button class="btn" data-act="lesson" data-val="' + first + '">Začať lekciu ' + (first + 1) + ' ' + IC.arrow + '</button>') +
+    '</div></div>';
   app.innerHTML = html;
 }
 
@@ -1617,13 +1633,13 @@ function renderRun(fresh){
   var R = S.run, st = R.queue[R.i], total = R.queue.length, pct, html, c = BYID[st.id];
   pct = Math.round(((R.i + (R.locked || st.k === "card" ? 1 : 0)) / total) * 100);
   html = '<div class="wrap flow">' +
-    '<div class="ftop"><button class="ibtn" data-act="quit" aria-label="' + (R.kind === "test" ? "Ukončiť písomku" : "Ukončiť kolo") + '">' + IC.close + '</button>' +
+    '<div class="ftop"><button class="ibtn" data-act="quit" aria-label="' + (R.kind === "test" ? "Ukončiť písomku" : (R.kind === "lesson" ? "Ukončiť lekciu" : "Ukončiť opakovanie")) + '">' + IC.close + '</button>' +
     '<div class="prog"><span style="width:' + pct + '%"></span></div><span class="cnt">' + (R.i + 1) + ' / ' + total + '</span></div>';
   if(st.k === "card"){
-    html += '<div class="stack tight"><div class="kick"><span class="a">Nový pojem</span><span class="sep">·</span><span>' + TOPICS[c.t].title + '</span></div>' +
+    html += '<div class="stack tight"><div class="kick"><span class="a">Nový pojem</span><span class="sep">·</span><span>Lekcia ' + (R.li + 1) + ' · ' + TOPICS[c.t].title + '</span></div>' +
       '<h1>' + c.h + '</h1></div>' +
       '<div class="stack loose">' + cardBody(c) + '</div>' +
-      '<div class="dock"><div class="srs">' + IC.again + '<span>Spýtam sa ťa na to o pár otázok neskôr a potom znova o pár dní.</span></div>' +
+      '<div class="dock"><div class="srs">' + IC.again + '<span>O chvíľu sa ťa na to spýtam a na konci lekcie ešte raz, ťažšie.</span></div>' +
       '<button class="btn" data-act="learned" id="mainbtn">Rozumiem</button></div>';
   } else {
     html += questionHtml();
@@ -1641,8 +1657,10 @@ function focusFirst(){
   if(el && !el.disabled && window.matchMedia && window.matchMedia("(hover:hover)").matches){ el.focus(); }
 }
 function questionHtml(){
-  var R = S.run, q = R.q, a = R.ans, L = R.locked, c = BYID[q.id], html = "", i, cls, dis = L ? " disabled" : "", s = stOf(q.id), tag, res, used;
-  tag = R.kind === "test" ? "písomka" : (R.learned[q.id] || !s || s.n === 0 ? "nový pojem" : "opakovanie");
+  var R = S.run, q = R.q, a = R.ans, L = R.locked, c = BYID[q.id], html = "", i, cls, dis = L ? " disabled" : "", role = R.queue[R.i].role, tag, res, used;
+  if(R.kind === "test"){ tag = "písomka"; }
+  else if(R.kind === "review"){ tag = "opakovanie"; }
+  else { tag = role === "old" ? "z predošlých lekcií" : "nový pojem"; }
   html += '<div class="stack tight"><div class="kick"><span class="a">' + KIND[q.t] + '</span><span class="sep">·</span><span>' + TOPICS[c.t].title + '</span><span class="tag">' + tag + '</span></div>' +
     '<h2>' + q.q + '</h2></div>';
 
@@ -1742,7 +1760,7 @@ function questionHtml(){
   html += '<div class="dock">';
   if(L){
     if(R.note){ html += '<div class="srs">' + IC.again + '<span>' + R.note + '</span></div>'; }
-    html += '<button class="btn" data-act="next" id="mainbtn">' + (R.i >= R.queue.length - 1 ? (R.kind === "test" ? "Vyhodnotiť písomku" : "Ukončiť kolo") : 'Ďalej ' + IC.arrow) + '</button>';
+    html += '<button class="btn" data-act="next" id="mainbtn">' + (R.i >= R.queue.length - 1 ? (R.kind === "test" ? "Vyhodnotiť písomku" : (R.kind === "lesson" ? "Dokončiť lekciu" : "Dokončiť opakovanie")) : 'Ďalej ' + IC.arrow) + '</button>';
   } else if(q.t === "match"){
     html += '<div class="hint">Ťukni na pojem a potom na to, k čomu patrí.</div>';
   } else if(q.t === "fix"){
@@ -1761,7 +1779,7 @@ function questionHtml(){
 }
 
 function viewRoundEnd(){
-  var R = S.run, seen = {}, order = [], i, it, correct = 0, html;
+  var R = S.run, seen = {}, order = [], i, it, correct = 0, nl = nextLesson(), html;
   for(i = 0; i < R.log.length; i++){
     it = R.log[i];
     if(it.ok){ correct++; }
@@ -1770,19 +1788,21 @@ function viewRoundEnd(){
   }
   html = '<div class="wrap">' +
     '<div class="top"><div class="sp"></div>' + soundBtn() + '</div>' +
-    '<div class="stack tight"><span class="label">Kolo hotové</span><h1>' + correct + ' z ' + R.log.length + ' správne</h1>' +
-    '<p class="muted">Tu vidíš, kedy sa ti ktorý pojem vráti.</p></div><div>';
+    '<div class="stack tight"><span class="label">' + (R.kind === "lesson" ? "Lekcia " + (R.li + 1) + " hotová" : "Opakovanie hotové") + '</span>' +
+    '<h1>' + correct + ' z ' + R.log.length + ' správne</h1>' +
+    (R.kind === "lesson" ? '<p class="muted">Hotové lekcie: ' + doneCount() + ' z ' + LESSONS.length + '.</p>' : '') + '</div><div>';
   order.forEach(function(id){
-    var s = stOf(id), ok = seen[id].ok;
+    var ok = seen[id].ok, st = stateOf(id);
     html += '<div class="res"><span class="rk ' + (ok ? "ok" : "no") + '">' + (ok ? IC.check : IC.cross) + '</span>' +
-      '<span class="rt">' + BYID[id].h + '</span><span class="rn">' + (s.d <= now() ? "hneď v ďalšom kole" : whenText(s.d)) + '</span></div>';
+      '<span class="rt">' + BYID[id].h + '</span><span class="rn">' + (st === "know" ? "vieš napísať" : "učíš sa") + '</span></div>';
   });
-  if(!order.length){ html += '<p class="muted">V tomto kole boli len nové pojmy.</p>'; }
   html += '</div><div class="stack">';
-  if(dueCards(-1).length + freshCards(-1).length > 0){
-    html += '<button class="btn" data-act="round" data-val="-1">Ďalšie kolo ' + IC.arrow + '</button>';
+  if(R.kind === "lesson" && nl >= 0){
+    html += '<button class="btn" data-act="lesson" data-val="' + nl + '">Ďalšia lekcia ' + IC.arrow + '</button>';
+  } else if(R.kind === "lesson"){
+    html += '<button class="btn" data-act="review" data-val="-1">Opakovať všetko ' + IC.arrow + '</button>';
   } else {
-    html += '<button class="btn" data-act="force" data-val="-1">Precvičiť ešte ' + IC.arrow + '</button>';
+    html += '<button class="btn" data-act="review" data-val="' + R.ti + '">Opakovať ešte ' + IC.arrow + '</button>';
   }
   html += '<button class="btn ghost" data-act="home">Domov</button></div></div>';
   app.innerHTML = html;
@@ -1896,11 +1916,11 @@ function handle(act, val){
   if(act === "read"){ S.ti = parseInt(val, 10); S.screen = "read"; render(); return; }
   if(act === "cheat"){ S.screen = "cheat"; render(); return; }
   if(act === "cnt"){ S.cnt = parseInt(val, 10); render(); return; }
-  if(act === "round"){ ensureAudio(); startRound(parseInt(val, 10), false); return; }
-  if(act === "force"){ ensureAudio(); startRound(parseInt(val, 10), true); return; }
+  if(act === "lesson"){ ensureAudio(); startLesson(parseInt(val, 10)); return; }
+  if(act === "review"){ ensureAudio(); startReview(parseInt(val, 10)); return; }
   if(act === "test"){ ensureAudio(); startTest(); return; }
   if(act === "reset"){
-    if(window.confirm("Naozaj vymazať celý pokrok?")){ P.c = {}; P.best = null; saveProgress(); render(); }
+    if(window.confirm("Naozaj vymazať celý pokrok?")){ P.c = {}; P.done = {}; P.tick = 0; P.best = null; saveProgress(); render(); }
     return;
   }
   if(act === "quit"){
@@ -1909,9 +1929,7 @@ function handle(act, val){
   }
   if(!R || S.screen !== "run"){ return; }
   if(act === "learned"){
-    k = R.queue[R.i].id;
-    learn(k);
-    R.learned[k] = true;
+    learn(R.queue[R.i].id);
     nextStep();
     return;
   }
