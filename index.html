@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Politológia – štát a typy štátov</title>
-<meta name="description" content="Učebná appka z politológie (9. ročník): štát, moc, občianstvo, územie, suverenita, symboly a typy štátov. Učenie s opakovaním a písomka nanečisto.">
+<meta name="description" content="Učebná appka z politológie (9. ročník): štát, moc, občianstvo, územie, suverenita, symboly a typy štátov. Lekcie s písanými otázkami a písomka nanečisto.">
 <meta name="theme-color" content="#ffffff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -60,6 +60,7 @@
   .stack{display:flex;flex-direction:column;gap:12px;}
   .stack.tight{gap:6px;}
   .stack.loose{gap:20px;}
+  .center{text-align:center;}
 
   /* ---- tlacidla ---- */
   .btn{
@@ -70,8 +71,6 @@
   .btn:disabled{background:#c9d2ee;cursor:default;}
   .btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--ink);height:50px;font-size:16px;}
   .btn.soft{background:var(--soft);color:var(--ink);height:50px;font-size:16px;}
-  .btn.okb{background:var(--ok);}
-  .btn.badb{background:var(--bad);}
   .btn svg{flex:0 0 auto;}
   .ibtn{
     flex:0 0 44px;width:44px;height:44px;border-radius:10px;border:none;background:transparent;
@@ -96,11 +95,10 @@
   .brand span{font-size:13px;color:var(--muted);}
 
   /* ---- domov ---- */
+  .homegrid{display:flex;flex-direction:column;gap:36px;}
   .hero{display:flex;flex-direction:column;gap:14px;}
-  .big{display:flex;align-items:baseline;gap:12px;}
-  .big .n{font-size:64px;font-weight:600;line-height:.9;letter-spacing:-2px;font-variant-numeric:tabular-nums;}
-  .big .t{font-size:17px;font-weight:500;line-height:1.25;}
-  .center{text-align:center;}
+  .lbar{height:4px;border-radius:999px;background:var(--line);overflow:hidden;}
+  .lbar span{display:block;height:4px;background:var(--ink);border-radius:999px;}
   .topics{display:flex;flex-direction:column;}
   .trow{
     display:flex;gap:14px;width:100%;text-align:left;background:transparent;border:none;
@@ -109,7 +107,7 @@
   .trow .tn{flex:0 0 16px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;}
   .trow .tb{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;}
   .trow .tt{font-weight:600;font-size:17px;line-height:1.25;}
-  .trow .chev{flex:0 0 18px;color:var(--faint);margin-top:2px;}
+  .chev{flex:0 0 18px;color:var(--faint);margin-top:2px;}
   .dots{display:flex;flex-wrap:wrap;gap:4px;}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
   .dot.l{background:var(--learn);}
@@ -124,33 +122,31 @@
   }
   .tab.on{background:var(--ink);border-color:var(--ink);color:#fff;}
   .foot{font-size:13px;color:var(--muted);line-height:1.5;}
-  .lbar{height:4px;border-radius:999px;background:var(--line);overflow:hidden;}
-  .lbar span{display:block;height:4px;background:var(--ink);border-radius:999px;}
-  .homegrid{display:flex;flex-direction:column;gap:36px;}
 
   /* ---- tema ---- */
   .crow{
     display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:none;
     border-top:1px solid var(--line);padding:14px 0;color:var(--ink);cursor:pointer;font-size:16px;
   }
+  .crow:last-child{border-bottom:1px solid var(--line);}
   .crow .cb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
-  .crow .chev{flex:0 0 18px;color:var(--faint);}
   .crow .ct{font-weight:600;}
   .crow .cs{font-size:13.5px;color:var(--muted);}
   .pill{font-size:12.5px;font-weight:600;padding:4px 9px;border-radius:999px;white-space:nowrap;background:var(--soft);color:var(--muted);}
   .pill.l{background:var(--accent-soft);color:var(--accent-ink);}
   .pill.k{background:var(--ink);color:#fff;}
 
-  /* ---- karticka (obsah) ---- */
+  /* ---- lekcia (obsah) ---- */
   .kick{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:13px;font-weight:600;color:var(--muted);}
   .kick .a{color:var(--accent);}
   .kick .sep{color:#c2c7d0;}
   .kick .tag{margin-left:auto;font-weight:500;}
+  .sec{font-size:19px;font-weight:600;line-height:1.3;margin-top:10px;}
   .rows{display:flex;flex-direction:column;border-bottom:1px solid var(--line);}
-  .rows .r{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--line);}
-  .rows .r .k{font-size:19px;font-weight:600;flex:0 1 auto;}
-  .rows .r .v{font-size:16px;text-align:right;flex:0 1 60%;}
-  .pts{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;}
+  .rows .r{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);}
+  .rows .r .k{font-size:18px;font-weight:600;flex:0 1 auto;}
+  .rows .r .v{font-size:16px;text-align:right;flex:0 1 62%;}
+  .pts{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;}
   .pts.num{padding-left:24px;}
   .note{display:flex;gap:10px;font-size:15px;line-height:1.5;}
   .note svg{flex:0 0 20px;margin-top:2px;}
@@ -168,12 +164,11 @@
   .pw.jus .pn{color:var(--jus);}
   .pw .pk{font-size:13px;color:var(--muted);line-height:1.3;}
   .pw .pi{font-size:14.5px;font-weight:600;line-height:1.3;margin-top:6px;}
-  .figs{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+  .figs{display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;}
   .figs figure{margin:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start;}
   .figs figcaption{font-size:13px;color:var(--muted);}
-  .cardsep{border:none;border-top:1px solid var(--line);margin:8px 0;}
 
-  /* ---- priebeh kola ---- */
+  /* ---- otazky ---- */
   .ftop{display:flex;align-items:center;gap:12px;min-height:44px;}
   .ftop .ibtn{margin-left:-10px;}
   .prog{flex:1;height:4px;border-radius:999px;background:var(--line);overflow:hidden;}
@@ -184,97 +179,35 @@
     display:flex;flex-direction:column;gap:10px;background:var(--bg);
     padding:12px 0 max(20px, env(safe-area-inset-bottom));
   }
-  .dock .hint{text-align:center;font-size:15px;color:var(--muted);min-height:54px;display:flex;align-items:center;justify-content:center;}
-  .dock .two{display:flex;gap:10px;}
-  .dock .two .btn{flex:1;}
   .srs{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;color:var(--muted);}
   .srs svg{flex:0 0 18px;margin-top:1px;}
-
-  /* ---- otazky ---- */
-  .match{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px;}
-  .match .col{display:flex;flex-direction:column;gap:10px;}
-  .mi{
-    min-height:62px;padding:10px 12px;border-radius:12px;border:2px solid var(--line);background:var(--bg);
-    color:var(--ink);font-size:16px;font-weight:600;line-height:1.25;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;
-  }
-  .mi.r{font-weight:500;font-size:15px;}
-  .mi.sel{border-color:var(--ink);background:var(--soft);}
-  .mi.done{border-color:var(--ok);background:var(--ok-soft);color:var(--ok-ink);cursor:default;}
-  .mi.wrong{border-color:var(--bad);background:var(--bad-soft);}
-  .mi .no{flex:0 0 22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
-  .mwrong{font-size:15px;color:var(--bad);margin-top:-8px;}
-  .grp{display:flex;flex-direction:column;}
-  .grow{padding:12px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
-  .grow:last-child{border-bottom:1px solid var(--line);}
-  .grow .gname{font-weight:600;font-size:16px;line-height:1.35;}
-  .grow.okrow .gname{color:var(--ok-ink);}
-  .grow.badrow .gname{color:var(--bad);}
-  .gbtns{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:8px;}
-  .gb{
-    min-height:44px;padding:8px 6px;border-radius:10px;border:1px solid var(--line);background:var(--bg);
-    font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;line-height:1.2;
-  }
-  .gb.on{background:var(--ink);border-color:var(--ink);color:#fff;}
-  .gb.right{background:var(--ok);border-color:var(--ok);color:#fff;}
-  .gb.wrongsel{border-color:var(--bad);color:var(--bad);text-decoration:line-through;}
-  .gb:disabled{cursor:default;}
-  .cloze{font-size:19px;line-height:2.3;}
-  .blank{
-    display:inline-flex;align-items:center;justify-content:center;min-width:84px;height:38px;padding:0 10px;margin:0 2px;
-    border:none;border-bottom:2px solid var(--ink);border-radius:8px 8px 0 0;background:var(--soft);
-    font-size:17px;font-weight:600;color:var(--ink);cursor:pointer;vertical-align:baseline;line-height:1;
-  }
-  .blank.empty{color:var(--faint);}
-  .blank.okb{background:var(--ok-soft);border-color:var(--ok);color:var(--ok-ink);}
-  .blank.badb{background:var(--bad-soft);border-color:var(--bad);color:var(--bad);}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;}
-  .chip{
-    min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);
-    font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;
-  }
-  .chip.used{visibility:hidden;}
-  .words{display:flex;flex-wrap:wrap;gap:8px 6px;font-size:19px;}
-  .word{
-    min-height:44px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);
-    font-size:18px;font-weight:500;color:var(--ink);cursor:pointer;
-  }
-  .word.badw{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);text-decoration:line-through;}
-  .word.err{border-color:var(--ok);background:var(--ok-soft);color:var(--ink);text-decoration:line-through;}
-  .word.fixw{border-color:var(--ok);background:var(--ok);color:#fff;}
-  .word:disabled{cursor:default;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field label{font-size:15px;font-weight:600;line-height:1.35;}
   .inrow{display:flex;gap:12px;align-items:center;}
   .inrow .ix{flex:0 0 16px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;}
   .txtin{
     flex:1;min-width:0;width:100%;height:54px;padding:0 14px;border-radius:12px;border:1px solid #cfd4dc;background:var(--bg);
     font-family:inherit;font-size:18px;font-weight:500;color:var(--ink);outline:none;
   }
-  textarea.txtin{height:auto;min-height:120px;padding:12px 14px;line-height:1.45;resize:vertical;}
+  textarea.txtin{height:auto;min-height:92px;padding:12px 14px;line-height:1.45;resize:vertical;}
   .txtin:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
   .txtin.okin{border-color:var(--ok);background:var(--ok-soft);}
   .txtin.badin{border-color:var(--bad);background:var(--bad-soft);}
   .txtin:disabled{opacity:1;-webkit-text-fill-color:var(--ink);}
   .hint2{font-size:14px;color:var(--muted);}
-  .model{background:var(--soft);border-radius:12px;padding:14px 16px;font-size:15.5px;line-height:1.5;}
-  .model .nl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px;}
-  .fb{border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;font-size:15.5px;line-height:1.5;}
+  .fb{border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:15.5px;line-height:1.5;}
   .fb.ok{background:var(--ok-soft);}
   .fb.no{background:var(--bad-soft);}
   .fb .head{font-weight:700;font-size:16px;}
   .fb.ok .head{color:var(--ok-ink);}
   .fb.no .head{color:var(--bad);}
+  .fb .linkbtn{align-self:flex-start;color:var(--ink);font-size:14.5px;}
 
   /* ---- vysledky ---- */
   .grade{font-size:96px;font-weight:600;line-height:1;letter-spacing:-3px;text-align:center;}
   .stats{display:flex;justify-content:center;gap:28px;}
   .stat{display:flex;flex-direction:column;align-items:center;font-size:13.5px;color:var(--muted);}
   .stat b{font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums;}
-  .res{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);}
-  .res .rk{flex:0 0 22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;}
-  .res .rk.ok{background:var(--ok);}
-  .res .rk.no{background:var(--bad);}
-  .res .rt{flex:1;min-width:0;font-weight:600;}
-  .res .rn{font-size:13.5px;color:var(--muted);white-space:nowrap;}
   .miss{padding:14px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:15px;}
   .miss .mq{font-weight:600;font-size:16px;}
   .miss .yours{color:var(--bad);}
@@ -290,10 +223,8 @@
     .btn:hover:enabled{background:var(--accent-ink);}
     .btn.ghost:hover:enabled{background:var(--soft);}
     .btn.soft:hover:enabled{background:#eceef2;}
-    .btn.okb:hover:enabled{background:#0f6b31;}
-    .btn.badb:hover:enabled{background:#a82318;}
     .trow:hover .tt, .crow:hover .ct{color:var(--accent);}
-    .mi:hover:enabled:not(.done), .chip:hover, .word:hover:enabled, .gb:hover:enabled, .tab:hover, .tbtn:hover{border-color:var(--ink);}
+    .tab:hover, .tbtn:hover{border-color:var(--ink);}
   }
   button:focus-visible, .txtin:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
   @media (min-width:900px){
@@ -319,539 +250,235 @@
    UCEBNA APLIKACIA - POLITOLOGIA: STAT A TYPY STATOV
    Obsah je zo skolskeho zosita. Bloky "extra" su dovysvetlenie
    navyse, bloky "warn" upozornuju na miesto, kde sa appka
-   odklonila od zosita.
+   odklonila od zosita. Vsetky otazky su pisane, ako na pisomke.
    ============================================================ */
 
 /* ===== TEMY ===== */
 var TOPICS = [
-  {id:"moc",   title:"Štát a moc",           short:"Štát a neštát, znaky štátu, štátna moc, deľba moci"},
-  {id:"obcan", title:"Občianstvo a územie",  short:"Ako sa získa občianstvo, čo patrí k územiu, anexia, cesia, akcesia"},
-  {id:"suver", title:"Suverenita a symboly", short:"Vnútorná a vonkajšia suverenita, vlajka, znak, hymna, pečať"},
-  {id:"typy",  title:"Typy štátov",          short:"Forma vlády, územné členenie, štátny režim"}
+  {title:"Štát a moc",           short:"Štát a neštát, znaky štátu, štátna moc, koncentrácia a deľba moci"},
+  {title:"Občianstvo a územie",  short:"Ako sa získa občianstvo, čo patrí k územiu, anexia, cesia, akcesia"},
+  {title:"Suverenita a symboly", short:"Vnútorná a vonkajšia suverenita, vlajka, znak, hymna, pečať"},
+  {title:"Typy štátov",          short:"Forma vlády, územno-organizačné členenie, štátny režim"}
 ];
 
-/* ===== POJMY (karticky) =====
-   b     - obsah karticky: p (odsek), rows (pojem - vyznam), list, powers, flag, seal, tip, extra, warn
-   easy  - otazky pre novy pojem (spajanie, roztriedenie, doplnanie)
-   mid   - otazky pre pojem, ktory uz raz vedel (najdi chybu)
-   hard  - otazky, kde odpoved pise sam (ako na pisomke)
-
-   Typy otazok:
-   match - spoj dvojice, pairs: [lavy, pravy]
-   sort  - roztried do dvoch skupin g, "a" patri do g[0], "b" do g[1]
-   cloze - doplň slova do vety, [slovo] je medzera, "extra" su slova navyse
-   fix   - najdi zle slovo, {zle|spravne}
-   txt   - napis odpoved, acc su uznane tvary, kw su skupiny klucovych slov (staci, ked je z kazdej skupiny aspon jedno)
-   list  - napis n veci v lubovolnom poradi, items su uznane tvary kazdej veci
-   self  - napis vlastnymi slovami, potom porovnaj so vzorom a ohodnot sa sam */
-var CARDS = [
+/* ===== LEKCIE =====
+   b   - obsah lekcie: h (nadpis casti), p (odsek), rows (pojem - vyznam), list, powers, figs, tip, extra, warn
+   qs  - otazky, vsetky pisane:
+         txt   - napis kratku odpoved; acc su uznane tvary, kw su skupiny klucovych slov
+                 (staci, ked je v odpovedi z kazdej skupiny aspon jedno)
+         def   - napis vlastnymi slovami, co nieco znamena (kontroluju sa klucove slova)
+         list  - vymenuj n veci v lubovolnom poradi; polozka je pole uznanych tvarov alebo {s, kw}
+         pairs - viac poli s popisom, ku kazdemu jedna odpoved */
+var LESSONS = [
 /* ---------- 1. STAT A MOC ---------- */
-{id:"stat", t:0, h:"Štát a neštát",
+{t:0, h:"Štát a štátna moc",
  b:[
-  {t:"p", x:"Štát a neštát majú latinské názvy."},
+  {t:"h", x:"Štát a neštát"},
   {t:"rows", r:[["štát","status civilis"],["neštát","status naturalis"]]},
-  {t:"tip", x:"<b>Civilis</b> ako civilizácia: ľudia žijú podľa pravidiel štátu. <b>Naturalis</b> ako príroda: štát nie je, je to prirodzený stav."}
- ],
- easy:[
-  {t:"cloze", q:"Doplň latinské názvy.", s:"Štát je status [civilis], neštát je status [naturalis].", extra:["socialis","publicus"],
-   e:"Štát = <b>status civilis</b>, neštát = <b>status naturalis</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Štát sa po latinsky volá status {naturalis|civilis}.",
-   e:"Štát = status civilis. Status naturalis je neštát."}
- ],
- hard:[
-  {t:"txt", q:"Ako sa po latinsky volá štát?", acc:["status civilis"], e:"Štát = <b>status civilis</b>."},
-  {t:"txt", q:"Ako sa po latinsky volá neštát?", acc:["status naturalis"], e:"Neštát = <b>status naturalis</b>."}
- ]},
-
-{id:"znaky", t:0, h:"4 znaky štátu",
- b:[
-  {t:"p", x:"Štát spoznáš podľa štyroch znakov:"},
-  {t:"list", num:true, li:["<b>štátna moc</b>","<b>štátne občianstvo</b>","<b>štátne územie</b>","<b>suverenita</b>"]},
-  {t:"tip", x:"Na tieto štyri znaky je postavená celá appka: moc je v 1. téme, občianstvo a územie v 2. téme, suverenita v 3. téme."}
- ],
- easy:[
-  {t:"sort", q:"Je to znak štátu?", g:["znak štátu","nie je znak štátu"],
-   a:["štátna moc","štátne občianstvo","štátne územie","suverenita"], b:["štátna hymna","štátna vlajka","politické strany"],
-   e:"Znaky štátu sú 4: štátna moc, štátne občianstvo, štátne územie a suverenita. Hymna a vlajka sú štátne <b>symboly</b>, nie znaky."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Znaky štátu sú štátna moc, štátne občianstvo, štátne územie a {hymna|suverenita}.",
-   e:"Štvrtý znak štátu je <b>suverenita</b>. Hymna je štátny symbol."}
- ],
- hard:[
-  {t:"list", q:"Napíš 4 znaky štátu.", n:4,
-   items:[["štátna moc","moc"],["štátne občianstvo","občianstvo"],["štátne územie","územie"],["suverenita","zvrchovanosť","suverenita štátu"]],
-   e:"Znaky štátu: štátna moc, štátne občianstvo, štátne územie, suverenita."}
- ]},
-
-{id:"moc", t:0, h:"Štátna moc",
- b:[
+  {t:"h", x:"4 znaky štátu"},
+  {t:"list", num:true, li:["<b>štátna moc</b>","<b>štátne občianstvo</b>","<b>štátne územie</b>","<b>suverenita</b> (zvrchovanosť)"]},
+  {t:"h", x:"Štátna moc"},
   {t:"p", x:"Štátna moc je <b>identifikovateľná mocenská štruktúra</b>. Patrí k nej:"},
   {t:"rows", r:[
     ["zdroj moci","všeobecne uznávaný"],
-    ["legitimita moci","zdôvodnenie, prečo vládne práve ten, kto vládne"],
+    ["legitimita moci","zdôvodnenie, prečo vládne práve ten, kto vládne; je zhora alebo zdola"],
     ["stratifikácia spoločnosti","hierarchia, ktorá vychádza z deľby práce"],
     ["distribúcia moci","spôsob vlády"]
-  ]}
+  ]},
+  {t:"extra", x:"Legitimita <b>zhora</b>: moc je napríklad od Boha alebo zdedená. Legitimita <b>zdola</b>: moc vládnucim dali ľudia, napríklad vo voľbách."},
+  {t:"tip", x:"<b>Civilis</b> ako civilizácia: ľudia žijú podľa pravidiel štátu. <b>Naturalis</b> ako príroda: štát nie je, je to prirodzený stav."}
  ],
- easy:[
-  {t:"match", q:"Spoj pojem s tým, čo znamená.",
-   pairs:[["legitimita moci","prečo vládne práve ten, kto vládne"],["stratifikácia spoločnosti","hierarchia z deľby práce"],["distribúcia moci","spôsob vlády"]],
-   e:"Legitimita = zdôvodnenie, prečo vládne ten, kto vládne. Stratifikácia = hierarchia z deľby práce. Distribúcia = spôsob vlády."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Stratifikácia spoločnosti je hierarchia, ktorá vychádza z deľby {moci|práce}.",
-   e:"Stratifikácia spoločnosti vychádza z <b>deľby práce</b>."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Distribúcia moci je {zdôvodnenie|spôsob} vlády.",
-   e:"Distribúcia moci = <b>spôsob</b> vlády. Zdôvodnenie, prečo vládne ten, kto vládne, je legitimita."}
- ],
- hard:[
-  {t:"txt", q:"Ako sa volá zdôvodnenie, prečo vládne práve ten, kto vládne?", acc:["legitimita moci","legitimita"], sol:"legitimita moci",
-   e:"<b>Legitimita moci</b> = zdôvodnenie, prečo vládne práve ten, kto vládne."},
-  {t:"txt", q:"Ako sa volá spôsob vlády?", acc:["distribúcia moci","distribúcia"], sol:"distribúcia moci",
-   e:"<b>Distribúcia moci</b> = spôsob vlády."},
-  {t:"txt", q:"Ako sa volá hierarchia v spoločnosti, ktorá vychádza z deľby práce?", acc:["stratifikácia spoločnosti","stratifikácia"], sol:"stratifikácia spoločnosti",
-   e:"<b>Stratifikácia spoločnosti</b> = hierarchia, ktorá vychádza z deľby práce."},
-  {t:"txt", q:"Doplň: Štátna moc je identifikovateľná …", acc:["mocenská štruktúra"], sol:"mocenská štruktúra",
-   e:"Štátna moc je identifikovateľná <b>mocenská štruktúra</b>."}
+ qs:[
+  {t:"pairs", q:"Napíš latinské názvy.", rows:[{l:"štát", acc:["status civilis"]},{l:"neštát", acc:["status naturalis"]}]},
+  {t:"list", q:"Vymenuj 4 znaky štátu.", n:4,
+   items:[["štátna moc","moc"],["štátne občianstvo","občianstvo"],["štátne územie","územie"],["suverenita","zvrchovanosť","suverenita štátu"]]},
+  {t:"def", q:"Napíš, čo je štátna moc.", kw:[["mocensk"],["struktur"]], sol:"identifikovateľná mocenská štruktúra"},
+  {t:"list", q:"Vymenuj 4 veci, ktoré patria k štátnej moci.", n:4,
+   items:[["zdroj moci","všeobecne uznávaný zdroj moci","zdroj"],["legitimita moci","legitimita"],["stratifikácia spoločnosti","stratifikácia"],["distribúcia moci","distribúcia"]]},
+  {t:"def", q:"Napíš, čo znamená legitimita moci.", kw:[["zdovodn","preco","dovod"],["vlad"]], sol:"zdôvodnenie, prečo vládne práve ten, kto vládne"},
+  {t:"list", q:"Povedz, aká môže byť legitimita moci (obe možnosti).", n:2, items:[["zhora","z hora","zvrchu"],["zdola","z dola","zospodu"]]},
+  {t:"def", q:"Napíš, čo znamená stratifikácia spoločnosti.", kw:[["hierarch"]], sol:"hierarchia, ktorá vychádza z deľby práce"},
+  {t:"def", q:"Napíš, čo znamená distribúcia moci.", kw:[["sposob"],["vlad"]], sol:"spôsob vlády"}
  ]},
 
-{id:"legit", t:0, h:"Legitimita moci",
+{t:0, h:"Koncentrácia a deľba moci",
  b:[
-  {t:"p", x:"Legitimita moci je zdôvodnenie, prečo vládne práve ten, kto vládne. Môže byť:"},
-  {t:"rows", r:[["zhora",""],["zdola",""]]},
-  {t:"extra", x:"<b>Zhora</b>: moc je napríklad od Boha alebo zdedená. <b>Zdola</b>: moc vládnucim dali ľudia, napríklad vo voľbách."}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do vety.", s:"Legitimita moci môže byť [zhora] alebo [zdola].", extra:["zboku","zvnútra"],
-   e:"Legitimita moci je <b>zhora</b> alebo <b>zdola</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Legitimita moci je {spôsob|zdôvodnenie}, prečo vládne práve ten, kto vládne.",
-   e:"Legitimita = <b>zdôvodnenie</b>, prečo vládne ten, kto vládne. Spôsob vlády je distribúcia moci."}
- ],
- hard:[
-  {t:"list", q:"Odkiaľ môže byť legitimita moci? Napíš obe možnosti.", n:2, items:[["zhora","z hora"],["zdola","z dola"]],
-   e:"Legitimita moci je <b>zhora</b> alebo <b>zdola</b>."}
- ]},
-
-{id:"konc", t:0, h:"Koncentrácia moci",
- b:[
-  {t:"p", x:"Distribúcia moci je buď <b>koncentrácia moci</b>, alebo <b>deľba moci</b>. Ku koncentrácii moci patrí:"},
-  {t:"list", li:["absolutizmus","despotizmus","diktatúra","totalitarizmus (inak <b>totalita moci</b>)","monopol na moc"]}
- ],
- easy:[
-  {t:"sort", q:"Koncentrácia alebo deľba moci?", g:["koncentrácia moci","deľba moci"],
-   a:["absolutizmus","despotizmus","diktatúra","totalitarizmus"], b:["demokracia","oligarchia","pluralizmus moci"],
-   e:"Koncentrácia: absolutizmus, despotizmus, diktatúra, totalitarizmus, monopol na moc. Deľba: teokracia, aristokracia, oligarchia, demokracia, pluralizmus moci, checks and balances."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Diktatúra patrí k {deľbe|koncentrácii} moci.",
-   e:"Diktatúra patrí ku <b>koncentrácii</b> moci."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Totalitarizmus sa inak volá {sloboda|totalita} moci.",
-   e:"Totalitarizmus = <b>totalita</b> moci."}
- ],
- hard:[
-  {t:"list", q:"Napíš 3 príklady koncentrácie moci.", n:3,
-   items:[["absolutizmus"],["despotizmus"],["diktatúra"],["totalitarizmus","totalita moci","totalita"],["monopol na moc","monopol moci"]],
-   e:"Koncentrácia moci: absolutizmus, despotizmus, diktatúra, totalitarizmus, monopol na moc."},
-  {t:"txt", q:"Ako sa inak volá totalitarizmus?", acc:["totalita moci"], e:"Totalitarizmus = <b>totalita moci</b>."}
- ]},
-
-{id:"delba", t:0, h:"Deľba moci",
- b:[
-  {t:"p", x:"K <b>deľbe moci</b> patrí:"},
+  {t:"p", x:"Distribúcia moci (spôsob vlády) je buď <b>koncentrácia moci</b>, alebo <b>deľba moci</b>."},
+  {t:"h", x:"Koncentrácia moci"},
+  {t:"list", li:["absolutizmus","despotizmus","diktatúra","totalitarizmus (inak <b>totalita moci</b>)","monopol na moc"]},
+  {t:"h", x:"Deľba moci"},
   {t:"list", li:["teokracia","aristokracia","oligarchia","demokracia","pluralizmus moci","checks and balances"]},
-  {t:"extra", x:"<b>Checks and balances</b> sa po slovensky hovorí brzdy a protiváhy: jednotlivé zložky moci sa navzájom kontrolujú."}
- ],
- easy:[
-  {t:"sort", q:"Deľba alebo koncentrácia moci?", g:["deľba moci","koncentrácia moci"],
-   a:["teokracia","aristokracia","demokracia","checks and balances"], b:["diktatúra","monopol na moc"],
-   e:"Deľba: teokracia, aristokracia, oligarchia, demokracia, pluralizmus moci, checks and balances. Diktatúra a monopol na moc sú koncentrácia."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Demokracia patrí ku {koncentrácii|deľbe} moci.",
-   e:"Demokracia patrí k <b>deľbe</b> moci."}
- ],
- hard:[
-  {t:"list", q:"Napíš 3 príklady deľby moci.", n:3,
-   items:[["teokracia"],["aristokracia"],["oligarchia"],["demokracia"],["pluralizmus moci","pluralizmus"],["checks and balances"]],
-   e:"Deľba moci: teokracia, aristokracia, oligarchia, demokracia, pluralizmus moci, checks and balances."}
- ]},
-
-{id:"horiz", t:0, h:"Horizontálna deľba moci",
- b:[
-  {t:"p", x:"Štátnu moc si delia tri zložky:"},
+  {t:"extra", x:"<b>Checks and balances</b> sa po slovensky hovorí brzdy a protiváhy: zložky moci sa navzájom kontrolujú."},
+  {t:"h", x:"Horizontálna deľba moci"},
   {t:"powers"},
   {t:"tip", x:"<b>Legislatíva</b> robí zákony. <b>Exekutíva</b> ich vykonáva (po anglicky <i>execute</i>). <b>Justícia</b> súdi (<i>justice</i> = spravodlivosť)."}
  ],
- easy:[
-  {t:"match", q:"Spoj zložku moci s jej slovenským názvom.",
-   pairs:[["legislatíva","zákonodarná moc"],["exekutíva","výkonná moc"],["justícia","súdna moc"]],
-   e:"Legislatíva = zákonodarná, exekutíva = výkonná, justícia = súdna moc."},
-  {t:"match", q:"Kto má na Slovensku ktorú moc? Spoj.",
-   pairs:[["legislatíva","NR SR (parlament)"],["exekutíva","prezident a vláda SR"],["justícia","Ústavný a Najvyšší súd SR"]],
-   e:"Legislatíva: NR SR. Exekutíva: prezident + vláda SR. Justícia: Ústavný a Najvyšší súd SR."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Exekutíva je {zákonodarná|výkonná} moc a patrí k nej prezident a vláda SR.",
-   e:"Exekutíva = <b>výkonná</b> moc. Zákonodarná moc je legislatíva."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Zákonodarnú moc na Slovensku má {vláda|parlament} – NR SR.",
-   e:"Zákonodarnú moc (legislatívu) má <b>parlament</b>, teda NR SR. Vláda patrí k výkonnej moci."}
- ],
- hard:[
-  {t:"txt", q:"Ako sa volá zákonodarná moc?", acc:["legislatíva"], e:"Zákonodarná moc = <b>legislatíva</b>."},
-  {t:"txt", q:"Ako sa volá výkonná moc?", acc:["exekutíva"], e:"Výkonná moc = <b>exekutíva</b>."},
-  {t:"txt", q:"Ako sa volá súdna moc?", acc:["justícia"], e:"Súdna moc = <b>justícia</b>."},
-  {t:"txt", q:"Kto má na Slovensku zákonodarnú moc?", acc:["NR SR","Národná rada SR","Národná rada Slovenskej republiky","Národná rada","parlament","parlament NR SR","NRSR"], sol:"parlament – NR SR",
-   e:"Legislatívu má <b>parlament – NR SR</b>."},
-  {t:"list", q:"Kto má na Slovensku výkonnú moc? Napíš oboch.", n:2, items:[["prezident","prezident SR"],["vláda","vláda SR"]],
-   e:"Exekutívu má <b>prezident</b> a <b>vláda SR</b>."},
-  {t:"list", q:"Ktoré súdy majú na Slovensku súdnu moc?", n:2, items:[["Ústavný súd","Ústavný súd SR","ústavný"],["Najvyšší súd","Najvyšší súd SR","najvyšší"]],
-   e:"Justíciu má <b>Ústavný súd SR</b> a <b>Najvyšší súd SR</b>."}
+ qs:[
+  {t:"list", q:"Vymenuj aspoň 3 formy koncentrácie moci.", n:3,
+   items:[["absolutizmus"],["despotizmus"],["diktatúra"],["totalitarizmus","totalita moci","totalita"],["monopol na moc","monopol moci"]]},
+  {t:"list", q:"Vymenuj aspoň 3 formy deľby moci.", n:3,
+   items:[["teokracia"],["aristokracia"],["oligarchia"],["demokracia"],["pluralizmus moci","pluralizmus"],["checks and balances"]]},
+  {t:"txt", q:"Ako sa inak volá totalitarizmus?", acc:["totalita moci"]},
+  {t:"pairs", q:"Ako sa volá táto moc cudzím slovom?",
+   rows:[{l:"zákonodarná moc", acc:["legislatíva"]},{l:"výkonná moc", acc:["exekutíva"]},{l:"súdna moc", acc:["justícia"]}]},
+  {t:"pairs", q:"Napíš, čo znamená:",
+   rows:[{l:"legislatíva", kw:[["zakonodar","zakony","zakon"]], s:"zákonodarná moc"},
+         {l:"exekutíva", kw:[["vykon"]], s:"výkonná moc"},
+         {l:"justícia", kw:[["sudn","sud"]], s:"súdna moc"}]},
+  {t:"txt", q:"Kto má na Slovensku zákonodarnú moc?",
+   acc:["NR SR","Národná rada SR","Národná rada Slovenskej republiky","Národná rada","parlament","parlament NR SR","NRSR"], sol:"parlament – NR SR"},
+  {t:"list", q:"Kto má na Slovensku výkonnú moc?", n:2, items:[["prezident","prezident SR"],["vláda","vláda SR"]]},
+  {t:"list", q:"Ktoré súdy majú na Slovensku súdnu moc?", n:2,
+   items:[["Ústavný súd","Ústavný súd SR","ústavný"],["Najvyšší súd","Najvyšší súd SR","najvyšší"]]}
  ]},
 
 /* ---------- 2. OBCIANSTVO A UZEMIE ---------- */
-{id:"obc", t:1, h:"Občianstvo",
+{t:1, h:"Občianstvo",
  b:[
-  {t:"list", li:["Občianstvo je <b>právny vzťah človeka k štátu</b>.","Je <b>odlišné od národnosti</b>, teda od etnickej príslušnosti."]},
-  {t:"tip", x:"Môžeš byť občan SR a pritom mať napríklad maďarskú národnosť. Občianstvo je vzťah k štátu, národnosť k národu."}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do vety.", s:"Občianstvo je [právny] vzťah človeka k [štátu].", extra:["citový","národu"],
-   e:"Občianstvo je <b>právny</b> vzťah človeka k <b>štátu</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Občianstvo je {citový|právny} vzťah človeka k štátu.",
-   e:"Občianstvo je <b>právny</b> vzťah človeka k štátu."}
- ],
- hard:[
-  {t:"txt", q:"Čo je občianstvo?", acc:["právny vzťah človeka k štátu","právny vzťah k štátu"], kw:[["pravn"],["vztah"],["stat"]], sol:"právny vzťah človeka k štátu",
-   e:"Občianstvo je <b>právny vzťah človeka k štátu</b>."},
-  {t:"txt", q:"Od čoho je občianstvo odlišné?", acc:["od národnosti","národnosť","od etnickej príslušnosti","etnická príslušnosť"], kw:[["narodnost","etnick"]], sol:"od národnosti (etnickej príslušnosti)",
-   e:"Občianstvo je odlišné od <b>národnosti</b>, teda od etnickej príslušnosti."}
- ]},
-
-{id:"ziskanie", t:1, h:"Ako sa získa občianstvo SR",
- b:[
+  {t:"list", li:["Občianstvo je <b>právny vzťah človeka k štátu</b>.","Je <b>odlišné od národnosti</b>, resp. od etnickej príslušnosti."]},
+  {t:"h", x:"Ako sa získa občianstvo SR"},
   {t:"rows", r:[
     ["narodením","keď je aspoň jeden z biologických rodičov slovenský občan"],
     ["naturalizáciou","manželstvo, trvalý pobyt, pobyt, azyl, osvojenie, zásluhy…"]
-  ]}
+  ]},
+  {t:"tip", x:"Môžeš byť občan SR a pritom mať napríklad maďarskú národnosť. Občianstvo je vzťah k štátu, národnosť k národu."}
  ],
- easy:[
-  {t:"sort", q:"Narodením alebo naturalizáciou?", g:["narodením","naturalizáciou"],
-   a:["mama je občianka SR","otec je občan SR"], b:["manželstvo","azyl","osvojenie","zásluhy","trvalý pobyt"],
-   e:"Narodením: aspoň jeden biologický rodič je slovenský občan. Naturalizáciou: manželstvo, trvalý pobyt, pobyt, azyl, osvojenie, zásluhy."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Občianstvo SR získaš narodením, ak je {každý|aspoň jeden} z tvojich biologických rodičov slovenský občan.",
-   e:"Stačí, keď je <b>aspoň jeden</b> z biologických rodičov slovenský občan."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Získanie občianstva napríklad manželstvom alebo azylom sa volá {anexia|naturalizácia}.",
-   e:"Je to <b>naturalizácia</b>. Anexia je násilná zmena územia štátu."}
- ],
- hard:[
-  {t:"list", q:"Akými dvoma spôsobmi sa dá získať občianstvo SR?", n:2, items:[["narodením","narodenie"],["naturalizáciou","naturalizácia"]],
-   e:"Občianstvo SR sa získa <b>narodením</b> alebo <b>naturalizáciou</b>."},
-  {t:"txt", q:"Ako sa volá získanie občianstva napríklad manželstvom alebo azylom?", acc:["naturalizácia","naturalizáciou"], sol:"naturalizácia",
-   e:"<b>Naturalizácia</b>: manželstvo, trvalý pobyt, pobyt, azyl, osvojenie, zásluhy."},
-  {t:"list", q:"Napíš 3 spôsoby naturalizácie.", n:3,
-   items:[["manželstvo","manželstvom","sobáš"],["trvalý pobyt","trvalým pobytom"],["pobyt","pobytom"],["azyl","azylom"],["osvojenie","osvojením","adopcia"],["zásluhy","zásluhami"]],
-   e:"Naturalizácia: manželstvo, trvalý pobyt, pobyt, azyl, osvojenie, zásluhy."},
-  {t:"txt", q:"Kedy získaš občianstvo SR narodením?", kw:[["jeden","jedneho","jedna"],["rodic","mama","otec","matka"]], acc:[],
-   sol:"keď je aspoň jeden z biologických rodičov slovenský občan",
-   e:"Narodením, keď je <b>aspoň jeden z biologických rodičov</b> slovenský občan."}
+ qs:[
+  {t:"def", q:"Napíš, čo je občianstvo.", kw:[["pravn"],["vztah"],["stat"]], sol:"právny vzťah človeka k štátu"},
+  {t:"txt", q:"Od čoho je občianstvo odlišné?", acc:["od národnosti","národnosť","od etnickej príslušnosti","etnická príslušnosť"],
+   kw:[["narodnost","etnick"]], sol:"od národnosti (etnickej príslušnosti)"},
+  {t:"list", q:"Povedz, akými dvoma spôsobmi sa dá získať občianstvo SR.", n:2, items:[["narodením","narodenie"],["naturalizáciou","naturalizácia"]]},
+  {t:"def", q:"Kedy získaš občianstvo SR narodením?", kw:[["jeden","jedn"],["rodic","mama","otec","matka"]],
+   sol:"keď je aspoň jeden z biologických rodičov slovenský občan"},
+  {t:"txt", q:"Ako sa volá získanie občianstva napríklad manželstvom alebo azylom?", acc:["naturalizácia","naturalizáciou"], sol:"naturalizácia"},
+  {t:"list", q:"Vymenuj aspoň 3 spôsoby naturalizácie.", n:3,
+   items:[["manželstvo","manželstvom","sobáš"],["trvalý pobyt","trvalým pobytom"],["pobyt","pobytom"],["azyl","azylom"],["osvojenie","osvojením","adopcia"],["zásluhy","zásluhami"]]}
  ]},
 
-{id:"uzemie", t:1, h:"Územie štátu",
+{t:1, h:"Územie štátu",
  b:[
-  {t:"p", x:"Na území štátu je štátna moc <b>suverénna</b>. K územiu štátu patrí:"},
-  {t:"list", li:["vzdušný priestor","výsostné vody","ambasády","paluby vojnových lodí"]}
- ],
- easy:[
-  {t:"sort", q:"Patrí to k územiu štátu?", g:["patrí","nepatrí"],
-   a:["vzdušný priestor","výsostné vody","ambasády","paluby vojnových lodí"], b:["šíre more","územie susedného štátu"],
-   e:"K územiu štátu patrí vzdušný priestor, výsostné vody, ambasády a paluby vojnových lodí."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"K územiu štátu patria aj paluby {obchodných|vojnových} lodí.",
-   e:"K územiu štátu patria paluby <b>vojnových</b> lodí."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Na svojom území je štátna moc {podriadená|suverénna}.",
-   e:"Na svojom území je štátna moc <b>suverénna</b>."}
- ],
- hard:[
-  {t:"list", q:"Napíš 4 veci, ktoré patria k územiu štátu.", n:4,
-   items:[["vzdušný priestor","vzdušný"],["výsostné vody","vody"],["ambasády","ambasáda","veľvyslanectvá","veľvyslanectvo"],["paluby vojnových lodí","vojnové lode","paluby lodí","vojnová loď"]],
-   e:"K územiu štátu patrí vzdušný priestor, výsostné vody, ambasády a paluby vojnových lodí."},
-  {t:"txt", q:"Aká je štátna moc na území štátu?", acc:["suverénna","suverénna moc","zvrchovaná"], sol:"suverénna",
-   e:"Na území štátu je štátna moc <b>suverénna</b>."}
- ]},
-
-{id:"zmena", t:1, h:"Zmena územia štátu",
- b:[
-  {t:"p", x:"Územie štátu sa môže zmeniť tromi spôsobmi:"},
+  {t:"p", x:"Na území štátu je štátna moc <b>suverénna</b>."},
+  {t:"h", x:"Čo patrí k územiu štátu"},
+  {t:"list", li:["vzdušný priestor","výsostné vody","ambasády","paluby vojnových lodí"]},
+  {t:"h", x:"Zmena územia štátu"},
   {t:"rows", r:[["anexia","násilím"],["cesia","zmluvou"],["akcesia","z prirodzených príčin"]]},
   {t:"tip", x:"<b>A</b>nexia = <b>a</b>tak. <b>C</b>esia = <b>c</b>eruzka a podpis zmluvy. <b>Ak</b>cesia = <b>ak</b>o to urobí príroda."}
  ],
- easy:[
-  {t:"match", q:"Spoj pojem s tým, ako sa mení územie.",
-   pairs:[["anexia","násilím"],["cesia","zmluvou"],["akcesia","z prirodzených príčin"]],
-   e:"Anexia = násilím, cesia = zmluvou, akcesia = z prirodzených príčin."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Cesia je zmena územia štátu {násilím|zmluvou}.",
-   e:"Cesia = zmena územia <b>zmluvou</b>. Násilím je to anexia."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Anexia je zmena územia štátu {zmluvou|násilím}.",
-   e:"Anexia = zmena územia <b>násilím</b>. Zmluvou je to cesia."}
- ],
- hard:[
-  {t:"txt", q:"Ako sa volá zmena územia štátu násilím?", acc:["anexia"], e:"Násilím = <b>anexia</b>."},
-  {t:"txt", q:"Ako sa volá zmena územia štátu na základe zmluvy?", acc:["cesia"], e:"Zmluvou = <b>cesia</b>."},
-  {t:"txt", q:"Ako sa volá zmena územia štátu z prirodzených príčin?", acc:["akcesia"], e:"Z prirodzených príčin = <b>akcesia</b>."},
-  {t:"txt", q:"Čo je cesia?", kw:[["zmluv"]], acc:[], sol:"zmena územia štátu zmluvou", e:"Cesia = zmena územia štátu <b>zmluvou</b>."}
+ qs:[
+  {t:"txt", q:"Aká je štátna moc na území štátu?", acc:["suverénna","suverénna moc","zvrchovaná"], sol:"suverénna"},
+  {t:"list", q:"Vymenuj 4 veci, ktoré patria k územiu štátu.", n:4,
+   items:[["vzdušný priestor","vzdušný"],["výsostné vody","vody"],["ambasády","ambasáda","veľvyslanectvá","veľvyslanectvo"],["paluby vojnových lodí","vojnové lode","paluby lodí","vojnová loď"]]},
+  {t:"pairs", q:"Ako sa volá zmena územia štátu…",
+   rows:[{l:"násilím", acc:["anexia"]},{l:"zmluvou", acc:["cesia"]},{l:"z prirodzených príčin", acc:["akcesia"]}]},
+  {t:"pairs", q:"Napíš, čo znamená:",
+   rows:[{l:"anexia", kw:[["nasil","silou","utok","vojn"]], s:"zmena územia násilím"},
+         {l:"cesia", kw:[["zmluv","dohod"]], s:"zmena územia zmluvou"},
+         {l:"akcesia", kw:[["prirod"]], s:"zmena územia z prirodzených príčin"}]}
  ]},
 
 /* ---------- 3. SUVERENITA A SYMBOLY ---------- */
-{id:"suver", t:2, h:"Suverenita",
+{t:2, h:"Suverenita",
  b:[
-  {t:"p", x:"Suverenita = <b>zvrchovanosť</b> štátu. Je dvojaká:"},
-  {t:"rows", r:[["vnútorná","dovnútra štátu"],["vonkajšia","voči iným štátom"]]}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do viet.", s:"Suverenita sa inak volá [zvrchovanosť]. Je [vnútorná] a [vonkajšia].", extra:["legitimita","stredná"],
-   e:"Suverenita = <b>zvrchovanosť</b>. Je <b>vnútorná</b> a <b>vonkajšia</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Suverenita sa inak volá {legitimita|zvrchovanosť}.",
-   e:"Suverenita = <b>zvrchovanosť</b>."}
- ],
- hard:[
-  {t:"txt", q:"Ako sa inak povie suverenita?", acc:["zvrchovanosť","zvrchovanosť štátu"], sol:"zvrchovanosť", e:"Suverenita = <b>zvrchovanosť</b>."},
-  {t:"list", q:"Aké sú 2 druhy suverenity?", n:2, items:[["vnútorná"],["vonkajšia"]], e:"Suverenita je <b>vnútorná</b> a <b>vonkajšia</b>."}
- ]},
-
-{id:"vnutorna", t:2, h:"Vnútorná suverenita",
- b:[
+  {t:"p", x:"Suverenita = <b>zvrchovanosť</b> štátu. Je <b>vnútorná</b> a <b>vonkajšia</b>."},
+  {t:"h", x:"Vnútorná suverenita"},
   {t:"list", li:[
     "Štát je nezávislý v <b>tvorbe zákonov</b> a v uplatňovaní moci na svojom území a voči svojim občanom.",
     "Štát je nezávislý od <b>neštátnych organizácií</b> (cirkev, politické strany…)."
   ]},
-  {t:"tip", x:"<b>Vnútorná</b> = dovnútra krajiny: zákony, občania, cirkev, strany. <b>Vonkajšia</b> = smerom von, k iným štátom."}
- ],
- easy:[
-  {t:"sort", q:"Vnútorná alebo vonkajšia suverenita?", g:["vnútorná","vonkajšia"],
-   a:["štát sám tvorí zákony","nezávislosť od cirkvi a politických strán"], b:["nezávislosť od iného štátu","zákony iného štátu u nás neplatia"],
-   e:"Vnútorná: tvorba zákonov, nezávislosť od cirkvi a strán. Vonkajšia: nezávislosť od iného štátu, jeho zákony u nás neplatia."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"{Vonkajšia|Vnútorná} suverenita znamená nezávislosť štátu od cirkvi a politických strán.",
-   e:"Nezávislosť od neštátnych organizácií je <b>vnútorná</b> suverenita."}
- ],
- hard:[
-  {t:"list", q:"Od ktorých neštátnych organizácií je štát nezávislý? Napíš 2 príklady.", n:2,
-   items:[["cirkev","cirkvi","cirkevné"],["politické strany","politická strana","strany","strán","politických strán"]],
-   e:"Napríklad od <b>cirkvi</b> a <b>politických strán</b>."},
-  {t:"self", q:"Vysvetli vlastnými slovami, čo je vnútorná suverenita.",
-   model:"Štát je nezávislý v <b>tvorbe zákonov</b> a v uplatňovaní moci na svojom území a voči svojim občanom. Je nezávislý aj od <b>neštátnych organizácií</b> (cirkev, politické strany…)."}
- ]},
-
-{id:"vonkajsia", t:2, h:"Vonkajšia suverenita",
- b:[
+  {t:"h", x:"Vonkajšia suverenita"},
   {t:"list", li:[
     "Štát je <b>nezávislý od iného štátu</b>.",
     "<b>Zákony iného štátu</b> na jeho území neplatia.",
     "Na jeho území <b>nie sú ozbrojené zložky</b> iného štátu.",
     "Iný štát <b>nekoná v jeho mene</b>."
-  ]}
+  ]},
+  {t:"tip", x:"<b>Vnútorná</b> = dovnútra krajiny: zákony, občania, cirkev, strany. <b>Vonkajšia</b> = smerom von, k iným štátom."}
  ],
- easy:[
-  {t:"sort", q:"Vonkajšia alebo vnútorná suverenita?", g:["vonkajšia","vnútorná"],
-   a:["nezávislosť od iného štátu","nie sú tu cudzie ozbrojené zložky","iný štát nekoná v našom mene"], b:["štát sám tvorí zákony","nezávislosť od cirkvi"],
-   e:"Vonkajšia: nezávislosť od iného štátu, jeho zákony ani ozbrojené zložky tu nie sú, nekoná v našom mene. Vnútorná: tvorba zákonov, nezávislosť od cirkvi a strán."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"{Vnútorná|Vonkajšia} suverenita znamená, že zákony iného štátu na našom území neplatia.",
-   e:"Všetko, čo súvisí s iným štátom, je <b>vonkajšia</b> suverenita."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Na území suverénneho štátu {sú|nie sú} ozbrojené zložky iného štátu.",
-   e:"Na území štátu <b>nie sú</b> ozbrojené zložky iného štátu."}
- ],
- hard:[
-  {t:"self", q:"Napíš aspoň 2 znaky vonkajšej suverenity.",
-   model:"Štát je <b>nezávislý od iného štátu</b>. <b>Zákony iného štátu</b> na jeho území neplatia. Na jeho území <b>nie sú ozbrojené zložky</b> iného štátu. Iný štát <b>nekoná v jeho mene</b>."},
-  {t:"txt", q:"Čo iného štátu nesmie byť na území suverénneho štátu?", acc:["ozbrojené zložky","ozbrojené zložky iného štátu"], kw:[["ozbroj","vojsk","armad","vojac"]], sol:"ozbrojené zložky",
-   e:"Na území štátu nie sú <b>ozbrojené zložky</b> iného štátu."}
+ qs:[
+  {t:"txt", q:"Ako sa inak povie suverenita?", acc:["zvrchovanosť","zvrchovanosť štátu"], sol:"zvrchovanosť"},
+  {t:"list", q:"Povedz 2 druhy suverenity.", n:2, items:[["vnútorná"],["vonkajšia"]]},
+  {t:"list", q:"Vymenuj 2 znaky vnútornej suverenity.", n:2,
+   items:[{s:"nezávislosť v tvorbe zákonov a uplatňovaní moci na svojom území", kw:[["zakon","moc","uzem"]]},
+          {s:"nezávislosť od neštátnych organizácií (cirkev, politické strany)", kw:[["cirk","stran","nestatn","organiz"]]}]},
+  {t:"list", q:"Vymenuj aspoň 2 znaky vonkajšej suverenity.", n:2,
+   items:[{s:"štát je nezávislý od iného štátu", kw:[["nezavis"]]},
+          {s:"zákony iného štátu na jeho území neplatia", kw:[["zakon"]]},
+          {s:"na jeho území nie sú ozbrojené zložky iného štátu", kw:[["ozbroj","vojsk","armad","vojac"]]},
+          {s:"iný štát nekoná v jeho mene", kw:[["kona","mene"]]}]}
  ]},
 
-{id:"symboly", t:2, h:"Štátne symboly",
+{t:2, h:"Štátne symboly",
  b:[
-  {t:"p", x:"Slovensko má 4 štátne symboly:"},
-  {t:"list", li:["<b>vlajka</b>","<b>znak</b>","<b>hymna</b>","<b>pečať</b>: kruh, v ňom štátny znak a okolo nápis SLOVENSKÁ REPUBLIKA"]},
-  {t:"seal"}
+  {t:"p", x:"Slovensko má 4 štátne symboly: <b>vlajka, znak, hymna, pečať</b>."},
+  {t:"rows", r:[
+    ["vlajka","pomer 2 : 3, odvodená z ruskej vlajky"],
+    ["znak","rannogotický štít, odvodený zo znaku Uhorska"],
+    ["hymna","melódia piesne „Kopala studienku“, autor textu J. (Janko) Matúška"],
+    ["pečať","kruh, v ňom štátny znak a okolo nápis SLOVENSKÁ REPUBLIKA"]
+  ]},
+  {t:"figs"}
  ],
- easy:[
-  {t:"sort", q:"Je to štátny symbol?", g:["štátny symbol","nie je symbol"],
-   a:["vlajka","znak","hymna","pečať"], b:["suverenita","štátne územie"],
-   e:"Štátne symboly: vlajka, znak, hymna, pečať. Suverenita a územie sú <b>znaky</b> štátu."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Štátne symboly sú vlajka, znak, hymna a {suverenita|pečať}.",
-   e:"Štvrtý symbol je <b>pečať</b>. Suverenita je znak štátu."}
- ],
- hard:[
-  {t:"list", q:"Napíš 4 štátne symboly SR.", n:4,
-   items:[["vlajka","štátna vlajka"],["znak","štátny znak","erb"],["hymna","štátna hymna"],["pečať","štátna pečať"]],
-   e:"Štátne symboly: vlajka, znak, hymna, pečať."}
- ]},
-
-{id:"vlajka", t:2, h:"Vlajka a znak",
- b:[
-  {t:"rows", r:[["vlajka","pomer 2 : 3, odvodená z ruskej vlajky"],["znak","rannogotický štít, odvodený zo znaku Uhorska"]]},
-  {t:"flag"}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do viet.", s:"Vlajka SR má pomer [2 : 3] a je odvodená z [ruskej] vlajky. Znak SR je [rannogotický] štít odvodený zo znaku [Uhorska].",
-   extra:["3 : 2","českej","barokový","Rakúska"],
-   e:"Vlajka: pomer <b>2 : 3</b>, z <b>ruskej</b> vlajky. Znak: <b>rannogotický</b> štít zo znaku <b>Uhorska</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Vlajka SR je odvodená z {českej|ruskej} vlajky.",
-   e:"Vlajka SR je odvodená z <b>ruskej</b> vlajky."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Štátny znak SR je odvodený zo znaku {Rakúska|Uhorska}.",
-   e:"Znak SR je odvodený zo znaku <b>Uhorska</b>."}
- ],
- hard:[
-  {t:"txt", q:"Aký pomer strán má vlajka SR?", acc:["2:3","2 ku 3","2/3"], sol:"2 : 3", e:"Vlajka SR má pomer <b>2 : 3</b>."},
-  {t:"txt", q:"Z ktorej vlajky je odvodená vlajka SR?", acc:["z ruskej","ruskej","ruská","z ruskej vlajky","ruskej vlajky","Rusko","z Ruska"], sol:"z ruskej",
-   e:"Vlajka SR je odvodená z <b>ruskej</b> vlajky."},
-  {t:"txt", q:"Aký štít je na štátnom znaku SR?", acc:["rannogotický","ranogotický","rannogotický štít","ranogotický štít"], sol:"rannogotický",
-   e:"Znak SR je <b>rannogotický</b> štít."},
-  {t:"txt", q:"Zo znaku ktorej krajiny je odvodený znak SR?", acc:["Uhorska","Uhorsko","z Uhorska","zo znaku Uhorska"], sol:"Uhorska",
-   e:"Znak SR je odvodený zo znaku <b>Uhorska</b>."}
- ]},
-
-{id:"hymna", t:2, h:"Hymna",
- b:[
-  {t:"rows", r:[["melódia","pieseň „Kopala studienku“"],["autor textu","J. (Janko) Matúška"]]}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do vety.", s:"Hymna SR má melódiu piesne „[Kopala studienku]“ a text napísal [Janko Matúška].", extra:["Tancuj, tancuj","P. O. Hviezdoslav"],
-   e:"Melódia: <b>Kopala studienku</b>. Text: <b>Janko Matúška</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Text hymny SR napísal {Hviezdoslav|Matúška}.",
-   e:"Text hymny napísal <b>Janko Matúška</b>."}
- ],
- hard:[
-  {t:"txt", q:"Na melódiu ktorej piesne je hymna SR?", acc:["Kopala studienku","Kopala studienku pozerala do nej"], sol:"Kopala studienku",
-   e:"Hymna má melódiu piesne <b>Kopala studienku</b>."},
-  {t:"txt", q:"Kto napísal text hymny SR?", acc:["Janko Matúška","J. Matúška","Ján Matúška","Matúška"], sol:"Janko Matúška",
-   e:"Text hymny napísal <b>Janko Matúška</b>."}
+ qs:[
+  {t:"list", q:"Vymenuj 4 štátne symboly SR.", n:4,
+   items:[["vlajka","štátna vlajka"],["znak","štátny znak","erb"],["hymna","štátna hymna"],["pečať","štátna pečať"]]},
+  {t:"pairs", q:"Napíš o vlajke SR:",
+   rows:[{l:"pomer strán", acc:["2:3","2 ku 3","2/3"], s:"2 : 3"},
+         {l:"z ktorej vlajky je odvodená", acc:["ruskej","z ruskej","ruská","z ruskej vlajky","ruskej vlajky","Rusko","z Ruska"], s:"z ruskej"}]},
+  {t:"pairs", q:"Napíš o štátnom znaku SR:",
+   rows:[{l:"aký je to štít", acc:["rannogotický","ranogotický","rannogotický štít","ranogotický štít"], s:"rannogotický"},
+         {l:"zo znaku ktorej krajiny je odvodený", acc:["Uhorska","Uhorsko","z Uhorska","zo znaku Uhorska"], s:"Uhorska"}]},
+  {t:"pairs", q:"Napíš o hymne SR:",
+   rows:[{l:"melódia ktorej piesne", acc:["Kopala studienku","Kopala studienku pozerala do nej"], s:"Kopala studienku"},
+         {l:"autor textu", acc:["Janko Matúška","J. Matúška","Ján Matúška","Matúška"], s:"Janko Matúška"}]},
+  {t:"def", q:"Napíš, ako vyzerá štátna pečať SR.", kw:[["kruh"],["znak","napis","slovensk"]],
+   sol:"kruh, v ňom štátny znak a okolo nápis SLOVENSKÁ REPUBLIKA"}
  ]},
 
 /* ---------- 4. TYPY STATOV ---------- */
-{id:"hladiska", t:3, h:"Typy štátov: 3 hľadiská",
+{t:3, h:"Typy štátov a forma vlády",
  b:[
-  {t:"p", x:"Štáty delíme z troch hľadísk:"},
-  {t:"list", num:true, li:["podľa <b>formy vlády</b>","podľa <b>územno-organizačného členenia</b>","podľa <b>štátneho režimu</b>"]}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do vety.", s:"Štáty delíme podľa formy [vlády], podľa územno-organizačného [členenia] a podľa štátneho [režimu].", extra:["moci","občianstva"],
-   e:"Hľadiská: forma <b>vlády</b>, územno-organizačné <b>členenie</b>, štátny <b>režim</b>."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Štáty delíme podľa formy vlády, územno-organizačného členenia a štátneho {symbolu|režimu}.",
-   e:"Tretie hľadisko je štátny <b>režim</b>."}
- ],
- hard:[
-  {t:"list", q:"Podľa ktorých 3 hľadísk delíme štáty?", n:3,
-   items:[["forma vlády","podľa formy vlády","formy vlády"],["územno-organizačné členenie","územno organizačné členenie","územné členenie","územno-organizačného členenia","územno-organizačná štruktúra"],["štátny režim","režim","štátneho režimu"]],
-   e:"Forma vlády, územno-organizačné členenie, štátny režim."}
- ]},
-
-{id:"republika", t:3, h:"Republiky",
- b:[
-  {t:"p", x:"V republike je hlava štátu <b>volená</b>."},
-  {t:"rows", r:[["prezidentská","legislatíva a exekutíva sú oddelené a vyvážené"],["parlamentná","legislatíva je exekutíve nadradená"]]}
- ],
- easy:[
-  {t:"sort", q:"Republika alebo monarchia?", g:["republika","monarchia"],
-   a:["hlava štátu je volená","prezidentská","parlamentná"], b:["hlava štátu je dedičná","absolutická","konštitučná"],
-   e:"Republika: volená hlava štátu (prezidentská, parlamentná). Monarchia: dedičná hlava štátu (absolutická, stavovská, konštitučná)."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V {parlamentnej|prezidentskej} republike sú legislatíva a exekutíva oddelené a vyvážené.",
-   e:"Oddelené a vyvážené sú v <b>prezidentskej</b> republike. V parlamentnej je legislatíva nadradená."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V republike je hlava štátu {dedičná|volená}.",
-   e:"V republike je hlava štátu <b>volená</b>."}
- ],
- hard:[
-  {t:"txt", q:"Aká je hlava štátu v republike?", acc:["volená"], e:"V republike je hlava štátu <b>volená</b>."},
-  {t:"txt", q:"Ako sa volá republika, v ktorej je legislatíva nadradená exekutíve?", acc:["parlamentná","parlamentná republika"], sol:"parlamentná",
-   e:"<b>Parlamentná</b> republika: legislatíva je exekutíve nadradená."},
-  {t:"txt", q:"Ako sa volá republika, v ktorej sú legislatíva a exekutíva oddelené a vyvážené?", acc:["prezidentská","prezidentská republika"], sol:"prezidentská",
-   e:"<b>Prezidentská</b> republika: legislatíva a exekutíva sú oddelené a vyvážené."},
-  {t:"list", q:"Aké 2 druhy republík poznáme?", n:2, items:[["prezidentská","prezidentské"],["parlamentná","parlamentné"]],
-   e:"Republiky sú <b>prezidentské</b> a <b>parlamentné</b>."}
- ]},
-
-{id:"monarchia", t:3, h:"Monarchie",
- b:[
-  {t:"p", x:"V monarchii je hlava štátu <b>dedičná</b>."},
+  {t:"h", x:"Štáty delíme z troch hľadísk"},
+  {t:"list", num:true, li:["podľa <b>formy vlády</b>","podľa <b>územno-organizačného členenia</b>","podľa <b>štátneho režimu</b>"]},
+  {t:"h", x:"Republiky: hlava štátu je volená"},
+  {t:"rows", r:[["prezidentská","legislatíva a exekutíva sú oddelené a vyvážené"],["parlamentná","legislatíva je exekutíve nadradená"]]},
+  {t:"h", x:"Monarchie: hlava štátu je dedičná"},
   {t:"rows", r:[
     ["absolutická","hlava štátu sa o moc nedelí"],
     ["stavovská","hlava štátu je volená privilegovanou vrstvou"],
     ["konštitučná","hlava štátu sa delí o moc s voleným parlamentom"]
   ]}
  ],
- easy:[
-  {t:"match", q:"Spoj druh monarchie s tým, čo znamená.",
-   pairs:[["absolutická","hlava štátu sa o moc nedelí"],["stavovská","hlavu štátu volí privilegovaná vrstva"],["konštitučná","hlava štátu sa delí o moc s parlamentom"]],
-   e:"Absolutická: nedelí sa. Stavovská: volí ju privilegovaná vrstva. Konštitučná: delí sa s voleným parlamentom."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V monarchii je hlava štátu {volená|dedičná}.",
-   e:"V monarchii je hlava štátu <b>dedičná</b>."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V {absolutickej|konštitučnej} monarchii sa hlava štátu delí o moc s voleným parlamentom.",
-   e:"S parlamentom sa delí v <b>konštitučnej</b> monarchii. V absolutickej sa o moc nedelí."}
- ],
- hard:[
-  {t:"txt", q:"Aká je hlava štátu v monarchii?", acc:["dedičná"], e:"V monarchii je hlava štátu <b>dedičná</b>."},
-  {t:"txt", q:"Ako sa volá monarchia, v ktorej sa hlava štátu o moc nedelí?", acc:["absolutická","absolutistická","absolutická monarchia"], sol:"absolutická",
-   e:"<b>Absolutická</b> monarchia: hlava štátu sa o moc nedelí."},
-  {t:"txt", q:"Ako sa volá monarchia, v ktorej je hlava štátu volená privilegovanou vrstvou?", acc:["stavovská","stavovská monarchia"], sol:"stavovská",
-   e:"<b>Stavovská</b> monarchia: hlavu štátu volí privilegovaná vrstva."},
-  {t:"txt", q:"Ako sa volá monarchia, v ktorej sa hlava štátu delí o moc s voleným parlamentom?", acc:["konštitučná","konštitučná monarchia"], sol:"konštitučná",
-   e:"<b>Konštitučná</b> monarchia: hlava štátu sa delí o moc s voleným parlamentom."},
-  {t:"list", q:"Napíš 3 druhy monarchií.", n:3, items:[["absolutická","absolutistická","absolutické"],["stavovská","stavovské"],["konštitučná","konštitučné"]],
-   e:"Monarchie: absolutické, stavovské, konštitučné."}
+ qs:[
+  {t:"list", q:"Vymenuj 3 hľadiská, podľa ktorých delíme štáty.", n:3,
+   items:[["forma vlády","podľa formy vlády","formy vlády"],
+          ["územno-organizačné členenie","územno organizačné členenie","územné členenie","územno-organizačného členenia","územno-organizačná štruktúra"],
+          ["štátny režim","režim","štátneho režimu"]]},
+  {t:"pairs", q:"Aká je hlava štátu?", rows:[{l:"v republike", acc:["volená"]},{l:"v monarchii", acc:["dedičná"]}]},
+  {t:"list", q:"Vymenuj 2 druhy republík.", n:2, items:[["prezidentská","prezidentské"],["parlamentná","parlamentné"]]},
+  {t:"pairs", q:"Ako sa volá republika, v ktorej…",
+   rows:[{l:"legislatíva a exekutíva sú oddelené a vyvážené", acc:["prezidentská","prezidentská republika"]},
+         {l:"legislatíva je exekutíve nadradená", acc:["parlamentná","parlamentná republika"]}]},
+  {t:"list", q:"Vymenuj 3 druhy monarchií.", n:3,
+   items:[["absolutická","absolutistická","absolutické"],["stavovská","stavovské"],["konštitučná","konštitučné"]]},
+  {t:"pairs", q:"Ako sa volá monarchia, v ktorej hlava štátu…",
+   rows:[{l:"sa o moc nedelí", acc:["absolutická","absolutistická"]},
+         {l:"je volená privilegovanou vrstvou", acc:["stavovská"]},
+         {l:"sa delí o moc s voleným parlamentom", acc:["konštitučná"]}]},
+  {t:"pairs", q:"Napíš, čo znamená:",
+   rows:[{l:"prezidentská republika", kw:[["oddelen","vyvazen"]], s:"legislatíva a exekutíva sú oddelené a vyvážené"},
+         {l:"parlamentná republika", kw:[["nadraden"]], s:"legislatíva je exekutíve nadradená"}]},
+  {t:"pairs", q:"Napíš, čo znamená:",
+   rows:[{l:"absolutická monarchia", kw:[["nedel","nedeli"]], s:"hlava štátu sa o moc nedelí"},
+         {l:"stavovská monarchia", kw:[["privileg","vrstv"]], s:"hlava štátu je volená privilegovanou vrstvou"},
+         {l:"konštitučná monarchia", kw:[["parlament"]], s:"hlava štátu sa delí o moc s voleným parlamentom"}]}
  ]},
 
-{id:"unitarne", t:3, h:"Unitárne štáty",
+{t:3, h:"Územno-organizačné členenie",
  b:[
-  {t:"p", x:"Unitárny štát má <b>jednu centralizovanú mocenskú štruktúru</b>. Môže byť:"},
-  {t:"list", li:["centralizovaný","decentralizovaný"]}
- ],
- easy:[
-  {t:"sort", q:"Unitárny alebo zložený štát?", g:["unitárny","zložený"],
-   a:["jedna centralizovaná mocenská štruktúra","centralizovaný","decentralizovaný"], b:["federácia","konfederácia","únia"],
-   e:"Unitárny: jedna centralizovaná mocenská štruktúra, centralizovaný alebo decentralizovaný. Zložený: federácia, konfederácia, únia."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"{Zložený|Unitárny} štát má jednu centralizovanú mocenskú štruktúru.",
-   e:"Jednu centralizovanú mocenskú štruktúru má <b>unitárny</b> štát."}
- ],
- hard:[
-  {t:"list", q:"Aké 2 druhy unitárnych štátov poznáme?", n:2, items:[["centralizované","centralizovaný","centralizovane"],["decentralizované","decentralizovaný"]],
-   e:"Unitárne štáty sú <b>centralizované</b> a <b>decentralizované</b>."},
-  {t:"txt", q:"Akú mocenskú štruktúru má unitárny štát?", acc:["jednu centralizovanú","jednu centralizovanú mocenskú štruktúru","jedna centralizovaná mocenská štruktúra"], kw:[["jedn"],["centraliz"]],
-   sol:"jednu centralizovanú mocenskú štruktúru", e:"Unitárny štát má <b>jednu centralizovanú</b> mocenskú štruktúru."}
- ]},
-
-{id:"zlozene", t:3, h:"Zložené štáty",
- b:[
-  {t:"p", x:"V zloženom štáte sa <b>centrálna mocenská štruktúra delí o moc s regionálnymi</b>. Je to viac štátov v jednom štáte."},
+  {t:"h", x:"Unitárne štáty"},
+  {t:"p", x:"Majú <b>jednu centralizovanú mocenskú štruktúru</b>. Sú <b>centralizované</b> alebo <b>decentralizované</b>."},
+  {t:"h", x:"Zložené štáty"},
+  {t:"p", x:"<b>Centrálna mocenská štruktúra sa delí o moc s regionálnymi.</b> Je to viac štátov v jednom štáte."},
   {t:"rows", r:[
     ["federácia","pevný zväzok štátov; symetrická alebo asymetrická"],
     ["konfederácia","voľný zväzok štátov"],
@@ -860,77 +487,34 @@ var CARDS = [
   {t:"extra", h:"Konfederácia jednoducho", x:"Každý štát v konfederácii má svoju moc, ale aj konfederácia ako celok má trochu moci, napríklad spoločnú obranu. USA boli konfederácia len na začiatku (1781 – 1789), <b>dnes sú USA federácia</b>."},
   {t:"warn", h:"Pozor na zošit", x:"V zošite je „voľný zväzok štátov“ napísaný medzi konfederáciou a úniou. V učebniciach patrí ku <b>konfederácii</b>, tak je to aj tu."}
  ],
- easy:[
-  {t:"match", q:"Spoj druh zloženého štátu s popisom.",
-   pairs:[["federácia","pevný zväzok štátov"],["konfederácia","voľný zväzok štátov"],["únia","reálna alebo personálna"]],
-   e:"Federácia = pevný zväzok, konfederácia = voľný zväzok, únia = reálna alebo personálna."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Federácia je {voľný|pevný} zväzok štátov.",
-   e:"Federácia je <b>pevný</b> zväzok štátov. Voľný zväzok je konfederácia."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Únie môžu byť reálne alebo {symetrické|personálne}.",
-   e:"Únie sú reálne alebo <b>personálne</b>. Symetrické a asymetrické sú federácie."}
- ],
- hard:[
-  {t:"list", q:"Napíš 3 druhy zložených štátov.", n:3, items:[["federácia","federácie"],["konfederácia","konfederácie"],["únia","únie"]],
-   e:"Zložené štáty: <b>federácie</b>, <b>konfederácie</b>, <b>únie</b>."},
-  {t:"list", q:"Aké môžu byť federácie?", n:2, items:[["symetrické","symetrická"],["asymetrické","asymetrická"]],
-   e:"Federácie sú <b>symetrické</b> a <b>asymetrické</b>."},
-  {t:"list", q:"Aké môžu byť únie?", n:2, items:[["reálne","reálna"],["personálne","personálna"]],
-   e:"Únie sú <b>reálne</b> a <b>personálne</b>."},
-  {t:"txt", q:"Ktorý zložený štát je pevný zväzok štátov?", acc:["federácia"], e:"Pevný zväzok štátov je <b>federácia</b>."},
-  {t:"txt", q:"Ktorý zložený štát je voľný zväzok štátov?", acc:["konfederácia"], e:"Voľný zväzok štátov je <b>konfederácia</b>."}
+ qs:[
+  {t:"list", q:"Povedz 2 typy štátov podľa územno-organizačného členenia.", n:2,
+   items:[["unitárne","unitárny","unitárne štáty"],["zložené","zložený","zložené štáty"]]},
+  {t:"def", q:"Napíš, čo je unitárny štát.", kw:[["jeden","jedn"],["centraliz"]], sol:"štát s jednou centralizovanou mocenskou štruktúrou"},
+  {t:"list", q:"Aké môžu byť unitárne štáty?", n:2, items:[["centralizované","centralizovaný"],["decentralizované","decentralizovaný"]]},
+  {t:"def", q:"Napíš, čo je zložený štát.", kw:[["region","viac stat","viacero stat"]],
+   sol:"centrálna mocenská štruktúra sa delí o moc s regionálnymi; viac štátov v jednom štáte"},
+  {t:"list", q:"Vymenuj 3 druhy zložených štátov.", n:3, items:[["federácia","federácie"],["konfederácia","konfederácie"],["únia","únie"]]},
+  {t:"pairs", q:"Aký zväzok štátov je…",
+   rows:[{l:"federácia", acc:["pevný","pevný zväzok","pevný zväzok štátov"]},{l:"konfederácia", acc:["voľný","voľný zväzok","voľný zväzok štátov"]}]},
+  {t:"list", q:"Aké môžu byť federácie?", n:2, items:[["symetrické","symetrická"],["asymetrické","asymetrická"]]},
+  {t:"list", q:"Aké môžu byť únie?", n:2, items:[["reálne","reálna"],["personálne","personálna"]]}
  ]},
 
-{id:"rezimy", t:3, h:"Štátne režimy",
+{t:3, h:"Štátny režim",
  b:[
-  {t:"p", x:"Podľa štátneho režimu poznáme:"},
-  {t:"rows", r:[["diktatúra",""],["autoritatívny režim","medzistupeň medzi diktatúrou a demokraciou"],["demokracia",""]]}
- ],
- easy:[
-  {t:"cloze", q:"Doplň do vety.", s:"Autoritatívny režim je [medzistupeň] medzi [diktatúrou] a demokraciou.", extra:["koniec","monarchiou"],
-   e:"Autoritatívny režim je <b>medzistupeň</b> medzi <b>diktatúrou</b> a demokraciou."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"Autoritatívny režim je medzistupeň medzi diktatúrou a {monarchiou|demokraciou}.",
-   e:"Autoritatívny režim je medzi diktatúrou a <b>demokraciou</b>."}
- ],
- hard:[
-  {t:"list", q:"Aké 3 štátne režimy poznáme?", n:3,
-   items:[["diktatúra","diktatúry"],["autoritatívny režim","autoritatívny","autoritatívne režimy","autoritárny režim"],["demokracia","demokracie"]],
-   e:"Diktatúra, autoritatívny režim, demokracia."},
-  {t:"txt", q:"Ako sa volá medzistupeň medzi diktatúrou a demokraciou?", acc:["autoritatívny režim","autoritatívny","autoritárny režim"], sol:"autoritatívny režim",
-   e:"Je to <b>autoritatívny režim</b>."}
- ]},
-
-{id:"diktatura", t:3, h:"Diktatúra",
- b:[
+  {t:"p", x:"Podľa štátneho režimu sú štáty <b>diktatúry</b>, <b>autoritatívne režimy</b> a <b>demokracie</b>."},
+  {t:"h", x:"Diktatúra"},
   {t:"list", li:[
     "vládnucu skupinu <b>nie je možné vymeniť bez násilia</b>",
     "<b>médiá sú kontrolované</b> štátnou mocou",
     "<b>voľby sú manipulované</b>",
     "<b>nedodržiavajú sa ľudské práva</b>",
     "<b>súdny systém</b> rozhoduje podľa želaní vládnucej skupiny"
-  ]}
- ],
- easy:[
-  {t:"sort", q:"Diktatúra alebo demokracia?", g:["diktatúra","demokracia"],
-   a:["vládu nemožno vymeniť bez násilia","médiá kontroluje štát","voľby sú manipulované"], b:["vlády sa menia voľbami","slobodné médiá kontrolujú moc","platí všeobecné volebné právo"],
-   e:"Diktatúra: vládu nemožno vymeniť bez násilia, médiá kontroluje štát, voľby sú manipulované. Demokracia: voľby, slobodné médiá, všeobecné volebné právo."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V diktatúre sú voľby {slobodné|manipulované}.",
-   e:"V diktatúre sú voľby <b>manipulované</b>."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V diktatúre sa ľudské práva {dodržiavajú|nedodržiavajú}.",
-   e:"V diktatúre sa ľudské práva <b>nedodržiavajú</b>."}
- ],
- hard:[
-  {t:"self", q:"Napíš aspoň 3 znaky diktatúry.",
-   model:"Vládnucu skupinu <b>nie je možné vymeniť bez násilia</b>. <b>Médiá sú kontrolované</b> štátnou mocou. <b>Voľby sú manipulované</b>. <b>Nedodržiavajú sa ľudské práva</b>. <b>Súdny systém</b> rozhoduje podľa želaní vládnucej skupiny."}
- ]},
-
-{id:"demokracia", t:3, h:"Demokracia",
- b:[
+  ]},
+  {t:"h", x:"Autoritatívny režim"},
+  {t:"p", x:"<b>medzistupeň</b> medzi diktatúrou a demokraciou"},
+  {t:"h", x:"Demokracia"},
   {t:"list", li:[
     "vlády sa menia v <b>pravidelných intervaloch voľbami</b>",
     "moc je kontrolovaná <b>slobodnými médiami</b>",
@@ -940,66 +524,59 @@ var CARDS = [
     "sú dodržiavané <b>všetky ľudské práva</b>"
   ]}
  ],
- easy:[
-  {t:"sort", q:"Demokracia alebo diktatúra?", g:["demokracia","diktatúra"],
-   a:["existuje právny štát","dodržiavajú sa všetky ľudské práva","občania priamo participujú na moci"], b:["súdy rozhodujú podľa vládnucej skupiny","nedodržiavajú sa ľudské práva"],
-   e:"Demokracia: právny štát, ľudské práva, občania participujú na moci. Diktatúra: súdy podľa vládnucej skupiny, ľudské práva sa nedodržiavajú."}
- ],
- mid:[
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V demokracii sa vlády menia {násilím|voľbami} v pravidelných intervaloch.",
-   e:"V demokracii sa vlády menia <b>voľbami</b>."},
-  {t:"fix", q:"Jedno slovo vo vete je zlé. Ťukni naň.", s:"V demokracii platí {obmedzené|všeobecné} volebné právo.",
-   e:"V demokracii platí <b>všeobecné</b> volebné právo."}
- ],
- hard:[
-  {t:"self", q:"Napíš aspoň 3 znaky demokracie.",
-   model:"Vlády sa menia v <b>pravidelných intervaloch voľbami</b>. Moc je kontrolovaná <b>slobodnými médiami</b>. Občania <b>priamo participujú</b> na moci. Existuje <b>právny štát</b>. Platí <b>všeobecné volebné právo</b>. Sú dodržiavané <b>všetky ľudské práva</b>."}
+ qs:[
+  {t:"list", q:"Vymenuj 3 štátne režimy.", n:3,
+   items:[["diktatúra","diktatúry"],["autoritatívny režim","autoritatívny","autoritatívne režimy","autoritárny režim"],["demokracia","demokracie"]]},
+  {t:"txt", q:"Ako sa volá medzistupeň medzi diktatúrou a demokraciou?", acc:["autoritatívny režim","autoritatívny","autoritárny režim"], sol:"autoritatívny režim"},
+  {t:"list", q:"Vymenuj aspoň 3 znaky diktatúry.", n:3,
+   items:[{s:"vládnucu skupinu nie je možné vymeniť bez násilia", kw:[["nasil","vymen"]]},
+          {s:"médiá sú kontrolované štátnou mocou", kw:[["medi","noviny","televiz"]]},
+          {s:"voľby sú manipulované", kw:[["volb","manipul"]]},
+          {s:"nedodržiavajú sa ľudské práva", kw:[["ludsk","prav"]]},
+          {s:"súdy rozhodujú podľa želaní vládnucej skupiny", kw:[["sud"]]}]},
+  {t:"list", q:"Vymenuj aspoň 3 znaky demokracie.", n:3,
+   items:[{s:"vlády sa menia v pravidelných intervaloch voľbami", kw:[["volb","volia","interval"]]},
+          {s:"moc je kontrolovaná slobodnými médiami", kw:[["medi"]]},
+          {s:"občania priamo participujú na moci", kw:[["particip","podiel"]]},
+          {s:"existuje právny štát", kw:[["pravny"]]},
+          {s:"platí všeobecné volebné právo", kw:[["volebn","vseobecn"]]},
+          {s:"sú dodržiavané všetky ľudské práva", kw:[["ludsk"]]}]}
  ]}
 ];
 
-var BYID = {};
-(function index(){
-  var i;
-  for(i = 0; i < CARDS.length; i++){ BYID[CARDS[i].id] = CARDS[i]; }
-})();
-function cardsOf(ti){ return CARDS.filter(function(c){ return c.t === ti; }); }
-
-/* ===== LEKCIE =====
-   ucivo ide po lekciach: v kazdej sa precitaju 1 - 3 pojmy, potom pridu otazky na ne
-   pomiesane s otazkami z predoslych lekcii a na konci este raz tazsie otazky na nove pojmy */
-var LESSONS = [
-  {t:0, ids:["stat", "znaky"]},
-  {t:0, ids:["moc", "legit"]},
-  {t:0, ids:["konc", "delba"]},
-  {t:0, ids:["horiz"]},
-  {t:1, ids:["obc", "ziskanie"]},
-  {t:1, ids:["uzemie", "zmena"]},
-  {t:2, ids:["suver", "vnutorna", "vonkajsia"]},
-  {t:2, ids:["symboly", "vlajka", "hymna"]},
-  {t:3, ids:["hladiska", "republika", "monarchia"]},
-  {t:3, ids:["unitarne", "zlozene"]},
-  {t:3, ids:["rezimy", "diktatura", "demokracia"]}
-];
-var LESSON_OF = {};
-(function indexLessons(){
-  var i, j;
-  for(i = 0; i < LESSONS.length; i++){
-    for(j = 0; j < LESSONS[i].ids.length; j++){ LESSON_OF[LESSONS[i].ids[j]] = i; }
+/* kazda otazka dostane id "lekcia-poradie"; polozky zoznamov a riadky sa zjednotia */
+var QS = [], QBYID = {};
+function normItem(it){
+  if(Array.isArray(it)){ return {s:it[0], acc:it, kw:null}; }
+  return {s:it.s || (it.acc ? it.acc[0] : ""), acc:it.acc || [], kw:it.kw || null};
+}
+(function indexQuestions(){
+  var li, k, src, it;
+  for(li = 0; li < LESSONS.length; li++){
+    for(k = 0; k < LESSONS[li].qs.length; k++){
+      src = LESSONS[li].qs[k];
+      if(src.items){ src.items = src.items.map(normItem); }
+      if(src.rows){ src.rows = src.rows.map(function(r){ var n = normItem(r); n.l = r.l; return n; }); }
+      it = {id:li + "-" + k, li:li, src:src};
+      QS.push(it);
+      QBYID[it.id] = it;
+    }
   }
 })();
-function lessonTitle(li){ return LESSONS[li].ids.map(function(id){ return BYID[id].h; }).join(" · "); }
+function qsOf(li){ return QS.filter(function(x){ return x.li === li; }); }
 function lessonsOf(ti){
   var out = [], i;
   for(i = 0; i < LESSONS.length; i++){ if(LESSONS[i].t === ti){ out.push(i); } }
   return out;
 }
+function topicQs(ti){ return QS.filter(function(x){ return LESSONS[x.li].t === ti; }); }
 
 /* ===== POKROK =====
-   b: ako dobre pojem vie (0 = prave precitany, 1 = raz vedel, 2+ = pise sam, od 3 "vie napisat")
-   last: poradie otazky, ked sa nan naposledy pytal, aby sa z minuleho uciva striedali pojmy */
-var KNOW = 3;
-var KEY = "polit-pokrok-v2";
-var P = {c:{}, done:{}, tick:0, best:null, sound:true};
+   pri kazdej otazke: ok = posledna odpoved bola spravna, b = kolkokrat za sebou spravne,
+   last = poradie, kedy sa na nu naposledy pytal (aby sa z minuleho uciva striedali otazky) */
+var KEY = "polit-pokrok-v3";
+var P = {q:{}, done:{}, tick:0, best:null, sound:true};
+var OLD_PER_LESSON = 2;
 
 function loadProgress(){
   try {
@@ -1007,7 +584,7 @@ function loadProgress(){
     if(!raw){ return; }
     var o = JSON.parse(raw);
     if(o && typeof o === "object"){
-      if(o.c && typeof o.c === "object"){ P.c = o.c; }
+      if(o.q && typeof o.q === "object"){ P.q = o.q; }
       if(o.done && typeof o.done === "object"){ P.done = o.done; }
       if(typeof o.tick === "number"){ P.tick = o.tick; }
       if(o.best && typeof o.best === "object"){ P.best = o.best; }
@@ -1019,25 +596,16 @@ function saveProgress(){
   try { window.localStorage.setItem(KEY, JSON.stringify(P)); }
   catch(err){ /* sukromne okno alebo plne ulozisko */ }
 }
-function stOf(id){ return P.c[id] || null; }
-function stateOf(id){
-  var s = stOf(id);
+function qState(id){
+  var s = P.q[id];
   if(!s){ return "new"; }
-  return s.b >= KNOW ? "know" : "learn";
-}
-function learn(id){
-  if(!P.c[id]){ P.c[id] = {b:0, n:0, w:0, last:P.tick}; saveProgress(); }
+  return s.ok ? "know" : "learn";
 }
 function record(id, ok){
-  var s = P.c[id] || (P.c[id] = {b:0, n:0, w:0, last:0});
-  var before = s.b;
+  var s = P.q[id] || {ok:false, b:0, n:0, last:0};
   P.tick++;
-  s.n++;
-  s.last = P.tick;
-  if(ok){ s.b = Math.min(s.b + 1, 5); }
-  else { s.w++; s.b = s.b >= 2 ? 1 : 0; }
+  P.q[id] = {ok:ok, b:ok ? s.b + 1 : 0, n:s.n + 1, last:P.tick};
   saveProgress();
-  return {before:before, after:s.b};
 }
 function nextLesson(){
   var i;
@@ -1049,14 +617,12 @@ function doneCount(){
   for(i = 0; i < LESSONS.length; i++){ if(P.done[i]){ n++; } }
   return n;
 }
-function learnedCards(ti){
-  return CARDS.filter(function(c){ return stOf(c.id) && (ti < 0 || c.t === ti); });
-}
-/* najprv pojmy, ktore ide najmenej, a z nich tie, na ktore sa najdlhsie nepytal */
+function answered(list){ return list.filter(function(x){ return !!P.q[x.id]; }); }
+/* najprv otazky, ktore naposledy nevedel, potom tie, na ktore sa najdlhsie nepytal */
 function weakest(list){
   return list.slice().sort(function(x, y){
-    var a = stOf(x.id), b = stOf(y.id);
-    return (a.b - b.b) || (a.last - b.last);
+    var a = P.q[x.id], b = P.q[y.id];
+    return ((a.ok ? 1 : 0) - (b.ok ? 1 : 0)) || (a.b - b.b) || (a.last - b.last);
   });
 }
 
@@ -1098,7 +664,6 @@ function shuffle(arr){
   }
   return arr;
 }
-function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
 /* male pismena, bez diakritiky, bez interpunkcie */
 function norm(s){
   s = (s === null || s === undefined) ? "" : String(s);
@@ -1123,14 +688,14 @@ function lev(a, b){
   }
   return prev[n];
 }
-/* presna zhoda alebo maly preklep (dlhsie slova znesu viac); zaciatok slova musi sediet,
-   inak by "symetricke" preslo ako "asymetricke" a "centralizovane" ako "decentralizovane" */
 function accExact(val, acc){
   var v = norm(val), i;
   if(!v){ return false; }
   for(i = 0; i < acc.length; i++){ if(v === norm(acc[i])){ return true; } }
   return false;
 }
+/* presna zhoda alebo maly preklep (dlhsie slova znesu viac); zaciatok slova musi sediet,
+   inak by "symetricke" preslo ako "asymetricke" a "centralizovane" ako "decentralizovane" */
 function accOk(val, acc){
   var v = norm(val), i, a;
   if(!v){ return false; }
@@ -1154,20 +719,26 @@ function kwOk(val, kw){
   }
   return true;
 }
-function txtOk(val, q){ return accOk(val, q.acc || []) || kwOk(val, q.kw); }
-/* zoznam: kazde policko sa priradi inej veci, najprv presne zhody, potom preklepy */
+function itemOk(val, it){ return accOk(val, it.acc || []) || kwOk(val, it.kw); }
+/* zoznam: kazde policko sa priradi inej veci (najvacsie parovanie, aby jedna odpoved nezabrala miesto inej) */
 function listMatch(vals, items){
-  var res = [], used = {}, i, j, pass;
-  for(i = 0; i < vals.length; i++){ res.push(-1); }
-  for(pass = 0; pass < 2; pass++){
-    for(i = 0; i < vals.length; i++){
-      if(res[i] >= 0 || !norm(vals[i])){ continue; }
-      for(j = 0; j < items.length; j++){
-        if(used[j]){ continue; }
-        if(pass === 0 ? accExact(vals[i], items[j]) : accOk(vals[i], items[j])){ res[i] = j; used[j] = true; break; }
-      }
-    }
+  var ok = [], ownerOf = [], res = [], i, j;
+  for(i = 0; i < vals.length; i++){
+    ok.push([]);
+    for(j = 0; j < items.length; j++){ ok[i].push(!!norm(vals[i]) && itemOk(vals[i], items[j])); }
   }
+  for(j = 0; j < items.length; j++){ ownerOf.push(-1); }
+  function tryAssign(i, seen){
+    for(var j2 = 0; j2 < items.length; j2++){
+      if(!ok[i][j2] || seen[j2]){ continue; }
+      seen[j2] = true;
+      if(ownerOf[j2] < 0 || tryAssign(ownerOf[j2], seen)){ ownerOf[j2] = i; return true; }
+    }
+    return false;
+  }
+  for(i = 0; i < vals.length; i++){ tryAssign(i, {}); }
+  for(i = 0; i < vals.length; i++){ res.push(-1); }
+  for(j = 0; j < items.length; j++){ if(ownerOf[j] >= 0){ res[ownerOf[j]] = j; } }
   return res;
 }
 function esc(s){
@@ -1194,9 +765,7 @@ var IC = {
   sound:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>',
   mute:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6M16 9l6 6"/></svg>',
   bulb:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#636b7a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>',
-  again:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>',
-  check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
-  cross:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>'
+  again:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>'
 };
 
 /* statny znak: cerveny stit, biely dvojkriz, modre trojvrsie (zjednodusene) */
@@ -1207,12 +776,12 @@ function shieldSvg(cid){
     '<rect x="45" y="17" width="10" height="74" fill="#fff"/><rect x="31" y="29" width="38" height="9" fill="#fff"/><rect x="22" y="49" width="56" height="10" fill="#fff"/>';
 }
 function flagSvg(){
-  return '<svg width="210" height="140" viewBox="0 0 300 200" role="img" aria-label="Vlajka Slovenskej republiky">' +
+  return '<svg width="180" height="120" viewBox="0 0 300 200" role="img" aria-label="Vlajka Slovenskej republiky">' +
     '<rect x="0.5" y="0.5" width="299" height="66" fill="#fff" stroke="#e4e7ec"/><rect y="66.7" width="300" height="66.7" fill="#0b4ea2"/><rect y="133.3" width="300" height="66.7" fill="#ee1c25"/>' +
     '<g transform="translate(62 46) scale(0.92)">' + shieldSvg("clipFlag") + '</g></svg>';
 }
 function sealSvg(){
-  return '<svg width="150" height="150" viewBox="0 0 200 200" role="img" aria-label="Štátna pečať Slovenskej republiky">' +
+  return '<svg width="130" height="130" viewBox="0 0 200 200" role="img" aria-label="Štátna pečať Slovenskej republiky">' +
     '<circle cx="100" cy="100" r="96" fill="none" stroke="#12141a" stroke-width="2"/>' +
     '<circle cx="100" cy="100" r="66" fill="none" stroke="#12141a" stroke-width="1"/>' +
     '<path id="sealArc" d="M100 100m-81 0a81 81 0 1 1 162 0a81 81 0 1 1 -162 0" fill="none"/>' +
@@ -1220,9 +789,10 @@ function sealSvg(){
     '<g transform="translate(70 62) scale(0.6)">' + shieldSvg("clipSeal") + '</g></svg>';
 }
 
-/* ===== KARTICKA: OBSAH ===== */
+/* ===== OBSAH LEKCIE ===== */
 function blockHtml(b){
   var html = "", i;
+  if(b.t === "h"){ return '<h3 class="sec">' + b.x + '</h3>'; }
   if(b.t === "p"){ return '<p>' + b.x + '</p>'; }
   if(b.t === "rows"){
     html = '<div class="rows">';
@@ -1243,11 +813,9 @@ function blockHtml(b){
       '<div class="pw jus"><span class="pn">Justícia</span><span class="pk">súdna moc</span><span class="pi">Ústavný a Najvyšší súd SR</span></div>' +
       '</div>';
   }
-  if(b.t === "flag"){
-    return '<div class="figs"><figure>' + flagSvg() + '<figcaption>vlajka, pomer 2 : 3</figcaption></figure></div>';
-  }
-  if(b.t === "seal"){
-    return '<div class="figs"><figure>' + sealSvg() + '<figcaption>štátna pečať</figcaption></figure></div>';
+  if(b.t === "figs"){
+    return '<div class="figs"><figure>' + flagSvg() + '<figcaption>vlajka, pomer 2 : 3</figcaption></figure>' +
+      '<figure>' + sealSvg() + '<figcaption>štátna pečať</figcaption></figure></div>';
   }
   if(b.t === "tip"){
     return '<div class="note">' + IC.bulb + '<span><span class="nl">Pomôcka:</span> ' + b.x + '</span></div>';
@@ -1260,224 +828,156 @@ function blockHtml(b){
   }
   return "";
 }
-function cardBody(c){
+function lessonBody(L){
   var html = "", i;
-  for(i = 0; i < c.b.length; i++){ html += blockHtml(c.b[i]); }
+  for(i = 0; i < L.b.length; i++){ html += blockHtml(L.b[i]); }
   return html;
 }
 
-/* ===== PRIPRAVA OTAZKY ===== */
-function prepare(src, card){
-  var q = {src:src, t:src.t, q:src.q, e:src.e || "", id:card.id}, i, arr, m, parts, before, after, suffix;
-  if(src.t === "match"){
-    q.L = []; q.R = [];
-    for(i = 0; i < src.pairs.length; i++){ q.L.push({x:src.pairs[i][0], k:i}); q.R.push({x:src.pairs[i][1], k:i}); }
-    shuffle(q.L); shuffle(q.R);
-  } else if(src.t === "sort"){
-    arr = [];
-    for(i = 0; i < src.a.length; i++){ arr.push({x:src.a[i], g:0}); }
-    for(i = 0; i < src.b.length; i++){ arr.push({x:src.b[i], g:1}); }
-    q.items = shuffle(arr);
-    q.g = src.g;
-  } else if(src.t === "cloze"){
-    /* "text [slovo] text" -> casti textu a medzery */
-    q.segs = []; q.ans = [];
-    parts = src.s.split(/\[([^\]]+)\]/);
-    for(i = 0; i < parts.length; i++){
-      if(i % 2 === 0){ if(parts[i]){ q.segs.push({x:parts[i]}); } }
-      else { q.segs.push({b:q.ans.length}); q.ans.push(parts[i]); }
-    }
-    arr = q.ans.concat(src.extra || []);
-    q.bank = shuffle(arr.map(function(x){ return {x:x}; }));
-  } else if(src.t === "fix"){
-    m = src.s.match(/^(.*?)\{([^|}]+)\|([^}]+)\}(.*)$/);
-    before = m[1]; after = m[4];
-    suffix = (after.match(/^[.,;:!?…“”"]+/) || [""])[0];
-    after = after.slice(suffix.length);
-    q.words = [];
-    before.split(" ").forEach(function(w){ if(w){ q.words.push(w); } });
-    q.bad = q.words.length;
-    q.words.push(m[2] + suffix);
-    after.split(" ").forEach(function(w){ if(w){ q.words.push(w); } });
-    q.wrongWord = m[2];
-    q.right = m[3];
-  } else if(src.t === "txt"){
-    q.acc = src.acc || []; q.kw = src.kw; q.sol = src.sol || q.acc[0];
-  } else if(src.t === "list"){
-    q.n = src.n; q.items = src.items;
-  } else if(src.t === "self"){
-    q.model = src.model;
-  }
-  return q;
+/* ===== OTAZKY ===== */
+function prepare(x){
+  var src = x.src;
+  return {id:x.id, li:x.li, t:src.t, q:src.q, e:src.e || "", acc:src.acc || [], kw:src.kw || null,
+    sol:src.sol || (src.acc ? src.acc[0] : ""), n:src.n || 0, items:src.items || [], rows:src.rows || []};
 }
 function blankAns(q){
-  if(q.t === "match"){ return {selL:-1, selR:-1, mt:{}, ord:{}, wr:null, miss:0}; }
-  if(q.t === "sort"){ return q.items.map(function(){ return -1; }); }
-  if(q.t === "cloze"){ return q.ans.map(function(){ return -1; }); }
-  if(q.t === "fix"){ return -1; }
-  if(q.t === "list"){ var a = [], i; for(i = 0; i < q.n; i++){ a.push(""); } return a; }
-  if(q.t === "self"){ return {text:"", shown:false, ok:null}; }
-  return "";
+  var a = [], i, k = q.t === "list" ? q.n : (q.t === "pairs" ? q.rows.length : 1);
+  for(i = 0; i < k; i++){ a.push(""); }
+  return a;
+}
+function fieldOk(q, a){
+  /* pre kazde policko: je spravne? */
+  var res, i, out = [];
+  if(q.t === "list"){
+    res = listMatch(a, q.items);
+    for(i = 0; i < q.n; i++){ out.push(res[i] >= 0); }
+    return out;
+  }
+  if(q.t === "pairs"){
+    for(i = 0; i < q.rows.length; i++){ out.push(itemOk(a[i], q.rows[i])); }
+    return out;
+  }
+  return [accOk(a[0], q.acc) || kwOk(a[0], q.kw)];
 }
 function isOk(q, a){
-  var i, res;
-  if(q.t === "match"){ return a.miss === 0; }
-  if(q.t === "sort"){ for(i = 0; i < q.items.length; i++){ if(a[i] !== q.items[i].g){ return false; } } return true; }
-  if(q.t === "cloze"){ for(i = 0; i < q.ans.length; i++){ if(a[i] < 0 || q.bank[a[i]].x !== q.ans[i]){ return false; } } return true; }
-  if(q.t === "fix"){ return a === q.bad; }
-  if(q.t === "txt"){ return txtOk(a, q); }
-  if(q.t === "list"){ res = listMatch(a, q.items); for(i = 0; i < q.n; i++){ if(res[i] < 0){ return false; } } return true; }
-  if(q.t === "self"){ return a.ok === true; }
-  return false;
-}
-function ready(q, a){
-  var i;
-  if(q.t === "sort" || q.t === "cloze"){ for(i = 0; i < a.length; i++){ if(a[i] < 0){ return false; } } return true; }
+  var f = fieldOk(q, a), i;
+  for(i = 0; i < f.length; i++){ if(!f[i]){ return false; } }
   return true;
 }
 function solText(q){
-  var i, out = [], g0 = [], g1 = [];
-  if(q.t === "txt"){ return esc(q.sol); }
   if(q.t === "list"){
-    for(i = 0; i < q.items.length; i++){ out.push(q.items[i][0]); }
-    return q.n === q.items.length ? out.join(", ") : "stačí " + q.n + " z týchto: " + out.join(", ");
+    var all = q.items.map(function(it){ return it.s; });
+    return (q.n === q.items.length ? "" : "stačí " + q.n + " z týchto: ") + all.join(", ");
   }
-  if(q.t === "fix"){ return "namiesto „" + q.wrongWord + "“ má byť „" + q.right + "“"; }
-  if(q.t === "cloze"){
-    for(i = 0; i < q.segs.length; i++){ out.push(q.segs[i].x !== undefined ? q.segs[i].x : '<b>' + q.ans[q.segs[i].b] + '</b>'); }
-    return out.join("");
-  }
-  if(q.t === "sort"){
-    for(i = 0; i < q.items.length; i++){ (q.items[i].g === 0 ? g0 : g1).push(q.items[i].x); }
-    return '<b>' + q.g[0] + ':</b> ' + g0.join(", ") + '<br><b>' + q.g[1] + ':</b> ' + g1.join(", ");
-  }
-  if(q.t === "match"){
-    for(i = 0; i < q.src.pairs.length; i++){ out.push(q.src.pairs[i][0] + ' – ' + q.src.pairs[i][1]); }
-    return out.join("<br>");
-  }
-  if(q.t === "self"){ return q.model; }
-  return "";
+  if(q.t === "pairs"){ return q.rows.map(function(r){ return r.l + ' – <b>' + esc(r.s) + '</b>'; }).join("<br>"); }
+  return '<b>' + esc(q.sol) + '</b>';
 }
 function yourText(q, a){
-  if(q.t === "txt"){ return esc(String(a).trim()) || "(nič)"; }
-  if(q.t === "list"){ return a.map(function(x){ return esc(String(x).trim()) || "–"; }).join(", "); }
-  if(q.t === "self"){ return esc(String(a.text).trim()) || "(nič)"; }
-  return "";
+  if(q.t === "pairs"){ return q.rows.map(function(r, i){ return r.l + ': ' + (esc(String(a[i]).trim()) || "–"); }).join("<br>"); }
+  return a.map(function(x){ return esc(String(x).trim()) || "–"; }).join(", ");
 }
-var KIND = {match:"Spájanie", sort:"Roztrieď", cloze:"Doplň do vety", fix:"Nájdi chybu", txt:"Napíš", list:"Napíš", self:"Napíš vlastnými slovami"};
-
-/* ktoru otazku dat k pojmu: novy pojem lahko, raz vedel stredne, potom pise sam */
-function chooseQ(card){
-  var s = stOf(card.id), b = s ? s.b : 0;
-  var pool = b <= 0 ? card.easy : (b === 1 ? (card.mid.length ? card.mid : card.easy) : card.hard);
-  return prepare(pick(pool), card);
-}
+var KIND = {txt:"Napíš", def:"Napíš vlastnými slovami", list:"Vymenuj", pairs:"Napíš"};
+var HINT = {
+  txt:"Na diakritike ani malom preklepe nezáleží.",
+  def:"Stačí vlastnými slovami, dôležité sú hlavné slová. Enter = skontrolovať.",
+  list:"Poradie nevadí. Diakritika ani malý preklep nevadia.",
+  pairs:"Ku každému riadku napíš odpoveď."
+};
 
 /* ===== STAV APLIKACIE ===== */
 var S = {
   screen:"home",
   ti:0,          /* otvorena tema */
-  cid:null,      /* otvorena karticka */
-  run:null,      /* bezi kolo alebo pisomka */
+  li:0,          /* otvorena lekcia */
+  run:null,      /* bezi lekcia, opakovanie alebo pisomka */
   cnt:15         /* pocet otazok v pisomke */
 };
 var app = document.getElementById("app");
 
-/* ===== LEKCIA: poradie krokov =====
-   1. karticky novych pojmov
-   2. otazka na kazdy novy pojem, medzi nimi otazky z predoslych lekcii (jedna z tej tesne pred nou)
-   3. na konci este raz kazdy novy pojem, uz tazsia otazka */
+/* ===== PRIEBEH =====
+   lekcia: vsetky otazky z lekcie, po kazdej tretej jedna z predoslych lekcii
+   (vzdy aspon jedna z lekcie tesne pred nou); co nevedel, pride este raz na konci */
 function buildLesson(li){
-  var news = LESSONS[li].ids.slice(), reviews = [], Q = [], prev, rest, i, n;
-  prev = li > 0 ? LESSONS[li - 1].ids.filter(function(id){ return !!stOf(id); }) : [];
-  if(prev.length){ reviews.push(pick(prev)); }
-  rest = weakest(CARDS.filter(function(c){
-    return stOf(c.id) && LESSON_OF[c.id] < li && reviews.indexOf(c.id) < 0;
-  }));
-  for(i = 0; i < rest.length && reviews.length < 3; i++){ reviews.push(rest[i].id); }
-  shuffle(reviews);
-  for(i = 0; i < news.length; i++){ Q.push({k:"card", id:news[i]}); }
-  n = Math.max(news.length, reviews.length);
-  for(i = 0; i < n; i++){
-    if(i < news.length){ Q.push({k:"q", id:news[i], role:"new"}); }
-    if(i < reviews.length){ Q.push({k:"q", id:reviews[i], role:"old"}); }
+  var own = qsOf(li), olds = [], Q = [], prev, rest, i, oi = 0;
+  prev = li > 0 ? weakest(answered(qsOf(li - 1))) : [];
+  if(prev.length){ olds.push(prev[0].id); }
+  rest = weakest(answered(QS.filter(function(x){ return x.li < li && olds.indexOf(x.id) < 0; })));
+  for(i = 0; i < rest.length && olds.length < OLD_PER_LESSON; i++){ olds.push(rest[i].id); }
+  for(i = 0; i < own.length; i++){
+    Q.push({id:own[i].id, role:"new"});
+    if((i + 1) % 3 === 0 && oi < olds.length){ Q.push({id:olds[oi], role:"old"}); oi++; }
   }
-  for(i = 0; i < news.length; i++){ Q.push({k:"q", id:news[i], role:"again"}); }
+  while(oi < olds.length){ Q.push({id:olds[oi], role:"old"}); oi++; }
   return Q;
 }
 function newRun(kind, li, ti, Q){
-  S.run = {kind:kind, li:li, ti:ti, queue:Q, i:0, q:null, ans:null, locked:false, ok:false, note:"", reasks:{}, log:[]};
+  S.run = {kind:kind, li:li, ti:ti, queue:Q, i:0, q:null, ans:null, locked:false, ok:false, note:"",
+    snap:null, added:-1, reasked:{}, log:[]};
   enterStep();
   S.screen = "run";
   render();
 }
 function startLesson(li){ newRun("lesson", li, LESSONS[li].t, buildLesson(li)); }
-/* opakovanie: najslabsie pojmy z toho, co sa uz ucil */
 function startReview(ti){
-  var list = weakest(learnedCards(ti)).slice(0, 10);
+  var pool = ti < 0 ? QS : topicQs(ti), list = weakest(answered(pool)).slice(0, 10);
   if(!list.length){ return; }
-  newRun("review", -1, ti, shuffle(list).map(function(c){ return {k:"q", id:c.id, role:"old"}; }));
+  newRun("review", -1, ti, shuffle(list).map(function(x){ return {id:x.id, role:"old"}; }));
 }
+/* pisomka: otazky zo vsetkych tem striedavo */
 function startTest(){
-  var pools = [], order = [], out = [], i, any = true, c, q;
+  var pools = [], order = [], out = [], i, any = true;
   for(i = 0; i < TOPICS.length; i++){
-    pools.push(shuffle(cardsOf(i).slice()));
+    pools.push(shuffle(topicQs(i)));
     order.push(i);
   }
   while(out.length < S.cnt && any){
     any = false;
     shuffle(order);
     for(i = 0; i < order.length && out.length < S.cnt; i++){
-      if(pools[order[i]].length){
-        c = pools[order[i]].pop();
-        q = prepare(pick(c.hard), c);
-        out.push({k:"q", id:c.id, pre:q});
-        any = true;
-      }
+      if(pools[order[i]].length){ out.push({id:pools[order[i]].pop().id, role:"test"}); any = true; }
     }
   }
   newRun("test", -1, -1, shuffle(out));
 }
 function enterStep(){
-  var R = S.run, st = R.queue[R.i];
-  R.locked = false; R.ok = false; R.note = "";
-  if(st.k === "q"){
-    R.q = st.pre || chooseQ(BYID[st.id]);
-    R.ans = blankAns(R.q);
-  } else {
-    R.q = null; R.ans = null;
-  }
+  var R = S.run;
+  R.q = prepare(QBYID[R.queue[R.i].id]);
+  R.ans = blankAns(R.q);
+  R.locked = false; R.ok = false; R.note = ""; R.snap = null; R.added = -1;
 }
 function lockRun(){
-  var R = S.run, q = R.q, st = R.queue[R.i], ok = isOk(q, R.ans), r, s;
+  var R = S.run, q = R.q, ok = isOk(q, R.ans);
   R.locked = true;
   R.ok = ok;
-  R.log.push({q:q, ans:R.ans, ok:ok, id:q.id});
+  R.log.push({q:q, ans:R.ans, ok:ok});
   if(ok){ sGood(); } else { sBad(); }
   if(R.kind !== "test"){
-    r = record(q.id, ok);
-    if(!ok){
-      if((R.reasks[q.id] || 0) < 2){
-        R.reasks[q.id] = (R.reasks[q.id] || 0) + 1;
-        R.queue.splice(Math.min(R.i + 3, R.queue.length), 0, {k:"q", id:q.id, role:"retry"});
-        R.note = "Vráti sa ti to ešte o chvíľu, trochu ľahšie.";
-      } else {
-        R.note = R.kind === "lesson" ? "Vrátime sa k tomu v ďalšej lekcii." : "Vrátime sa k tomu pri ďalšom opakovaní.";
-      }
-    } else if(st.role === "new"){
-      R.note = "Na konci lekcie sa ťa na to spýtam ešte raz, ťažšie.";
-    } else if(r.after === 2){
-      R.note = "Nabudúce to už napíšeš sám, bez možností.";
-    } else if(r.after >= KNOW && r.before < KNOW){
-      R.note = "Výborne, toto už vieš napísať.";
-    } else {
-      R.note = "";
+    R.snap = P.q[q.id] ? JSON.parse(JSON.stringify(P.q[q.id])) : null;
+    record(q.id, ok);
+    if(!ok && !R.reasked[q.id]){
+      R.reasked[q.id] = true;
+      R.queue.push({id:q.id, role:"retry"});
+      R.added = R.queue.length - 1;
+      R.note = "Na konci sa ťa na to spýtam ešte raz.";
+    } else if(!ok){
+      R.note = R.kind === "lesson" ? "Vrátim sa k tomu v ďalšej lekcii." : "Vrátim sa k tomu pri ďalšom opakovaní.";
     }
-  } else if(!ok){
-    /* chyba v pisomke: pojem pride v opakovani medzi prvymi */
-    s = P.c[q.id];
-    if(s){ s.b = Math.min(s.b, 1); saveProgress(); }
   }
+  renderRun(false);
+}
+/* odpoved bola dobre, len inymi slovami: oprava hodnotenia */
+function overrideRun(){
+  var R = S.run, q = R.q;
+  if(!R.locked || R.ok){ return; }
+  R.ok = true;
+  R.log[R.log.length - 1].ok = true;
+  if(R.kind !== "test"){
+    if(R.snap){ P.q[q.id] = R.snap; } else { delete P.q[q.id]; }
+    record(q.id, true);
+    if(R.added >= 0){ R.queue.splice(R.added, 1); delete R.reasked[q.id]; R.added = -1; }
+  }
+  R.note = "";
+  sGood();
   renderRun(false);
 }
 function nextStep(){
@@ -1497,7 +997,7 @@ function finishRun(){
     saveProgress();
   }
   sWin();
-  S.screen = R.kind === "test" ? "testend" : "roundend";
+  S.screen = R.kind === "test" ? "testend" : "lessonend";
   render();
 }
 
@@ -1505,20 +1005,24 @@ function finishRun(){
 function soundBtn(){
   return '<button class="ibtn out" data-act="sound" aria-label="' + (P.sound ? "Vypnúť zvuk" : "Zapnúť zvuk") + '">' + (P.sound ? IC.sound : IC.mute) + '</button>';
 }
-function dotsHtml(ti){
-  var cs = cardsOf(ti), html = '<span class="dots" aria-hidden="true">', i, st;
-  for(i = 0; i < cs.length; i++){
-    st = stateOf(cs[i].id);
+function dotsHtml(list){
+  var html = '<span class="dots" aria-hidden="true">', i, st;
+  for(i = 0; i < list.length; i++){
+    st = qState(list[i].id);
     html += '<span class="dot' + (st === "know" ? " k" : (st === "learn" ? " l" : "")) + '"></span>';
   }
   return html + '</span>';
 }
-function countKnow(ti){
-  return cardsOf(ti).filter(function(c){ return stateOf(c.id) === "know"; }).length;
+function countKnow(list){ return list.filter(function(x){ return qState(x.id) === "know"; }).length; }
+function lessonText(li){
+  var n = qsOf(li).length, old = 0;
+  if(li > 0){ old = Math.min(OLD_PER_LESSON, answered(QS.filter(function(x){ return x.li < li; })).length); }
+  return "Prečítaš si lekciu a potom ťa vyskúšam: " + n + " " + plural(n, "otázka", "otázky", "otázok") + " z nej" +
+    (old ? " a " + old + " z predošlých lekcií" : "") + ". Asi " + Math.max(3, Math.round(1.5 + (n + old) * 0.4)) + " minúty.";
 }
 
 function viewHome(){
-  var nl = nextLesson(), done = doneCount(), total = LESSONS.length, learned = learnedCards(-1).length, L, html;
+  var nl = nextLesson(), done = doneCount(), total = LESSONS.length, any = answered(QS).length, html;
   html = '<div class="wrap home">' +
     '<div class="top"><div class="brand"><b>Politológia</b><span>Štát a typy štátov · 9. ročník</span></div><div class="sp"></div>' +
     '<button class="tbtn" data-act="cheat">' + IC.doc + 'Ťahák</button>' + soundBtn() + '</div>' +
@@ -1526,25 +1030,24 @@ function viewHome(){
 
   html += '<div class="hero">';
   if(nl >= 0){
-    L = LESSONS[nl];
-    html += '<div class="label">Lekcia ' + (nl + 1) + ' z ' + total + ' · ' + TOPICS[L.t].title + '</div>' +
-      '<h1>' + lessonTitle(nl) + '</h1>' +
+    html += '<div class="label">Lekcia ' + (nl + 1) + ' z ' + total + ' · ' + TOPICS[LESSONS[nl].t].title + '</div>' +
+      '<h1>' + LESSONS[nl].h + '</h1>' +
       '<p class="muted">' + lessonText(nl) + '</p>' +
-      '<button class="btn" data-act="lesson" data-val="' + nl + '">' + (done ? "Pokračovať" : "Začať prvú lekciu") + ' ' + IC.arrow + '</button>';
+      '<button class="btn" data-act="open" data-val="' + nl + '">' + (done ? "Pokračovať" : "Začať prvú lekciu") + ' ' + IC.arrow + '</button>';
   } else {
     html += '<div class="label">Celé učivo</div><h1>Všetkých ' + total + ' lekcií máš za sebou</h1>' +
-      '<p class="muted">Teraz už len opakuj. Najprv prídu pojmy, ktoré ti idú najmenej.</p>' +
+      '<p class="muted">Teraz už len opakuj. Najprv prídu otázky, ktoré ti idú najmenej.</p>' +
       '<button class="btn" data-act="review" data-val="-1">Opakovať všetko ' + IC.arrow + '</button>';
   }
   html += '<div class="stack tight"><div class="lbar"><span style="width:' + Math.round((done / total) * 100) + '%"></span></div>' +
-    '<span class="small muted">Hotové lekcie: ' + done + ' z ' + total + ' · celé učivo asi na 30 minút</span></div>';
-  if(nl >= 0 && learned){
+    '<span class="small muted">Hotové lekcie: ' + done + ' z ' + total + '</span></div>';
+  if(nl >= 0 && any){
     html += '<button class="btn soft" data-act="review" data-val="-1">Zopakovať, čo som sa už učil</button>';
   }
   html += '</div>';
 
   html += '<div class="box"><h3>Písomka nanečisto</h3>' +
-    '<p class="muted">Len písané odpovede, žiadne možnosti, ako u učiteľa. Na konci dostaneš známku.</p>' +
+    '<p class="muted">Otázky zo všetkých lekcií pomiešané, ako u učiteľa. Na konci dostaneš známku.</p>' +
     (P.best ? '<p class="small">Najlepšie: <b>známka ' + P.best.grade + '</b> (' + P.best.pct + ' %)</p>' : '') +
     '<div class="tabs">';
   [10, 15, 25].forEach(function(n){
@@ -1553,98 +1056,57 @@ function viewHome(){
   html += '</div><button class="btn ghost" data-act="test">Spustiť písomku</button></div>';
   html += '</div>';
 
-  html += '<div class="topics"><div class="top" style="min-height:0;padding-bottom:8px;"><span class="label">Témy</span><div class="sp"></div><span class="small muted">bodka = jeden pojem</span></div>';
+  html += '<div class="topics"><div class="top" style="min-height:0;padding-bottom:8px;"><span class="label">Témy</span><div class="sp"></div><span class="small muted">bodka = jedna otázka</span></div>';
   TOPICS.forEach(function(t, i){
-    var ls = lessonsOf(i);
+    var ls = lessonsOf(i), tq = topicQs(i);
     html += '<button class="trow" data-act="topic" data-val="' + i + '"><span class="tn">' + (i + 1) + '</span>' +
-      '<span class="tb"><span class="tt">' + t.title + '</span>' + dotsHtml(i) +
-      '<span class="small muted">vieš napísať ' + countKnow(i) + ' z ' + cardsOf(i).length + ' · lekcie ' + (ls[0] + 1) + (ls.length > 1 ? ' – ' + (ls[ls.length - 1] + 1) : '') + '</span></span>' + IC.chev + '</button>';
+      '<span class="tb"><span class="tt">' + t.title + '</span>' + dotsHtml(tq) +
+      '<span class="small muted">vieš ' + countKnow(tq) + ' z ' + tq.length + ' otázok · ' + (ls.length === 1 ? 'lekcia ' + (ls[0] + 1) : 'lekcie ' + (ls[0] + 1) + ' – ' + (ls[ls.length - 1] + 1)) + '</span></span>' + IC.chev + '</button>';
   });
-  html += '<div class="legend"><span><span class="dot k"></span>vieš napísať</span><span><span class="dot l"></span>učíš sa</span><span><span class="dot"></span>ešte nové</span></div>';
-  html += '<p class="foot" style="margin-top:20px;">V každej lekcii si prečítaš 1 – 3 pojmy. Potom dostaneš otázky na ne a pomedzi ne otázky z predošlých lekcií. ' +
-    'Nový pojem najprv spájaš alebo dopĺňaš, keď ho už vieš, píšeš ho sám. Pokrok sa ukladá len v tomto prehliadači. ' +
-    (learned || P.best ? '<button class="linkbtn" data-act="reset">Vymazať pokrok</button>' : '') + '</p>';
+  html += '<div class="legend"><span><span class="dot k"></span>vieš</span><span><span class="dot l"></span>naposledy zle</span><span><span class="dot"></span>ešte nebola</span></div>';
+  html += '<p class="foot" style="margin-top:20px;">Najprv si prečítaš celú lekciu, potom ťa z nej vyskúšam a pridám aj otázky z predošlých lekcií. ' +
+    'Všetky otázky sú písané, ako na písomke. Pokrok sa ukladá len v tomto prehliadači. ' +
+    (any || P.best ? '<button class="linkbtn" data-act="reset">Vymazať pokrok</button>' : '') + '</p>';
   html += '</div></div></div>';
   app.innerHTML = html;
 }
-function lessonText(li){
-  var n = LESSONS[li].ids.length, old = 0;
-  if(li > 0){ old = Math.min(3, CARDS.filter(function(c){ return stOf(c.id) && LESSON_OF[c.id] < li; }).length); }
-  return "Prečítaš " + n + " " + plural(n, "pojem", "pojmy", "pojmov") + ", potom otázky " + (n === 1 ? "naň" : "na ne") +
-    (old ? " a " + old + " " + plural(old, "otázku", "otázky", "otázok") + " z predošlých lekcií" : "") + ". Asi 3 minúty.";
-}
 
 function viewTopic(){
-  var t = TOPICS[S.ti], cs = cardsOf(S.ti), ls = lessonsOf(S.ti), nl = nextLesson(), any = learnedCards(S.ti).length > 0, html;
+  var t = TOPICS[S.ti], ls = lessonsOf(S.ti), nl = nextLesson(), any = answered(topicQs(S.ti)).length > 0, html;
   html = '<div class="wrap">' +
     '<div class="top"><button class="back" data-act="home">' + IC.back + 'Domov</button><div class="sp"></div>' + soundBtn() + '</div>' +
-    '<div class="stack tight"><span class="label">Téma ' + (S.ti + 1) + ' z ' + TOPICS.length + '</span><h1>' + t.title + '</h1><p class="muted">' + t.short + '</p></div>' +
-    '<div class="stack">' +
-      (any ? '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>' : '') +
-      '<button class="btn ghost" data-act="read" data-val="' + S.ti + '">Prečítať celú tému</button>' +
-    '</div>';
+    '<div class="stack tight"><span class="label">Téma ' + (S.ti + 1) + ' z ' + TOPICS.length + '</span><h1>' + t.title + '</h1><p class="muted">' + t.short + '</p></div>';
+  if(any){ html += '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>'; }
   html += '<div class="topics"><div class="label" style="padding-bottom:8px;">Lekcie</div>';
   ls.forEach(function(li){
-    var pill = P.done[li] ? '<span class="pill k">hotová</span>' : (li === nl ? '<span class="pill l">ďalšia</span>' : '');
-    html += '<button class="crow" data-act="lesson" data-val="' + li + '"><span class="cb"><span class="ct">Lekcia ' + (li + 1) + '</span>' +
-      '<span class="cs">' + lessonTitle(li) + '</span></span>' + pill + IC.chev + '</button>';
-  });
-  html += '</div><div class="topics"><div class="label" style="padding-bottom:8px;">Pojmy</div>';
-  cs.forEach(function(c){
-    var st = stateOf(c.id);
-    html += '<button class="crow" data-act="card" data-val="' + c.id + '"><span class="cb"><span class="ct">' + c.h + '</span>' +
-      '<span class="cs">lekcia ' + (LESSON_OF[c.id] + 1) + '</span></span>' +
-      '<span class="pill ' + (st === "know" ? "k" : (st === "learn" ? "l" : "")) + '">' + (st === "know" ? "vieš napísať" : (st === "learn" ? "učíš sa" : "nové")) + '</span></button>';
+    var lq = qsOf(li), pill = P.done[li] ? '<span class="pill k">hotová</span>' : (li === nl ? '<span class="pill l">ďalšia</span>' : '');
+    html += '<button class="crow" data-act="open" data-val="' + li + '"><span class="cb"><span class="ct">' + (li + 1) + '. ' + LESSONS[li].h + '</span>' +
+      '<span class="cs">vieš ' + countKnow(lq) + ' z ' + lq.length + ' otázok</span></span>' + pill + IC.chev + '</button>';
   });
   html += '</div></div>';
   app.innerHTML = html;
 }
-function viewCard(){
-  var c = BYID[S.cid], cs = cardsOf(c.t), k = cs.indexOf(c), html;
+
+function viewLesson(){
+  var L = LESSONS[S.li], n = qsOf(S.li).length, html;
   html = '<div class="wrap flow">' +
-    '<div class="top"><button class="back" data-act="topic" data-val="' + c.t + '">' + IC.back + TOPICS[c.t].title + '</button></div>' +
-    '<div class="stack tight"><div class="kick"><span>Pojem ' + (k + 1) + ' z ' + cs.length + '</span></div><h1>' + c.h + '</h1></div>' +
-    '<div class="stack loose">' + cardBody(c) + '</div>' +
-    '<div class="dock"><div class="two">' +
-      (k > 0 ? '<button class="btn soft" data-act="card" data-val="' + cs[k - 1].id + '">' + IC.back + 'Predošlý</button>' : '') +
-      (k < cs.length - 1 ? '<button class="btn soft" data-act="card" data-val="' + cs[k + 1].id + '">Ďalší ' + IC.arrow + '</button>' :
-        '<button class="btn" data-act="topic" data-val="' + c.t + '">Späť na tému</button>') +
-    '</div></div></div>';
-  app.innerHTML = html;
-}
-function viewRead(){
-  var t = TOPICS[S.ti], cs = cardsOf(S.ti), any = learnedCards(S.ti).length > 0, ls = lessonsOf(S.ti), first = ls[0], html, i;
-  for(i = 0; i < ls.length; i++){ if(!P.done[ls[i]]){ first = ls[i]; break; } }
-  html = '<div class="wrap flow">' +
-    '<div class="top"><button class="back" data-act="topic" data-val="' + S.ti + '">' + IC.back + t.title + '</button></div>' +
-    '<div class="stack tight"><span class="label">Celá téma na čítanie</span><h1>' + t.title + '</h1></div>';
-  cs.forEach(function(c, i){
-    html += (i ? '<hr class="cardsep">' : '') + '<div class="stack"><h2>' + c.h + '</h2>' + cardBody(c) + '</div>';
-  });
-  html += '<div class="dock">' + (any ?
-    '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>' :
-    '<button class="btn" data-act="lesson" data-val="' + first + '">Začať lekciu ' + (first + 1) + ' ' + IC.arrow + '</button>') +
-    '</div></div>';
+    '<div class="top"><button class="back" data-act="home">' + IC.back + 'Domov</button><div class="sp"></div>' + soundBtn() + '</div>' +
+    '<div class="stack tight"><span class="label">Lekcia ' + (S.li + 1) + ' z ' + LESSONS.length + ' · ' + TOPICS[L.t].title + '</span><h1>' + L.h + '</h1></div>' +
+    '<div class="stack">' + lessonBody(L) + '</div>' +
+    '<div class="dock"><button class="btn" data-act="lesson" data-val="' + S.li + '">Mám prečítané, vyskúšaj ma ' + IC.arrow + '</button>' +
+    '<div class="small muted center">' + n + ' ' + plural(n, "otázka", "otázky", "otázok") + ' z tejto lekcie' +
+    (S.li > 0 && answered(QS.filter(function(x){ return x.li < S.li; })).length ? ' a ' + OLD_PER_LESSON + ' z predošlých' : '') + '</div></div></div>';
   app.innerHTML = html;
 }
 
-/* --- kolo / pisomka --- */
+/* --- otazky --- */
 function renderRun(fresh){
-  var R = S.run, st = R.queue[R.i], total = R.queue.length, pct, html, c = BYID[st.id];
-  pct = Math.round(((R.i + (R.locked || st.k === "card" ? 1 : 0)) / total) * 100);
+  var R = S.run, total = R.queue.length, pct = Math.round(((R.i + (R.locked ? 1 : 0)) / total) * 100), html, label;
+  label = R.kind === "test" ? "Ukončiť písomku" : (R.kind === "lesson" ? "Ukončiť lekciu" : "Ukončiť opakovanie");
   html = '<div class="wrap flow">' +
-    '<div class="ftop"><button class="ibtn" data-act="quit" aria-label="' + (R.kind === "test" ? "Ukončiť písomku" : (R.kind === "lesson" ? "Ukončiť lekciu" : "Ukončiť opakovanie")) + '">' + IC.close + '</button>' +
-    '<div class="prog"><span style="width:' + pct + '%"></span></div><span class="cnt">' + (R.i + 1) + ' / ' + total + '</span></div>';
-  if(st.k === "card"){
-    html += '<div class="stack tight"><div class="kick"><span class="a">Nový pojem</span><span class="sep">·</span><span>Lekcia ' + (R.li + 1) + ' · ' + TOPICS[c.t].title + '</span></div>' +
-      '<h1>' + c.h + '</h1></div>' +
-      '<div class="stack loose">' + cardBody(c) + '</div>' +
-      '<div class="dock"><div class="srs">' + IC.again + '<span>O chvíľu sa ťa na to spýtam a na konci lekcie ešte raz, ťažšie.</span></div>' +
-      '<button class="btn" data-act="learned" id="mainbtn">Rozumiem</button></div>';
-  } else {
-    html += questionHtml();
-  }
-  html += '</div>';
+    '<div class="ftop"><button class="ibtn" data-act="quit" aria-label="' + label + '">' + IC.close + '</button>' +
+    '<div class="prog"><span style="width:' + pct + '%"></span></div><span class="cnt">' + (R.i + 1) + ' / ' + total + '</span></div>' +
+    questionHtml() + '</div>';
   app.innerHTML = html;
   if(fresh){ window.scrollTo(0, 0); focusFirst(); }
   else if(R.locked){
@@ -1653,163 +1115,106 @@ function renderRun(fresh){
   }
 }
 function focusFirst(){
-  var el = document.querySelector(".txtin");
+  var el = document.getElementById("in0");
   if(el && !el.disabled && window.matchMedia && window.matchMedia("(hover:hover)").matches){ el.focus(); }
 }
+function inputHtml(id, val, L, cls, enter){
+  return '<input class="txtin' + cls + '" id="' + id + '" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="' + enter + '"' +
+    (L ? ' disabled value="' + esc(val) + '"' : '') + '>';
+}
 function questionHtml(){
-  var R = S.run, q = R.q, a = R.ans, L = R.locked, c = BYID[q.id], html = "", i, cls, dis = L ? " disabled" : "", role = R.queue[R.i].role, tag, res, used;
+  var R = S.run, q = R.q, a = R.ans, L = R.locked, role = R.queue[R.i].role, html = "", i, f = L ? fieldOk(q, a) : [], tag, cls, last;
   if(R.kind === "test"){ tag = "písomka"; }
   else if(R.kind === "review"){ tag = "opakovanie"; }
-  else { tag = role === "old" ? "z predošlých lekcií" : "nový pojem"; }
-  html += '<div class="stack tight"><div class="kick"><span class="a">' + KIND[q.t] + '</span><span class="sep">·</span><span>' + TOPICS[c.t].title + '</span><span class="tag">' + tag + '</span></div>' +
+  else { tag = role === "old" ? "z predošlej lekcie" : (role === "retry" ? "ešte raz" : "z tejto lekcie"); }
+  html += '<div class="stack tight"><div class="kick"><span class="a">' + KIND[q.t] + '</span><span class="sep">·</span><span>' + LESSONS[q.li].h + '</span><span class="tag">' + tag + '</span></div>' +
     '<h2>' + q.q + '</h2></div>';
 
-  if(q.t === "match"){
-    html += '<div class="match"><div class="col">';
-    for(i = 0; i < q.L.length; i++){
-      cls = "mi";
-      if(a.mt.hasOwnProperty(i)){ cls += " done"; }
-      else if(a.wr && a.wr[0] === i){ cls += " wrong"; }
-      else if(a.selL === i){ cls += " sel"; }
-      html += '<button class="' + cls + '" data-act="ml" data-val="' + i + '"' + dis + '>' +
-        (a.mt.hasOwnProperty(i) ? '<span class="no">' + a.ord[i] + '</span>' : '') + '<span>' + q.L[i].x + '</span></button>';
-    }
-    html += '</div><div class="col">';
-    used = {};
-    for(i in a.mt){ used[a.mt[i]] = a.ord[i]; }
-    for(i = 0; i < q.R.length; i++){
-      cls = "mi r";
-      if(used.hasOwnProperty(i)){ cls += " done"; }
-      else if(a.wr && a.wr[1] === i){ cls += " wrong"; }
-      else if(a.selR === i){ cls += " sel"; }
-      html += '<button class="' + cls + '" data-act="mr" data-val="' + i + '"' + dis + '>' +
-        (used.hasOwnProperty(i) ? '<span class="no">' + used[i] + '</span>' : '') + '<span>' + q.R[i].x + '</span></button>';
-    }
-    html += '</div></div>';
-    if(a.wr && !L){ html += '<div class="mwrong">„' + q.L[a.wr[0]].x + '“ nepatrí k „' + q.R[a.wr[1]].x + '“. Skús iný.</div>'; }
-  } else if(q.t === "sort"){
-    html += '<div class="grp">';
-    for(i = 0; i < q.items.length; i++){
-      var mine = a[i], right = q.items[i].g, n;
-      html += '<div class="grow' + (L ? (mine === right ? " okrow" : " badrow") : "") + '"><div class="gname">' + q.items[i].x + '</div><div class="gbtns">';
-      for(n = 0; n < 2; n++){
-        cls = "gb";
-        if(!L && mine === n){ cls += " on"; }
-        if(L && n === right){ cls += " right"; }
-        if(L && n === mine && mine !== right){ cls += " wrongsel"; }
-        html += '<button class="' + cls + '" data-act="srt" data-val="' + i + ':' + n + '"' + dis + '>' + q.g[n] + '</button>';
-      }
-      html += '</div></div>';
-    }
-    html += '</div>';
-  } else if(q.t === "cloze"){
-    html += '<div class="cloze">';
-    for(i = 0; i < q.segs.length; i++){
-      var sg = q.segs[i];
-      if(sg.x !== undefined){ html += esc(sg.x); continue; }
-      var fill = a[sg.b];
-      cls = "blank" + (fill < 0 ? " empty" : "");
-      if(L){ cls += (fill >= 0 && q.bank[fill].x === q.ans[sg.b]) ? " okb" : " badb"; }
-      html += '<button class="' + cls + '" data-act="blank" data-val="' + sg.b + '"' + dis + ' aria-label="Medzera ' + (sg.b + 1) + '">' +
-        (fill >= 0 ? esc(q.bank[fill].x) : (sg.b + 1)) + '</button>';
-    }
-    html += '</div>';
-    if(!L){
-      html += '<div class="chips">';
-      for(i = 0; i < q.bank.length; i++){
-        html += '<button class="chip' + (a.indexOf(i) >= 0 ? " used" : "") + '" data-act="chip" data-val="' + i + '">' + esc(q.bank[i].x) + '</button>';
-      }
-      html += '</div><div class="hint2">Ťukni na slovo a doplní sa do najbližšej medzery. Ťuknutím na medzeru ho vrátiš.</div>';
-    }
-  } else if(q.t === "fix"){
-    html += '<div class="words">';
-    for(i = 0; i < q.words.length; i++){
-      cls = "word";
-      if(L && i === q.bad){ cls += " err"; }
-      if(L && i === a && a !== q.bad){ cls += " badw"; }
-      html += '<button class="' + cls + '" data-act="fix" data-val="' + i + '"' + dis + '>' + esc(q.words[i]) + '</button>';
-      if(L && i === q.bad){ html += '<span class="word fixw">' + esc(q.right) + '</span>'; }
-    }
-    html += '</div>';
-  } else if(q.t === "txt"){
-    html += '<input class="txtin' + (L ? (R.ok ? " okin" : " badin") : "") + '" id="in0" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Napíš odpoveď"' +
-      (L ? ' disabled value="' + esc(a) + '"' : '') + '>';
-    if(!L){ html += '<div class="hint2">Na diakritike ani na malom preklepe nezáleží.</div>'; }
+  html += '<div class="stack">';
+  if(q.t === "txt"){
+    html += inputHtml("in0", a[0], L, L ? (f[0] ? " okin" : " badin") : "", "done");
+  } else if(q.t === "def"){
+    html += '<textarea class="txtin' + (L ? (f[0] ? " okin" : " badin") : "") + '" id="in0" rows="2" enterkeyhint="done" placeholder="Napíš vlastnými slovami"' + (L ? ' disabled' : '') + '>' + esc(a[0]) + '</textarea>';
   } else if(q.t === "list"){
-    res = L ? listMatch(a, q.items) : [];
-    html += '<div class="stack">';
     for(i = 0; i < q.n; i++){
-      html += '<div class="inrow"><span class="ix">' + (i + 1) + '</span><input class="txtin' + (L ? (res[i] >= 0 ? " okin" : " badin") : "") + '" id="in' + i + '" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="' + (i < q.n - 1 ? "next" : "done") + '"' +
-        (L ? ' disabled value="' + esc(a[i]) + '"' : '') + '></div>';
+      last = i === q.n - 1;
+      html += '<div class="inrow"><span class="ix">' + (i + 1) + '</span>' + inputHtml("in" + i, a[i], L, L ? (f[i] ? " okin" : " badin") : "", last ? "done" : "next") + '</div>';
     }
-    html += '</div>';
-    if(!L){ html += '<div class="hint2">Poradie nevadí. Diakritika ani malý preklep nevadia.</div>'; }
-  } else if(q.t === "self"){
-    html += '<textarea class="txtin" id="in0" placeholder="Napíš odpoveď vlastnými slovami"' + (a.shown ? ' disabled' : '') + '>' + esc(a.text) + '</textarea>';
-    if(a.shown){ html += '<div class="model"><span class="nl">Správna odpoveď</span>' + q.model + '</div>'; }
-    else { html += '<div class="hint2">Najprv napíš, čo vieš. Potom ti ukážem správnu odpoveď a sám posúdiš, či si to vedel.</div>'; }
+  } else if(q.t === "pairs"){
+    for(i = 0; i < q.rows.length; i++){
+      last = i === q.rows.length - 1;
+      html += '<div class="field"><label for="in' + i + '">' + q.rows[i].l + '</label>' + inputHtml("in" + i, a[i], L, L ? (f[i] ? " okin" : " badin") : "", last ? "done" : "next") + '</div>';
+    }
   }
+  if(!L){ html += '<div class="hint2">' + HINT[q.t] + '</div>'; }
+  html += '</div>';
 
   if(L){
-    html += '<div class="fb ' + (R.ok ? "ok" : "no") + '"><span class="head">' + (R.ok ? "Správne" : "Nesprávne") + '</span>' +
-      (!R.ok && (q.t === "txt" || q.t === "list" || q.t === "fix") ? '<span>Správne je: <b>' + solText(q) + '</b></span>' : '') +
-      (!R.ok && (q.t === "cloze") ? '<span>' + solText(q) + '</span>' : '') +
-      (q.e ? '<span>' + q.e + '</span>' : '') + '</div>';
+    html += '<div class="fb ' + (R.ok ? "ok" : "no") + '"><span class="head">' + (R.ok ? "Správne" : "Nie celkom") + '</span>' +
+      (R.ok ? '' : '<span>Správne je: ' + solText(q) + '</span>') +
+      (q.e ? '<span>' + q.e + '</span>' : '') +
+      (R.ok ? '' : '<button class="linkbtn" data-act="override">Mal som to správne, len inými slovami</button>') + '</div>';
   }
 
   html += '<div class="dock">';
   if(L){
     if(R.note){ html += '<div class="srs">' + IC.again + '<span>' + R.note + '</span></div>'; }
     html += '<button class="btn" data-act="next" id="mainbtn">' + (R.i >= R.queue.length - 1 ? (R.kind === "test" ? "Vyhodnotiť písomku" : (R.kind === "lesson" ? "Dokončiť lekciu" : "Dokončiť opakovanie")) : 'Ďalej ' + IC.arrow) + '</button>';
-  } else if(q.t === "match"){
-    html += '<div class="hint">Ťukni na pojem a potom na to, k čomu patrí.</div>';
-  } else if(q.t === "fix"){
-    html += '<div class="hint">Ťukni na slovo, ktoré tam nepatrí.</div>';
-  } else if(q.t === "self"){
-    if(a.shown){
-      html += '<div class="two"><button class="btn badb" data-act="selfno">Nevedel som</button><button class="btn okb" data-act="selfok">Vedel som</button></div>';
-    } else {
-      html += '<button class="btn" data-act="selfshow" id="mainbtn">Ukázať správnu odpoveď</button>';
-    }
   } else {
-    html += '<button class="btn" data-act="check" id="mainbtn"' + (ready(q, a) ? "" : " disabled") + '>Skontrolovať</button>';
+    html += '<button class="btn" data-act="check" id="mainbtn">Skontrolovať</button>';
   }
   html += '</div>';
   return html;
 }
 
-function viewRoundEnd(){
-  var R = S.run, seen = {}, order = [], i, it, correct = 0, nl = nextLesson(), html;
+function missesHtml(log){
+  var html = "", i, it;
+  for(i = 0; i < log.length; i++){
+    it = log[i];
+    if(it.ok){ continue; }
+    html += '<div class="miss"><span class="mq">' + it.q.q + '</span>' +
+      '<span>Tvoja odpoveď:<br><span class="yours">' + yourText(it.q, it.ans) + '</span></span>' +
+      '<span>Správne:<br><span class="right">' + solText(it.q) + '</span></span></div>';
+  }
+  return html;
+}
+/* v lekcii sa zle zodpovedana otazka opakuje; do vysledku ide posledna odpoved na kazdu otazku */
+function finalLog(log){
+  var lastOf = {}, out = [], i;
+  for(i = 0; i < log.length; i++){ lastOf[log[i].q.id] = i; }
+  for(i = 0; i < log.length; i++){ if(lastOf[log[i].q.id] === i){ out.push(log[i]); } }
+  return out;
+}
+function viewLessonEnd(){
+  var R = S.run, fl = finalLog(R.log), correct = 0, nl = nextLesson(), html, firstTry = 0, seen = {}, i;
+  for(i = 0; i < fl.length; i++){ if(fl[i].ok){ correct++; } }
   for(i = 0; i < R.log.length; i++){
-    it = R.log[i];
-    if(it.ok){ correct++; }
-    if(!seen[it.id]){ seen[it.id] = {ok:true}; order.push(it.id); }
-    if(!it.ok){ seen[it.id].ok = false; }
+    if(!seen[R.log[i].q.id]){ seen[R.log[i].q.id] = true; if(R.log[i].ok){ firstTry++; } }
   }
   html = '<div class="wrap">' +
     '<div class="top"><div class="sp"></div>' + soundBtn() + '</div>' +
     '<div class="stack tight"><span class="label">' + (R.kind === "lesson" ? "Lekcia " + (R.li + 1) + " hotová" : "Opakovanie hotové") + '</span>' +
-    '<h1>' + correct + ' z ' + R.log.length + ' správne</h1>' +
-    (R.kind === "lesson" ? '<p class="muted">Hotové lekcie: ' + doneCount() + ' z ' + LESSONS.length + '.</p>' : '') + '</div><div>';
-  order.forEach(function(id){
-    var ok = seen[id].ok, st = stateOf(id);
-    html += '<div class="res"><span class="rk ' + (ok ? "ok" : "no") + '">' + (ok ? IC.check : IC.cross) + '</span>' +
-      '<span class="rt">' + BYID[id].h + '</span><span class="rn">' + (st === "know" ? "vieš napísať" : "učíš sa") + '</span></div>';
-  });
-  html += '</div><div class="stack">';
+    '<h1>Na prvý raz ' + firstTry + ' z ' + fl.length + ' správne</h1>' +
+    '<p class="muted">' + (correct > firstTry ? 'Po oprave na konci máš správne ' + correct + ' z ' + fl.length + '. ' : '') +
+    (R.kind === "lesson" ? 'Hotové lekcie: ' + doneCount() + ' z ' + LESSONS.length + '.' : '') + '</p></div>';
+  html += '<div class="stack">';
   if(R.kind === "lesson" && nl >= 0){
-    html += '<button class="btn" data-act="lesson" data-val="' + nl + '">Ďalšia lekcia ' + IC.arrow + '</button>';
+    html += '<button class="btn" data-act="open" data-val="' + nl + '">Ďalšia lekcia: ' + LESSONS[nl].h + ' ' + IC.arrow + '</button>';
   } else if(R.kind === "lesson"){
     html += '<button class="btn" data-act="review" data-val="-1">Opakovať všetko ' + IC.arrow + '</button>';
   } else {
     html += '<button class="btn" data-act="review" data-val="' + R.ti + '">Opakovať ešte ' + IC.arrow + '</button>';
   }
-  html += '<button class="btn ghost" data-act="home">Domov</button></div></div>';
+  html += '<button class="btn ghost" data-act="home">Domov</button></div>';
+  if(correct < fl.length){
+    html += '<div><h2 style="margin-bottom:6px;">Toto si ešte nevedel</h2><p class="muted small" style="margin-bottom:8px;">Spýtam sa ťa na to znova v ďalšej lekcii alebo pri opakovaní.</p>' + missesHtml(fl) + '</div>';
+  }
+  html += '</div>';
   app.innerHTML = html;
   window.scrollTo(0, 0);
 }
 function viewTestEnd(){
-  var R = S.run, total = R.log.length, correct = 0, i, pct, g, html, it;
+  var R = S.run, total = R.log.length, correct = 0, i, pct, g, html;
   for(i = 0; i < total; i++){ if(R.log[i].ok){ correct++; } }
   pct = total ? Math.round((correct / total) * 100) : 0;
   g = gradeOf(pct);
@@ -1820,17 +1225,7 @@ function viewTestEnd(){
     '<div class="stats"><div class="stat"><b>' + pct + ' %</b>úspešnosť</div><div class="stat"><b>' + correct + '</b>správne</div><div class="stat"><b>' + (total - correct) + '</b>chyby</div></div>' +
     '<p class="small muted center">Známka: od 90 % = 1, od 75 % = 2, od 50 % = 3, od 30 % = 4</p></div>' +
     '<div class="stack"><button class="btn" data-act="test">Nová písomka</button><button class="btn ghost" data-act="home">Domov</button></div>';
-  if(correct < total){
-    html += '<div><h2 style="margin-bottom:6px;">Chyby</h2><p class="muted small" style="margin-bottom:8px;">Tieto pojmy som ti vrátil do opakovania.</p>';
-    for(i = 0; i < total; i++){
-      it = R.log[i];
-      if(it.ok){ continue; }
-      html += '<div class="miss"><span class="mq">' + it.q.q + '</span>' +
-        '<span>Tvoja odpoveď: <span class="yours">' + yourText(it.q, it.ans) + '</span></span>' +
-        '<span>Správne: <span class="right">' + solText(it.q) + '</span></span></div>';
-    }
-    html += '</div>';
-  }
+  if(correct < total){ html += '<div><h2 style="margin-bottom:6px;">Chyby</h2>' + missesHtml(R.log) + '</div>'; }
   html += '</div>';
   app.innerHTML = html;
   window.scrollTo(0, 0);
@@ -1841,32 +1236,33 @@ function viewCheat(){
     '<div class="stack tight"><span class="label">Ťahák</span><h1>Všetko na jednom mieste</h1></div>';
   TOPICS.forEach(function(t, ti){
     html += '<div class="stack tight"><h2>' + (ti + 1) + '. ' + t.title + '</h2><div class="ch">';
-    cardsOf(ti).forEach(function(c){
-      html += '<div class="ci"><h3>' + c.h + '</h3><div>' + cheatText(c) + '</div></div>';
-    });
+    lessonsOf(ti).forEach(function(li){ html += cheatHtml(LESSONS[li]); });
     html += '</div></div>';
   });
   html += '</div>';
   app.innerHTML = html;
 }
-function cheatText(c){
-  var out = [];
-  c.b.forEach(function(b){
-    if(b.t === "p"){ out.push(b.x); }
-    else if(b.t === "rows"){ out.push(b.r.map(function(r){ return '<b>' + r[0] + '</b>' + (r[1] ? ' – ' + r[1] : ''); }).join(" · ")); }
-    else if(b.t === "list"){ out.push(b.li.join(" · ")); }
-    else if(b.t === "powers"){ out.push("<b>legislatíva</b> – zákonodarná – NR SR · <b>exekutíva</b> – výkonná – prezident + vláda SR · <b>justícia</b> – súdna – Ústavný a Najvyšší súd SR"); }
+/* tahak: kazda cast lekcie (od nadpisu po nadpis) ako jeden riadok */
+function cheatHtml(L){
+  var html = "", title = L.h, parts = [];
+  function flush(){ if(parts.length){ html += '<div class="ci"><h3>' + title + '</h3><div>' + parts.join("<br>") + '</div></div>'; } parts = []; }
+  L.b.forEach(function(b){
+    if(b.t === "h"){ flush(); title = b.x; }
+    else if(b.t === "p"){ parts.push(b.x); }
+    else if(b.t === "rows"){ parts.push(b.r.map(function(r){ return '<b>' + r[0] + '</b>' + (r[1] ? ' – ' + r[1] : ''); }).join(" · ")); }
+    else if(b.t === "list"){ parts.push(b.li.join(" · ")); }
+    else if(b.t === "powers"){ parts.push("<b>legislatíva</b> – zákonodarná – NR SR · <b>exekutíva</b> – výkonná – prezident + vláda SR · <b>justícia</b> – súdna – Ústavný a Najvyšší súd SR"); }
   });
-  return out.join("<br>");
+  flush();
+  return html;
 }
 
 function render(){
   if(S.screen === "home"){ viewHome(); }
   else if(S.screen === "topic"){ viewTopic(); }
-  else if(S.screen === "card"){ viewCard(); }
-  else if(S.screen === "read"){ viewRead(); }
+  else if(S.screen === "lessonpage"){ viewLesson(); }
   else if(S.screen === "run"){ renderRun(true); return; }
-  else if(S.screen === "roundend"){ viewRoundEnd(); return; }
+  else if(S.screen === "lessonend"){ viewLessonEnd(); return; }
   else if(S.screen === "testend"){ viewTestEnd(); return; }
   else if(S.screen === "cheat"){ viewCheat(); }
   window.scrollTo(0, 0);
@@ -1879,21 +1275,18 @@ app.addEventListener("click", function(ev){
   if(!el || el === app || el.disabled){ return; }
   handle(el.getAttribute("data-act"), el.getAttribute("data-val"));
 });
+/* Enter v policku: dalsie policko, v poslednom kontrola */
 app.addEventListener("keydown", function(ev){
-  var t = ev.target, R = S.run, m, nx;
-  if(ev.key !== "Enter"){ return; }
-  if(t && t.tagName === "TEXTAREA"){ return; }
-  if(t && t.classList && t.classList.contains("txtin")){
-    ev.preventDefault();
-    m = /^in(\d+)$/.exec(t.id || "");
-    if(R && R.q && R.q.t === "list" && m && parseInt(m[1], 10) < R.q.n - 1){
-      nx = document.getElementById("in" + (parseInt(m[1], 10) + 1));
-      if(nx){ nx.focus(); return; }
-    }
-    handle("check");
-  }
+  var t = ev.target, m, nx;
+  if(ev.key !== "Enter" || ev.shiftKey){ return; }
+  if(!t || !t.classList || !t.classList.contains("txtin")){ return; }
+  ev.preventDefault();
+  m = /^in(\d+)$/.exec(t.id || "");
+  nx = m ? document.getElementById("in" + (parseInt(m[1], 10) + 1)) : null;
+  if(nx && !nx.disabled){ nx.focus(); return; }
+  handle("check");
 });
-/* Enter mimo policka: na pocitaci ide dalej alebo kontroluje */
+/* Enter mimo policka (na pocitaci): Dalej */
 document.addEventListener("keydown", function(ev){
   var t = ev.target, btn;
   if(ev.key !== "Enter" || S.screen !== "run"){ return; }
@@ -1903,7 +1296,7 @@ document.addEventListener("keydown", function(ev){
 });
 
 function handle(act, val){
-  var R = S.run, q, a, i, parts, vals, el, k;
+  var R = S.run, q, i, el, vals;
   if(act === "home"){ S.screen = "home"; render(); return; }
   if(act === "sound"){
     P.sound = !P.sound; saveProgress();
@@ -1912,15 +1305,14 @@ function handle(act, val){
     return;
   }
   if(act === "topic"){ S.ti = parseInt(val, 10); S.screen = "topic"; render(); return; }
-  if(act === "card"){ S.cid = val; S.screen = "card"; render(); return; }
-  if(act === "read"){ S.ti = parseInt(val, 10); S.screen = "read"; render(); return; }
+  if(act === "open"){ S.li = parseInt(val, 10); S.screen = "lessonpage"; render(); return; }
   if(act === "cheat"){ S.screen = "cheat"; render(); return; }
   if(act === "cnt"){ S.cnt = parseInt(val, 10); render(); return; }
   if(act === "lesson"){ ensureAudio(); startLesson(parseInt(val, 10)); return; }
   if(act === "review"){ ensureAudio(); startReview(parseInt(val, 10)); return; }
   if(act === "test"){ ensureAudio(); startTest(); return; }
   if(act === "reset"){
-    if(window.confirm("Naozaj vymazať celý pokrok?")){ P.c = {}; P.done = {}; P.tick = 0; P.best = null; saveProgress(); render(); }
+    if(window.confirm("Naozaj vymazať celý pokrok?")){ P.q = {}; P.done = {}; P.tick = 0; P.best = null; saveProgress(); render(); }
     return;
   }
   if(act === "quit"){
@@ -1928,83 +1320,16 @@ function handle(act, val){
     S.screen = "home"; render(); return;
   }
   if(!R || S.screen !== "run"){ return; }
-  if(act === "learned"){
-    learn(R.queue[R.i].id);
-    nextStep();
-    return;
-  }
   if(act === "next"){ if(R.locked){ nextStep(); } return; }
-  if(R.locked || !R.q){ return; }
-  q = R.q; a = R.ans;
-  if(act === "ml" || act === "mr"){
-    i = parseInt(val, 10);
-    if(act === "ml"){
-      if(a.mt.hasOwnProperty(i)){ return; }
-      a.wr = null;
-      if(a.selR >= 0){ tryPair(i, a.selR); } else { a.selL = (a.selL === i ? -1 : i); }
-    } else {
-      for(k in a.mt){ if(a.mt[k] === i){ return; } }
-      a.wr = null;
-      if(a.selL >= 0){ tryPair(a.selL, i); } else { a.selR = (a.selR === i ? -1 : i); }
-    }
-    if(Object.keys(a.mt).length === q.L.length){ lockRun(); return; }
-    renderRun(false);
-    return;
-  }
-  if(act === "srt"){
-    parts = val.split(":");
-    a[parseInt(parts[0], 10)] = parseInt(parts[1], 10);
-    renderRun(false);
-    return;
-  }
-  if(act === "chip"){
-    i = parseInt(val, 10);
-    if(a.indexOf(i) >= 0){ return; }
-    k = a.indexOf(-1);
-    if(k < 0){ return; }
-    a[k] = i;
-    renderRun(false);
-    return;
-  }
-  if(act === "blank"){
-    a[parseInt(val, 10)] = -1;
-    renderRun(false);
-    return;
-  }
-  if(act === "fix"){ R.ans = parseInt(val, 10); lockRun(); return; }
-  if(act === "selfshow"){
-    el = document.getElementById("in0");
-    a.text = el ? el.value : "";
-    a.shown = true;
-    renderRun(false);
-    return;
-  }
-  if(act === "selfok" || act === "selfno"){ a.ok = (act === "selfok"); lockRun(); return; }
+  if(act === "override"){ overrideRun(); return; }
   if(act === "check"){
-    if(q.t === "txt"){
-      el = document.getElementById("in0");
-      if(!el || !el.value.replace(/\s/g, "")){ if(el){ el.focus(); } return; }
-      R.ans = el.value;
-    } else if(q.t === "list"){
-      vals = [];
-      for(i = 0; i < q.n; i++){ el = document.getElementById("in" + i); vals.push(el ? el.value : ""); }
-      if(!vals.join("").replace(/\s/g, "")){ el = document.getElementById("in0"); if(el){ el.focus(); } return; }
-      R.ans = vals;
-    } else if(!ready(q, a)){ return; }
+    if(R.locked){ return; }
+    q = R.q;
+    vals = [];
+    for(i = 0; i < R.ans.length; i++){ el = document.getElementById("in" + i); vals.push(el ? el.value : ""); }
+    if(!vals.join("").replace(/\s/g, "")){ el = document.getElementById("in0"); if(el){ el.focus(); } return; }
+    R.ans = vals;
     lockRun();
-  }
-}
-function tryPair(l, r){
-  var R = S.run, q = R.q, a = R.ans;
-  if(q.L[l].k === q.R[r].k){
-    a.mt[l] = r;
-    a.ord[l] = Object.keys(a.mt).length;
-    a.selL = -1; a.selR = -1;
-  } else {
-    a.wr = [l, r];
-    a.miss++;
-    a.selL = -1; a.selR = -1;
-    sBad();
   }
 }
 
