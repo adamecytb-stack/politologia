@@ -16,26 +16,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
 <style>
-  /* svetly minimalisticky vzhlad: biela plocha, tmavy text, jedna modra, ciary namiesto kariet */
+  /* svetly vzhlad s jasnou hierarchiou:
+     zlte zvyraznenie = uci sa na pisomku, modry ramcek = vysvetlenie jednoduchymi slovami,
+     sive a mensie = navyse; kazda tema ma svoju farbu (--tc) */
   :root{
-    --bg:#ffffff;
+    --bg:#f2f4f8;
+    --card:#ffffff;
     --soft:#f5f6f8;
-    --line:#e4e7ec;
+    --line:#e2e6ee;
     --ink:#12141a;
-    --muted:#636b7a;
+    --muted:#5d6577;
     --faint:#9aa1ae;
-    --accent:#2349d8;
-    --accent-ink:#1a36a6;
-    --accent-soft:#eef2fd;
-    --learn:#9db1f2;
+    --hl:#ffe27a;
+    --easy:#eef4fd;
+    --easy-line:#d3e1f7;
+    --easy-ink:#1f4fae;
+    --tip:#fff8e1;
+    --tip-line:#f0d98e;
+    --tip-ink:#7a5300;
     --ok:#13803b;
-    --ok-soft:#eaf6ee;
+    --ok-soft:#e8f6ed;
     --ok-ink:#0e5f2c;
     --bad:#c52a1f;
     --bad-soft:#fcedeb;
     --leg:#2349d8;
     --exe:#b45309;
     --jus:#0f766e;
+    --tc:#2349d8;
+    --tsoft:#eaf0ff;
+    --tink:#1a36a6;
     --font:"Figtree", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
@@ -43,127 +52,117 @@
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;}
   button{font-family:inherit;}
   .wrap{
-    max-width:640px;margin:0 auto;min-height:100vh;
-    padding:12px max(20px, env(safe-area-inset-right)) 40px max(20px, env(safe-area-inset-left));
+    max-width:680px;margin:0 auto;min-height:100vh;
+    padding:12px max(16px, env(safe-area-inset-right)) 40px max(16px, env(safe-area-inset-left));
     padding-top:max(12px, env(safe-area-inset-top));
-    display:flex;flex-direction:column;gap:28px;
+    display:flex;flex-direction:column;gap:16px;
   }
-  .wrap.flow{gap:24px;padding-bottom:0;}
-  h1{font-size:30px;font-weight:600;line-height:1.15;letter-spacing:-.6px;margin:0;text-wrap:balance;}
-  h2{font-size:24px;font-weight:600;line-height:1.25;letter-spacing:-.3px;margin:0;text-wrap:balance;}
-  h3{font-size:18px;font-weight:600;line-height:1.3;margin:0;}
+  .wrap.flow{padding-bottom:0;}
+  h1{font-size:28px;font-weight:700;line-height:1.15;letter-spacing:-.5px;margin:0;text-wrap:balance;}
+  h2{font-size:21px;font-weight:700;line-height:1.25;letter-spacing:-.2px;margin:0;text-wrap:balance;}
+  h3{font-size:18px;font-weight:700;line-height:1.3;margin:0;}
   p{margin:0;}
-  b{font-weight:600;}
+  b{font-weight:700;}
   .muted{color:var(--muted);}
   .small{font-size:14px;}
-  .label{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+  .label{font-size:12.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);}
   .stack{display:flex;flex-direction:column;gap:12px;}
   .stack.tight{gap:6px;}
-  .stack.loose{gap:20px;}
   .center{text-align:center;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 1px 3px rgba(18,20,26,.05);display:flex;flex-direction:column;gap:14px;}
+  .tpill{align-self:flex-start;font-size:13px;font-weight:700;padding:5px 11px;border-radius:999px;background:var(--tsoft);color:var(--tink);}
 
   /* ---- tlacidla ---- */
   .btn{
     display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
-    height:54px;padding:0 18px;border:none;border-radius:12px;cursor:pointer;
-    background:var(--accent);color:#fff;font-size:17px;font-weight:600;
+    min-height:54px;padding:8px 18px;border:none;border-radius:14px;cursor:pointer;
+    background:var(--tc);color:#fff;font-size:17px;font-weight:700;text-align:center;line-height:1.25;
   }
-  .btn:disabled{background:#c9d2ee;cursor:default;}
-  .btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--ink);height:50px;font-size:16px;}
-  .btn.soft{background:var(--soft);color:var(--ink);height:50px;font-size:16px;}
+  .btn.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--ink);min-height:50px;font-size:16px;}
+  .btn.soft{background:var(--card);color:var(--ink);border:1px solid var(--line);min-height:50px;font-size:16px;}
   .btn svg{flex:0 0 auto;}
   .ibtn{
-    flex:0 0 44px;width:44px;height:44px;border-radius:10px;border:none;background:transparent;
+    flex:0 0 44px;width:44px;height:44px;border-radius:12px;border:none;background:transparent;
     display:flex;align-items:center;justify-content:center;color:var(--ink);cursor:pointer;
   }
-  .ibtn.out{border:1px solid var(--line);}
+  .ibtn.out{border:1px solid var(--line);background:var(--card);}
   .tbtn{
-    height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);
-    display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:600;font-size:15px;cursor:pointer;
+    height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);
+    display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:700;font-size:15px;cursor:pointer;
   }
   .linkbtn{background:none;border:none;padding:0;font:inherit;color:var(--muted);text-decoration:underline;cursor:pointer;}
   .back{
     height:44px;padding:0 12px 0 4px;margin-left:-6px;border:none;background:transparent;border-radius:10px;
-    display:flex;align-items:center;gap:4px;font-weight:600;font-size:15px;color:var(--ink);cursor:pointer;
+    display:flex;align-items:center;gap:4px;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;
   }
 
   /* ---- hlavicka ---- */
   .top{display:flex;align-items:center;gap:8px;min-height:44px;}
   .top .sp{flex:1;}
   .brand{display:flex;flex-direction:column;line-height:1.3;}
-  .brand b{font-size:17px;font-weight:700;letter-spacing:-.2px;}
+  .brand b{font-size:18px;font-weight:800;letter-spacing:-.2px;}
   .brand span{font-size:13px;color:var(--muted);}
 
   /* ---- domov ---- */
-  .homegrid{display:flex;flex-direction:column;gap:36px;}
-  .hero{display:flex;flex-direction:column;gap:14px;}
-  .lbar{height:4px;border-radius:999px;background:var(--line);overflow:hidden;}
-  .lbar span{display:block;height:4px;background:var(--ink);border-radius:999px;}
-  .topics{display:flex;flex-direction:column;}
-  .trow{
-    display:flex;gap:14px;width:100%;text-align:left;background:transparent;border:none;
-    border-top:1px solid var(--line);padding:16px 0;color:var(--ink);cursor:pointer;font-size:16px;
-  }
-  .trow .tn{flex:0 0 16px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;}
-  .trow .tb{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;}
-  .trow .tt{font-weight:600;font-size:17px;line-height:1.25;}
-  .chev{flex:0 0 18px;color:var(--faint);margin-top:2px;}
-  .dots{display:flex;flex-wrap:wrap;gap:4px;}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--line);}
-  .dot.l{background:var(--learn);}
-  .dot.k{background:var(--ink);}
-  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;border-top:1px solid var(--line);padding-top:12px;font-size:12.5px;color:var(--muted);}
-  .legend span{display:flex;align-items:center;gap:6px;}
-  .box{border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;}
+  .homegrid{display:flex;flex-direction:column;gap:16px;}
+  .lbar{height:8px;border-radius:999px;background:var(--line);overflow:hidden;}
+  .lbar span{display:block;height:8px;background:var(--tc);border-radius:999px;}
+  .tcard{flex-direction:row;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;color:var(--ink);font-size:16px;padding:16px;}
+  .tbadge{flex:0 0 40px;height:40px;border-radius:12px;background:var(--tc);color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;}
+  .tcard .tb{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;}
+  .tcard .tt{font-weight:700;font-size:17px;line-height:1.25;}
+  .tcard .ts{font-size:14px;color:var(--muted);line-height:1.35;}
+  .chev{flex:0 0 18px;color:var(--faint);}
   .tabs{display:flex;gap:8px;flex-wrap:wrap;}
   .tab{
-    height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);
-    font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+    height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);
+    font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;
   }
   .tab.on{background:var(--ink);border-color:var(--ink);color:#fff;}
-  .foot{font-size:13px;color:var(--muted);line-height:1.5;}
+  .foot{font-size:13.5px;color:var(--muted);line-height:1.5;padding:0 4px;}
 
-  /* ---- tema ---- */
-  .crow{
-    display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:transparent;border:none;
-    border-top:1px solid var(--line);padding:14px 0;color:var(--ink);cursor:pointer;font-size:16px;
-  }
-  .crow:last-child{border-bottom:1px solid var(--line);}
-  .crow .cb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
-  .crow .ct{font-weight:600;}
-  .crow .cs{font-size:13.5px;color:var(--muted);}
-  .pill{font-size:12.5px;font-weight:600;padding:4px 9px;border-radius:999px;white-space:nowrap;background:var(--soft);color:var(--muted);}
-  .pill.l{background:var(--accent-soft);color:var(--accent-ink);}
-  .pill.k{background:var(--ink);color:#fff;}
-
-  /* ---- lekcia (obsah) ---- */
-  .kick{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:13px;font-weight:600;color:var(--muted);}
-  .kick .a{color:var(--accent);}
-  .kick .sep{color:#c2c7d0;}
-  .kick .tag{margin-left:auto;font-weight:500;}
-  .sec{font-size:19px;font-weight:600;line-height:1.3;margin-top:10px;}
-  .rows{display:flex;flex-direction:column;border-bottom:1px solid var(--line);}
-  .rows .r{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line);}
-  .rows .r .k{font-size:18px;font-weight:600;flex:0 1 auto;}
-  .rows .r .v{font-size:16px;text-align:right;flex:0 1 62%;}
-  .pts{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;}
-  .pts.num{padding-left:24px;}
-  .note{display:flex;gap:10px;font-size:15px;line-height:1.5;}
-  .note svg{flex:0 0 20px;margin-top:2px;}
-  .note .nl{color:var(--muted);}
-  .extra{border:1px dashed #c2c7d0;border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.5;}
-  .extra .nl{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:2px;}
-  .warn{background:#fff6e5;border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.5;}
-  .warn .nl{display:block;font-size:12.5px;font-weight:700;color:#8a5a00;margin-bottom:2px;}
-  .powers{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:10px;}
-  .pw{border-top:3px solid var(--leg);padding-top:10px;display:flex;flex-direction:column;gap:4px;}
-  .pw.exe{border-color:var(--exe);}
-  .pw.jus{border-color:var(--jus);}
-  .pw .pn{font-weight:700;font-size:16px;color:var(--leg);line-height:1.2;}
+  /* ---- obsah lekcie ---- */
+  .sechead{display:flex;align-items:center;gap:10px;}
+  .secn{flex:0 0 32px;height:32px;border-radius:10px;background:var(--tc);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;}
+  .lc b{background:linear-gradient(transparent 50%, var(--hl) 50%);padding:0 2px;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+  .lc p, .lc .pts{font-size:16.5px;line-height:1.55;}
+  .rows{display:flex;flex-direction:column;}
+  .rows .r{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;padding:12px 0;border-top:1px solid var(--line);}
+  .rows .r:first-child{border-top:none;padding-top:2px;}
+  .rows .r .k{flex:0 0 auto;font-size:16px;font-weight:800;padding:3px 10px;border-radius:9px;background:var(--tsoft);color:var(--tink);}
+  .rows .r .v{flex:1 1 200px;min-width:0;font-size:16.5px;line-height:1.5;}
+  .pts{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;}
+  .pts li::marker{color:var(--tc);font-weight:800;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-size:16px;font-weight:700;padding:7px 13px;border-radius:999px;background:var(--tsoft);color:var(--tink);}
+  .easy{background:var(--easy);border:1px solid var(--easy-line);border-radius:14px;padding:12px 14px;font-size:15.5px;line-height:1.55;}
+  .easy .nl, .tipbox .nl{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px;}
+  .easy .nl{color:var(--easy-ink);}
+  .lc .easy b{background:none;padding:0;color:#173f8c;}
+  .tipbox{background:var(--tip);border:1px solid var(--tip-line);border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.5;}
+  .tipbox .nl{color:var(--tip-ink);}
+  .lc .tipbox b{background:none;padding:0;}
+  .extra{border:1px dashed #c6ccd6;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5;color:var(--muted);}
+  .extra .nl{display:block;font-size:12px;font-weight:700;margin-bottom:2px;}
+  .lc .extra b{background:none;padding:0;}
+  .warn{background:#fff1e6;border:1px solid #f6c9a4;border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.5;}
+  .warn .nl{display:block;font-size:12.5px;font-weight:800;color:#8a3f06;margin-bottom:2px;}
+  .lc .warn b{background:none;padding:0;}
+  .legend2{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;}
+  .legend2 .es{background:var(--easy);border:1px solid var(--easy-line);color:var(--easy-ink);font-weight:700;border-radius:6px;padding:0 6px;}
+  .must{border:2px solid var(--tc);}
+  .mlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .mlist li{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.5;}
+  .mlist li svg{flex:0 0 20px;margin-top:2px;color:var(--tc);}
+  .powers{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px;}
+  .pw{border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:3px;background:#eef2fd;}
+  .pw.exe{background:#fdf1e2;}
+  .pw.jus{background:#e3f4f1;}
+  .pw .pn{font-weight:800;font-size:16px;color:var(--leg);line-height:1.2;}
   .pw.exe .pn{color:var(--exe);}
   .pw.jus .pn{color:var(--jus);}
-  .pw .pk{font-size:13px;color:var(--muted);line-height:1.3;}
-  .pw .pi{font-size:14.5px;font-weight:600;line-height:1.3;margin-top:6px;}
+  .pw .pk{font-size:13.5px;color:var(--ink);font-weight:600;line-height:1.3;}
+  .pw .pi{font-size:14px;color:var(--muted);line-height:1.3;margin-top:4px;}
   .figs{display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;}
   .figs figure{margin:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start;}
   .figs figcaption{font-size:13px;color:var(--muted);}
@@ -171,9 +170,11 @@
   /* ---- otazky ---- */
   .ftop{display:flex;align-items:center;gap:12px;min-height:44px;}
   .ftop .ibtn{margin-left:-10px;}
-  .prog{flex:1;height:4px;border-radius:999px;background:var(--line);overflow:hidden;}
-  .prog span{display:block;height:4px;background:var(--ink);border-radius:999px;transition:width .3s ease;}
-  .cnt{font-size:13.5px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .prog{flex:1;height:8px;border-radius:999px;background:var(--line);overflow:hidden;}
+  .prog span{display:block;height:8px;background:var(--tc);border-radius:999px;transition:width .3s ease;}
+  .cnt{font-size:13.5px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .kick{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:13px;font-weight:600;color:var(--muted);}
+  .kick .tag{margin-left:auto;}
   .dock{
     position:-webkit-sticky;position:sticky;bottom:0;z-index:5;margin-top:auto;
     display:flex;flex-direction:column;gap:10px;background:var(--bg);
@@ -182,61 +183,53 @@
   .srs{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;color:var(--muted);}
   .srs svg{flex:0 0 18px;margin-top:1px;}
   .field{display:flex;flex-direction:column;gap:6px;}
-  .field label{font-size:15px;font-weight:600;line-height:1.35;}
+  .field label{font-size:15.5px;font-weight:700;line-height:1.35;}
   .inrow{display:flex;gap:12px;align-items:center;}
-  .inrow .ix{flex:0 0 16px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .inrow .ix{flex:0 0 16px;font-weight:800;color:var(--tc);font-variant-numeric:tabular-nums;}
   .txtin{
-    flex:1;min-width:0;width:100%;height:54px;padding:0 14px;border-radius:12px;border:1px solid #cfd4dc;background:var(--bg);
+    flex:1;min-width:0;width:100%;height:54px;padding:0 14px;border-radius:12px;border:1.5px solid #cfd4dc;background:var(--card);
     font-family:inherit;font-size:18px;font-weight:500;color:var(--ink);outline:none;
   }
   textarea.txtin{height:auto;min-height:92px;padding:12px 14px;line-height:1.45;resize:vertical;}
-  .txtin:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+  .txtin:focus{border-color:var(--tc);box-shadow:0 0 0 3px var(--tsoft);}
   .txtin.okin{border-color:var(--ok);background:var(--ok-soft);}
   .txtin.badin{border-color:var(--bad);background:var(--bad-soft);}
   .txtin:disabled{opacity:1;-webkit-text-fill-color:var(--ink);}
   .hint2{font-size:14px;color:var(--muted);}
-  .fb{border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:15.5px;line-height:1.5;}
-  .fb.ok{background:var(--ok-soft);}
-  .fb.no{background:var(--bad-soft);}
-  .fb .head{font-weight:700;font-size:16px;}
+  .fb{border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:15.5px;line-height:1.5;}
+  .fb.ok{background:var(--ok-soft);border:1px solid #bfe3cb;}
+  .fb.no{background:var(--bad-soft);border:1px solid #f2c4bf;}
+  .fb .head{font-weight:800;font-size:16.5px;}
   .fb.ok .head{color:var(--ok-ink);}
   .fb.no .head{color:var(--bad);}
   .fb .linkbtn{align-self:flex-start;color:var(--ink);font-size:14.5px;}
 
   /* ---- vysledky ---- */
-  .grade{font-size:96px;font-weight:600;line-height:1;letter-spacing:-3px;text-align:center;}
+  .grade{font-size:96px;font-weight:800;line-height:1;letter-spacing:-3px;text-align:center;color:var(--tc);}
   .stats{display:flex;justify-content:center;gap:28px;}
   .stat{display:flex;flex-direction:column;align-items:center;font-size:13.5px;color:var(--muted);}
   .stat b{font-size:24px;color:var(--ink);font-variant-numeric:tabular-nums;}
   .miss{padding:14px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:15px;}
-  .miss .mq{font-weight:600;font-size:16px;}
+  .miss:first-of-type{border-top:none;padding-top:0;}
+  .miss .mq{font-weight:700;font-size:16px;}
   .miss .yours{color:var(--bad);}
   .miss .right{color:var(--ok-ink);}
 
-  /* ---- tahak ---- */
-  .ch{display:flex;flex-direction:column;}
-  .ch .ci{padding:12px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:4px;}
-  .ch .ci h3{font-size:16px;}
-  .ch .ci div{font-size:15px;line-height:1.5;color:#2c313c;}
-
   @media (hover:hover){
-    .btn:hover:enabled{background:var(--accent-ink);}
-    .btn.ghost:hover:enabled{background:var(--soft);}
-    .btn.soft:hover:enabled{background:#eceef2;}
-    .trow:hover .tt, .crow:hover .ct{color:var(--accent);}
+    .btn:hover{filter:brightness(.92);}
+    .btn.ghost:hover, .btn.soft:hover{filter:none;background:var(--soft);}
+    .tcard:hover{border-color:var(--tc);}
     .tab:hover, .tbtn:hover{border-color:var(--ink);}
   }
-  button:focus-visible, .txtin:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+  button:focus-visible, .txtin:focus-visible{outline:3px solid var(--tc);outline-offset:2px;}
   @media (min-width:900px){
-    .wrap.home{max-width:1040px;}
-    .homegrid{display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.1fr);gap:56px;align-items:start;}
+    .wrap.home{max-width:1080px;}
+    .homegrid{display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);gap:24px;align-items:start;}
     .wrap{padding-top:28px;}
     .wrap.flow .dock{padding-bottom:28px;}
   }
-  @media (max-width:360px){
+  @media (max-width:380px){
     .powers{grid-template-columns:1fr;}
-    .rows .r{flex-direction:column;gap:2px;}
-    .rows .r .v{text-align:left;}
   }
   @media (prefers-reduced-motion:reduce){
     .prog span{transition:none;}
@@ -274,19 +267,29 @@ var LESSONS = [
 {t:0, h:"Štát a štátna moc",
  b:[
   {t:"h", x:"Štát a neštát"},
-  {t:"rows", r:[["štát","status civilis"],["neštát","status naturalis"]]},
+  {t:"rows", r:[["štát","<b>status civilis</b>"],["neštát","<b>status naturalis</b>"]]},
+  {t:"easy", x:"<b>Status civilis</b> (občiansky stav): ľudia žijú v štáte podľa spoločných pravidiel a zákonov. <b>Status naturalis</b> (prirodzený stav): štát nie je, nikto nevládne a každý sa stará sám o seba."},
+  {t:"tip", x:"<b>Civilis</b> ako civilizácia, <b>naturalis</b> ako príroda."},
   {t:"h", x:"4 znaky štátu"},
   {t:"list", num:true, li:["<b>štátna moc</b>","<b>štátne občianstvo</b>","<b>štátne územie</b>","<b>suverenita</b> (zvrchovanosť)"]},
+  {t:"easy", x:"Aby bol niečo štát, musí mať všetky štyri: niekoho, kto vládne (moc), ľudí, ktorí k nemu patria (občania), svoje územie, a musí si sám rozhodovať (suverenita)."},
   {t:"h", x:"Štátna moc"},
   {t:"p", x:"Štátna moc je <b>identifikovateľná mocenská štruktúra</b>. Patrí k nej:"},
   {t:"rows", r:[
-    ["zdroj moci","všeobecne uznávaný"],
-    ["legitimita moci","zdôvodnenie, prečo vládne práve ten, kto vládne; je zhora alebo zdola"],
-    ["stratifikácia spoločnosti","hierarchia, ktorá vychádza z deľby práce"],
-    ["distribúcia moci","spôsob vlády"]
+    ["zdroj moci","<b>všeobecne uznávaný</b>"],
+    ["legitimita moci","<b>zdôvodnenie, prečo vládne práve ten, kto vládne</b>; je <b>zhora</b> alebo <b>zdola</b>"],
+    ["stratifikácia spoločnosti","<b>hierarchia</b>, ktorá vychádza z <b>deľby práce</b>"],
+    ["distribúcia moci","<b>spôsob vlády</b>"]
   ]},
-  {t:"extra", x:"Legitimita <b>zhora</b>: moc je napríklad od Boha alebo zdedená. Legitimita <b>zdola</b>: moc vládnucim dali ľudia, napríklad vo voľbách."},
-  {t:"tip", x:"<b>Civilis</b> ako civilizácia: ľudia žijú podľa pravidiel štátu. <b>Naturalis</b> ako príroda: štát nie je, je to prirodzený stav."}
+  {t:"easy", x:"<b>Identifikovateľná mocenská štruktúra</b> = dá sa jasne určiť, kto v štáte vládne a kto komu velí.<br><b>Zdroj moci</b> = ľudia uznávajú, odkiaľ má vláda moc.<br><b>Legitimita</b> = dôvod, prečo ľudia súhlasia, že vládne práve on. <b>Zhora</b>: moc mu dal niekto „nad“ ľuďmi, napríklad Boh, alebo ju zdedil. <b>Zdola</b>: moc mu dali ľudia, napríklad vo voľbách.<br><b>Stratifikácia</b> = spoločnosť je rozdelená na vrstvy ako poschodia, niekto je vyššie a niekto nižšie. Vzniká to tak, že ľudia robia rôzne práce (riaditeľ, lekár, robotník) a podľa toho majú rôzne postavenie.<br><b>Distribúcia moci</b> = ako je moc rozdelená: či ju má jeden, alebo viacerí."}
+ ],
+ must:[
+  "štát = <b>status civilis</b>, neštát = <b>status naturalis</b>",
+  "4 znaky štátu: <b>štátna moc, občianstvo, územie, suverenita</b>",
+  "štátna moc = <b>identifikovateľná mocenská štruktúra</b>",
+  "legitimita = <b>zdôvodnenie, prečo vládne ten, kto vládne</b> (zhora alebo zdola)",
+  "stratifikácia = <b>hierarchia z deľby práce</b>, distribúcia = <b>spôsob vlády</b>"
+
  ],
  qs:[
   {t:"pairs", q:"Napíš latinské názvy.", rows:[{l:"štát", acc:["status civilis"]},{l:"neštát", acc:["status naturalis"]}]},
@@ -305,13 +308,23 @@ var LESSONS = [
  b:[
   {t:"p", x:"Distribúcia moci (spôsob vlády) je buď <b>koncentrácia moci</b>, alebo <b>deľba moci</b>."},
   {t:"h", x:"Koncentrácia moci"},
-  {t:"list", li:["absolutizmus","despotizmus","diktatúra","totalitarizmus (inak <b>totalita moci</b>)","monopol na moc"]},
+  {t:"chips", li:["absolutizmus","despotizmus","diktatúra","totalitarizmus = totalita moci","monopol na moc"]},
+  {t:"easy", x:"Koncentrácia = všetka moc je sústredená u jedného človeka alebo malej skupiny.<br><b>Absolutizmus</b>: panovník má neobmedzenú moc. <b>Despotizmus</b>: krutá a svojvoľná vláda jedného. <b>Diktatúra</b>: vládne diktátor alebo skupina a ľudia ju nemôžu vymeniť. <b>Totalitarizmus</b>: štát kontroluje úplne všetko, aj súkromný život ľudí. <b>Monopol na moc</b>: moc má len jeden a nikto iný."},
   {t:"h", x:"Deľba moci"},
-  {t:"list", li:["teokracia","aristokracia","oligarchia","demokracia","pluralizmus moci","checks and balances"]},
-  {t:"extra", x:"<b>Checks and balances</b> sa po slovensky hovorí brzdy a protiváhy: zložky moci sa navzájom kontrolujú."},
+  {t:"chips", li:["teokracia","aristokracia","oligarchia","demokracia","pluralizmus moci","checks and balances"]},
+  {t:"easy", x:"Deľba = moc je rozdelená medzi viacerých, aby ju nikto nemal celú.<br><b>Teokracia</b>: vládnu duchovní podľa náboženstva. <b>Aristokracia</b>: vládne šľachta. <b>Oligarchia</b>: vládne malá skupina bohatých. <b>Demokracia</b>: vládne ľud. <b>Pluralizmus moci</b>: moc má viac skupín, napríklad viac politických strán. <b>Checks and balances</b> (brzdy a protiváhy): zložky moci sa navzájom kontrolujú."},
   {t:"h", x:"Horizontálna deľba moci"},
   {t:"powers"},
-  {t:"tip", x:"<b>Legislatíva</b> robí zákony. <b>Exekutíva</b> ich vykonáva (po anglicky <i>execute</i>). <b>Justícia</b> súdi (<i>justice</i> = spravodlivosť)."}
+  {t:"easy", x:"Moc je rozdelená na tri časti, aby ju nemal nikto celú: jedni zákony <b>robia</b>, druhí ich <b>vykonávajú</b> a tretí <b>súdia</b>, či sa dodržiavajú."},
+  {t:"tip", x:"<b>Exekutíva</b> ako anglické <i>execute</i> (vykonať). <b>Justícia</b> ako <i>justice</i> (spravodlivosť)."}
+ ],
+ must:[
+  "koncentrácia: <b>absolutizmus, despotizmus, diktatúra, totalitarizmus, monopol na moc</b>",
+  "deľba: <b>teokracia, aristokracia, oligarchia, demokracia, pluralizmus moci, checks and balances</b>",
+  "<b>legislatíva</b> = zákonodarná moc → parlament (NR SR)",
+  "<b>exekutíva</b> = výkonná moc → prezident + vláda SR",
+  "<b>justícia</b> = súdna moc → Ústavný a Najvyšší súd SR"
+
  ],
  qs:[
   {t:"list", q:"Vymenuj aspoň 3 formy koncentrácie moci.", n:3,
@@ -336,12 +349,20 @@ var LESSONS = [
 {t:1, h:"Občianstvo",
  b:[
   {t:"list", li:["Občianstvo je <b>právny vzťah človeka k štátu</b>.","Je <b>odlišné od národnosti</b>, resp. od etnickej príslušnosti."]},
+  {t:"easy", x:"<b>Občianstvo</b> = patríš k štátu „na papieri“: máš jeho občiansky preukaz a pas, práva (napríklad voliť) aj povinnosti. <b>Národnosť</b> = ku ktorému národu sa cítiš patriť. Môžeš byť občan SR a mať napríklad maďarskú národnosť."},
   {t:"h", x:"Ako sa získa občianstvo SR"},
   {t:"rows", r:[
-    ["narodením","keď je aspoň jeden z biologických rodičov slovenský občan"],
+    ["narodením","keď je <b>aspoň jeden</b> z biologických rodičov slovenský občan"],
     ["naturalizáciou","manželstvo, trvalý pobyt, pobyt, azyl, osvojenie, zásluhy…"]
   ]},
-  {t:"tip", x:"Môžeš byť občan SR a pritom mať napríklad maďarskú národnosť. Občianstvo je vzťah k štátu, národnosť k národu."}
+  {t:"easy", x:"<b>Naturalizácia</b> = človek, ktorý sa narodil ako cudzinec, sa stane občanom SR neskôr. Napríklad si vezme Slováka, dlho tu žije alebo tu dostane <b>azyl</b> (ochranu, lebo utiekol pred nebezpečenstvom). <b>Osvojenie</b> = adopcia dieťaťa."}
+ ],
+ must:[
+  "občianstvo = <b>právny vzťah človeka k štátu</b>",
+  "je <b>odlišné od národnosti</b> (etnickej príslušnosti)",
+  "získa sa <b>narodením</b> (aspoň jeden rodič je občan SR) alebo <b>naturalizáciou</b>",
+  "naturalizácia: manželstvo, trvalý pobyt, pobyt, azyl, osvojenie, zásluhy"
+
  ],
  qs:[
   {t:"def", q:"Napíš, čo je občianstvo.", kw:[["pravn"],["vztah"],["stat"]], sol:"právny vzťah človeka k štátu"},
@@ -358,11 +379,20 @@ var LESSONS = [
 {t:1, h:"Územie štátu",
  b:[
   {t:"p", x:"Na území štátu je štátna moc <b>suverénna</b>."},
+  {t:"easy", x:"<b>Suverénna</b> = na svojom území rozhoduje len tento štát a nikto iný."},
   {t:"h", x:"Čo patrí k územiu štátu"},
-  {t:"list", li:["vzdušný priestor","výsostné vody","ambasády","paluby vojnových lodí"]},
+  {t:"chips", li:["vzdušný priestor","výsostné vody","ambasády","paluby vojnových lodí"]},
+  {t:"easy", x:"<b>Vzdušný priestor</b> = vzduch nad územím. <b>Výsostné vody</b> = pás mora pri pobreží, ktorý patrí štátu. <b>Ambasády</b> = veľvyslanectvá. <b>Paluby vojnových lodí</b> = vojnová loď patrí k územiu štátu, aj keď pláva ďaleko."},
   {t:"h", x:"Zmena územia štátu"},
-  {t:"rows", r:[["anexia","násilím"],["cesia","zmluvou"],["akcesia","z prirodzených príčin"]]},
+  {t:"rows", r:[["anexia","<b>násilím</b>"],["cesia","<b>zmluvou</b>"],["akcesia","z <b>prirodzených príčin</b>"]]},
+  {t:"easy", x:"<b>Anexia</b>: štát si územie zoberie silou. <b>Cesia</b>: štáty sa dohodnú a jeden územie druhému odovzdá. <b>Akcesia</b>: územie pribudne samo od prírody, napríklad vznikne nový ostrov."},
   {t:"tip", x:"<b>A</b>nexia = <b>a</b>tak. <b>C</b>esia = <b>c</b>eruzka a podpis zmluvy. <b>Ak</b>cesia = <b>ak</b>o to urobí príroda."}
+ ],
+ must:[
+  "na území štátu je štátna moc <b>suverénna</b>",
+  "k územiu patrí: <b>vzdušný priestor, výsostné vody, ambasády, paluby vojnových lodí</b>",
+  "<b>anexia</b> = násilím, <b>cesia</b> = zmluvou, <b>akcesia</b> = z prirodzených príčin"
+
  ],
  qs:[
   {t:"txt", q:"Aká je štátna moc na území štátu?", acc:["suverénna","suverénna moc","zvrchovaná"], sol:"suverénna"},
@@ -380,11 +410,13 @@ var LESSONS = [
 {t:2, h:"Suverenita",
  b:[
   {t:"p", x:"Suverenita = <b>zvrchovanosť</b> štátu. Je <b>vnútorná</b> a <b>vonkajšia</b>."},
+  {t:"easy", x:"<b>Suverenita</b> = štát si sám rozhoduje o sebe a nikto mu nerozkazuje."},
   {t:"h", x:"Vnútorná suverenita"},
   {t:"list", li:[
     "Štát je nezávislý v <b>tvorbe zákonov</b> a v uplatňovaní moci na svojom území a voči svojim občanom.",
     "Štát je nezávislý od <b>neštátnych organizácií</b> (cirkev, politické strany…)."
   ]},
+  {t:"easy", x:"Doma v krajine si štát sám robí zákony a nerozkazuje mu ani cirkev, ani politické strany."},
   {t:"h", x:"Vonkajšia suverenita"},
   {t:"list", li:[
     "Štát je <b>nezávislý od iného štátu</b>.",
@@ -392,7 +424,14 @@ var LESSONS = [
     "Na jeho území <b>nie sú ozbrojené zložky</b> iného štátu.",
     "Iný štát <b>nekoná v jeho mene</b>."
   ]},
-  {t:"tip", x:"<b>Vnútorná</b> = dovnútra krajiny: zákony, občania, cirkev, strany. <b>Vonkajšia</b> = smerom von, k iným štátom."}
+  {t:"easy", x:"Nerozkazuje mu žiadny iný štát: neplatia tu cudzie zákony, nie sú tu cudzí vojaci a nikto iný za neho nerozhoduje."},
+  {t:"tip", x:"<b>Vnútorná</b> = dovnútra krajiny. <b>Vonkajšia</b> = smerom von, k iným štátom."}
+ ],
+ must:[
+  "suverenita = <b>zvrchovanosť</b>, je <b>vnútorná</b> a <b>vonkajšia</b>",
+  "vnútorná: nezávislosť v <b>tvorbe zákonov</b> a od <b>neštátnych organizácií</b> (cirkev, strany)",
+  "vonkajšia: <b>nezávislosť od iného štátu</b>, jeho zákony neplatia, nie sú tu jeho ozbrojené zložky, nekoná v našom mene"
+
  ],
  qs:[
   {t:"txt", q:"Ako sa inak povie suverenita?", acc:["zvrchovanosť","zvrchovanosť štátu"], sol:"zvrchovanosť"},
@@ -409,14 +448,23 @@ var LESSONS = [
 
 {t:2, h:"Štátne symboly",
  b:[
-  {t:"p", x:"Slovensko má 4 štátne symboly: <b>vlajka, znak, hymna, pečať</b>."},
-  {t:"rows", r:[
-    ["vlajka","pomer 2 : 3, odvodená z ruskej vlajky"],
-    ["znak","rannogotický štít, odvodený zo znaku Uhorska"],
-    ["hymna","melódia piesne „Kopala studienku“, autor textu J. (Janko) Matúška"],
-    ["pečať","kruh, v ňom štátny znak a okolo nápis SLOVENSKÁ REPUBLIKA"]
-  ]},
-  {t:"figs"}
+  {t:"p", x:"Slovensko má 4 štátne symboly:"},
+  {t:"chips", li:["vlajka","znak","hymna","pečať"]},
+  {t:"h", x:"Vlajka a znak"},
+  {t:"rows", r:[["vlajka","pomer <b>2 : 3</b>, odvodená z <b>ruskej</b> vlajky"],["znak","<b>rannogotický</b> štít, odvodený zo znaku <b>Uhorska</b>"]]},
+  {t:"flag"},
+  {t:"easy", x:"<b>Odvodená z ruskej vlajky</b> = má rovnaké farby (biela, modrá, červená) ako ruská vlajka. <b>Rannogotický</b> = tvar štítu z obdobia ranej gotiky, teda veľmi starý."},
+  {t:"h", x:"Hymna a pečať"},
+  {t:"rows", r:[["hymna","melódia piesne „<b>Kopala studienku</b>“, autor textu <b>J. (Janko) Matúška</b>"],["pečať","<b>kruh</b>, v ňom <b>štátny znak</b> a okolo nápis <b>SLOVENSKÁ REPUBLIKA</b>"]]},
+  {t:"seal"}
+ ],
+ must:[
+  "4 symboly: <b>vlajka, znak, hymna, pečať</b>",
+  "vlajka: pomer <b>2 : 3</b>, z <b>ruskej</b> vlajky",
+  "znak: <b>rannogotický</b> štít zo znaku <b>Uhorska</b>",
+  "hymna: „<b>Kopala studienku</b>“, text <b>Janko Matúška</b>",
+  "pečať: <b>kruh</b> so štátnym znakom a nápisom SLOVENSKÁ REPUBLIKA"
+
  ],
  qs:[
   {t:"list", q:"Vymenuj 4 štátne symboly SR.", n:4,
@@ -439,14 +487,24 @@ var LESSONS = [
  b:[
   {t:"h", x:"Štáty delíme z troch hľadísk"},
   {t:"list", num:true, li:["podľa <b>formy vlády</b>","podľa <b>územno-organizačného členenia</b>","podľa <b>štátneho režimu</b>"]},
-  {t:"h", x:"Republiky: hlava štátu je volená"},
-  {t:"rows", r:[["prezidentská","legislatíva a exekutíva sú oddelené a vyvážené"],["parlamentná","legislatíva je exekutíve nadradená"]]},
-  {t:"h", x:"Monarchie: hlava štátu je dedičná"},
+  {t:"h", x:"Republiky"},
+  {t:"p", x:"V republike je hlava štátu <b>volená</b>."},
+  {t:"rows", r:[["prezidentská","legislatíva a exekutíva sú <b>oddelené a vyvážené</b>"],["parlamentná","legislatíva je exekutíve <b>nadradená</b>"]]},
+  {t:"easy", x:"Hlavu štátu (prezidenta) si zvolia na pár rokov. V <b>prezidentskej</b> republike má prezident veľkú moc a parlament je s ním rovnako silný, napríklad USA. V <b>parlamentnej</b> má najväčšiu moc parlament, napríklad Slovensko."},
+  {t:"h", x:"Monarchie"},
+  {t:"p", x:"V monarchii je hlava štátu <b>dedičná</b>."},
   {t:"rows", r:[
-    ["absolutická","hlava štátu sa o moc nedelí"],
-    ["stavovská","hlava štátu je volená privilegovanou vrstvou"],
-    ["konštitučná","hlava štátu sa delí o moc s voleným parlamentom"]
-  ]}
+    ["absolutická","hlava štátu sa o moc <b>nedelí</b>"],
+    ["stavovská","hlava štátu je volená <b>privilegovanou vrstvou</b>"],
+    ["konštitučná","hlava štátu sa delí o moc s <b>voleným parlamentom</b>"]
+  ]},
+  {t:"easy", x:"Hlavou štátu je kráľ alebo kráľovná a funkcia sa dedí v rodine. <b>Absolutická</b>: kráľ vládne úplne sám. <b>Stavovská</b>: kráľa vyberajú ľudia s výsadami (privilegovaná vrstva), napríklad šľachta. <b>Konštitučná</b>: kráľ sa delí o moc s parlamentom, ktorý volia ľudia, napríklad Veľká Británia."}
+ ],
+ must:[
+  "3 hľadiská: <b>forma vlády, územno-organizačné členenie, štátny režim</b>",
+  "republika: hlava štátu <b>volená</b> → <b>prezidentská</b> (oddelené a vyvážené), <b>parlamentná</b> (legislatíva nadradená)",
+  "monarchia: hlava štátu <b>dedičná</b> → <b>absolutická</b> (nedelí sa), <b>stavovská</b> (volí ju privilegovaná vrstva), <b>konštitučná</b> (delí sa s parlamentom)"
+
  ],
  qs:[
   {t:"list", q:"Vymenuj 3 hľadiská, podľa ktorých delíme štáty.", n:3,
@@ -477,15 +535,22 @@ var LESSONS = [
  b:[
   {t:"h", x:"Unitárne štáty"},
   {t:"p", x:"Majú <b>jednu centralizovanú mocenskú štruktúru</b>. Sú <b>centralizované</b> alebo <b>decentralizované</b>."},
+  {t:"easy", x:"Jeden štát s jednou vládou pre celé územie, napríklad Slovensko. <b>Centralizovaný</b>: skoro všetko sa rozhoduje v hlavnom meste. <b>Decentralizovaný</b>: časť rozhodovania majú kraje a obce."},
   {t:"h", x:"Zložené štáty"},
-  {t:"p", x:"<b>Centrálna mocenská štruktúra sa delí o moc s regionálnymi.</b> Je to viac štátov v jednom štáte."},
+  {t:"p", x:"<b>Centrálna mocenská štruktúra sa delí o moc s regionálnymi.</b> Je to <b>viac štátov v jednom štáte</b>."},
   {t:"rows", r:[
-    ["federácia","pevný zväzok štátov; symetrická alebo asymetrická"],
-    ["konfederácia","voľný zväzok štátov"],
-    ["únia","reálna alebo personálna"]
+    ["federácia","<b>pevný</b> zväzok štátov; <b>symetrická</b> alebo <b>asymetrická</b>"],
+    ["konfederácia","<b>voľný</b> zväzok štátov"],
+    ["únia","<b>reálna</b> alebo <b>personálna</b>"]
   ]},
-  {t:"extra", h:"Konfederácia jednoducho", x:"Každý štát v konfederácii má svoju moc, ale aj konfederácia ako celok má trochu moci, napríklad spoločnú obranu. USA boli konfederácia len na začiatku (1781 – 1789), <b>dnes sú USA federácia</b>."},
+  {t:"easy", x:"<b>Federácia</b>: časti majú svoju vládu, ale nad nimi je spoločná silnejšia vláda, napríklad USA alebo Nemecko. <b>Symetrická</b> = všetky časti majú rovnaké práva, <b>asymetrická</b> = niektoré majú viac.<br><b>Konfederácia</b>: každý štát si nechá svoju moc a spolu majú len trochu spoločnej moci, napríklad obranu. USA boli konfederácia len na začiatku (1781 – 1789), dnes sú federácia.<br><b>Únia</b>: štáty spojené hlavne cez spoločného panovníka. <b>Personálna</b> = majú len spoločného panovníka, <b>reálna</b> = majú aj spoločné úrady."},
   {t:"warn", h:"Pozor na zošit", x:"V zošite je „voľný zväzok štátov“ napísaný medzi konfederáciou a úniou. V učebniciach patrí ku <b>konfederácii</b>, tak je to aj tu."}
+ ],
+ must:[
+  "unitárny štát: <b>jedna centralizovaná mocenská štruktúra</b> → <b>centralizovaný</b> alebo <b>decentralizovaný</b>",
+  "zložený štát: <b>centrálna moc sa delí s regionálnymi</b>, viac štátov v jednom",
+  "<b>federácia</b> = pevný zväzok (symetrická, asymetrická), <b>konfederácia</b> = voľný zväzok, <b>únia</b> = reálna alebo personálna"
+
  ],
  qs:[
   {t:"list", q:"Povedz 2 typy štátov podľa územno-organizačného členenia.", n:2,
@@ -512,8 +577,10 @@ var LESSONS = [
     "<b>nedodržiavajú sa ľudské práva</b>",
     "<b>súdny systém</b> rozhoduje podľa želaní vládnucej skupiny"
   ]},
+  {t:"easy", x:"Vládne jeden človek alebo skupina a ľudia ju nemôžu pokojne vymeniť. Noviny a televízia hovoria len to, čo chce vláda."},
   {t:"h", x:"Autoritatívny režim"},
   {t:"p", x:"<b>medzistupeň</b> medzi diktatúrou a demokraciou"},
+  {t:"easy", x:"Nie je to úplná diktatúra, ale ani skutočná demokracia. Napríklad voľby sú, ale nie úplne slobodné."},
   {t:"h", x:"Demokracia"},
   {t:"list", li:[
     "vlády sa menia v <b>pravidelných intervaloch voľbami</b>",
@@ -522,7 +589,14 @@ var LESSONS = [
     "existuje <b>právny štát</b>",
     "platí <b>všeobecné volebné právo</b>",
     "sú dodržiavané <b>všetky ľudské práva</b>"
-  ]}
+  ]},
+  {t:"easy", x:"Vládnu ľudia cez voľby. <b>Participovať</b> = zúčastňovať sa. <b>Právny štát</b> = všetci, aj vláda, musia dodržiavať zákony. <b>Všeobecné volebné právo</b> = voliť môže každý dospelý občan."}
+ ],
+ must:[
+  "3 režimy: <b>diktatúra, autoritatívny režim, demokracia</b>",
+  "autoritatívny režim = <b>medzistupeň</b> medzi diktatúrou a demokraciou",
+  "vedieť vymenovať aspoň 3 <b>znaky diktatúry</b> a 3 <b>znaky demokracie</b>"
+
  ],
  qs:[
   {t:"list", q:"Vymenuj 3 štátne režimy.", n:3,
@@ -764,7 +838,9 @@ var IC = {
   doc:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>',
   sound:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>',
   mute:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6M16 9l6 6"/></svg>',
-  bulb:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#636b7a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>',
+  bulb:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>',
+  chat:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>',
+  check:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
   again:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>'
 };
 
@@ -789,10 +865,18 @@ function sealSvg(){
     '<g transform="translate(70 62) scale(0.6)">' + shieldSvg("clipSeal") + '</g></svg>';
 }
 
+/* ===== FARBY TEM ===== */
+var TC = [
+  {c:"#2349d8", s:"#eaf0ff", i:"#1a36a6"},
+  {c:"#15803d", s:"#e5f5ea", i:"#0e5f2c"},
+  {c:"#b45309", s:"#fdf0e1", i:"#8a3f06"},
+  {c:"#7c3aed", s:"#f1ebff", i:"#5b21b6"}
+];
+function tvars(ti){ var p = TC[ti] || TC[0]; return '--tc:' + p.c + ';--tsoft:' + p.s + ';--tink:' + p.i + ';'; }
+
 /* ===== OBSAH LEKCIE ===== */
 function blockHtml(b){
   var html = "", i;
-  if(b.t === "h"){ return '<h3 class="sec">' + b.x + '</h3>'; }
   if(b.t === "p"){ return '<p>' + b.x + '</p>'; }
   if(b.t === "rows"){
     html = '<div class="rows">';
@@ -806,32 +890,44 @@ function blockHtml(b){
     for(i = 0; i < b.li.length; i++){ html += '<li>' + b.li[i] + '</li>'; }
     return html + (b.num ? '</ol>' : '</ul>');
   }
+  if(b.t === "chips"){
+    return '<div class="chips">' + b.li.map(function(x){ return '<span class="chip">' + x + '</span>'; }).join("") + '</div>';
+  }
   if(b.t === "powers"){
     return '<div class="powers">' +
-      '<div class="pw"><span class="pn">Legislatíva</span><span class="pk">zákonodarná moc</span><span class="pi">Parlament – NR SR</span></div>' +
-      '<div class="pw exe"><span class="pn">Exekutíva</span><span class="pk">výkonná moc</span><span class="pi">Prezident + Vláda SR</span></div>' +
+      '<div class="pw"><span class="pn">Legislatíva</span><span class="pk">zákonodarná moc</span><span class="pi">parlament – NR SR</span></div>' +
+      '<div class="pw exe"><span class="pn">Exekutíva</span><span class="pk">výkonná moc</span><span class="pi">prezident + vláda SR</span></div>' +
       '<div class="pw jus"><span class="pn">Justícia</span><span class="pk">súdna moc</span><span class="pi">Ústavný a Najvyšší súd SR</span></div>' +
       '</div>';
   }
-  if(b.t === "figs"){
-    return '<div class="figs"><figure>' + flagSvg() + '<figcaption>vlajka, pomer 2 : 3</figcaption></figure>' +
-      '<figure>' + sealSvg() + '<figcaption>štátna pečať</figcaption></figure></div>';
+  if(b.t === "flag"){ return '<div class="figs"><figure>' + flagSvg() + '<figcaption>vlajka, pomer 2 : 3</figcaption></figure></div>'; }
+  if(b.t === "seal"){ return '<div class="figs"><figure>' + sealSvg() + '<figcaption>štátna pečať</figcaption></figure></div>'; }
+  if(b.t === "easy"){
+    return '<div class="easy"><span class="nl">' + IC.chat + 'Jednoducho povedané</span><div>' + b.x + '</div></div>';
   }
   if(b.t === "tip"){
-    return '<div class="note">' + IC.bulb + '<span><span class="nl">Pomôcka:</span> ' + b.x + '</span></div>';
+    return '<div class="tipbox"><span class="nl">' + IC.bulb + 'Pomôcka na zapamätanie</span><div>' + b.x + '</div></div>';
   }
   if(b.t === "extra"){
-    return '<div class="extra"><span class="nl">' + (b.h || 'Navyše') + ' · nie je v zošite</span>' + b.x + '</div>';
+    return '<div class="extra"><span class="nl">Navyše, nie je v zošite, učiť sa to netreba</span>' + b.x + '</div>';
   }
   if(b.t === "warn"){
     return '<div class="warn"><span class="nl">' + b.h + '</span>' + b.x + '</div>';
   }
   return "";
 }
-function lessonBody(L){
-  var html = "", i;
-  for(i = 0; i < L.b.length; i++){ html += blockHtml(L.b[i]); }
-  return html;
+/* lekcia sa deli na casti podla nadpisov; co je pred prvym nadpisom, ide do hlavicky */
+function sectionsOf(L){
+  var out = [{h:null, b:[]}];
+  L.b.forEach(function(b){
+    if(b.t === "h"){ out.push({h:b.x, b:[]}); } else { out[out.length - 1].b.push(b); }
+  });
+  return out;
+}
+function blocksHtml(list){ return list.map(blockHtml).join(""); }
+function mustHtml(L){
+  return '<div class="card lc must"><h2>Na písomku určite vedieť</h2><ul class="mlist">' +
+    L.must.map(function(m){ return '<li>' + IC.check + '<span>' + m + '</span></li>'; }).join("") + '</ul></div>';
 }
 
 /* ===== OTAZKY ===== */
@@ -1005,14 +1101,6 @@ function finishRun(){
 function soundBtn(){
   return '<button class="ibtn out" data-act="sound" aria-label="' + (P.sound ? "Vypnúť zvuk" : "Zapnúť zvuk") + '">' + (P.sound ? IC.sound : IC.mute) + '</button>';
 }
-function dotsHtml(list){
-  var html = '<span class="dots" aria-hidden="true">', i, st;
-  for(i = 0; i < list.length; i++){
-    st = qState(list[i].id);
-    html += '<span class="dot' + (st === "know" ? " k" : (st === "learn" ? " l" : "")) + '"></span>';
-  }
-  return html + '</span>';
-}
 function countKnow(list){ return list.filter(function(x){ return qState(x.id) === "know"; }).length; }
 function lessonText(li){
   var n = qsOf(li).length, old = 0;
@@ -1022,31 +1110,31 @@ function lessonText(li){
 }
 
 function viewHome(){
-  var nl = nextLesson(), done = doneCount(), total = LESSONS.length, any = answered(QS).length, html;
+  var nl = nextLesson(), done = doneCount(), total = LESSONS.length, any = answered(QS).length, html, ti = nl >= 0 ? LESSONS[nl].t : 0;
   html = '<div class="wrap home">' +
     '<div class="top"><div class="brand"><b>Politológia</b><span>Štát a typy štátov · 9. ročník</span></div><div class="sp"></div>' +
     '<button class="tbtn" data-act="cheat">' + IC.doc + 'Ťahák</button>' + soundBtn() + '</div>' +
-    '<div class="homegrid"><div class="stack loose">';
+    '<div class="homegrid"><div class="stack">';
 
-  html += '<div class="hero">';
+  html += '<div class="card" style="' + tvars(ti) + '">';
   if(nl >= 0){
-    html += '<div class="label">Lekcia ' + (nl + 1) + ' z ' + total + ' · ' + TOPICS[LESSONS[nl].t].title + '</div>' +
+    html += '<span class="tpill">Lekcia ' + (nl + 1) + ' z ' + total + ' · ' + TOPICS[ti].title + '</span>' +
       '<h1>' + LESSONS[nl].h + '</h1>' +
       '<p class="muted">' + lessonText(nl) + '</p>' +
       '<button class="btn" data-act="open" data-val="' + nl + '">' + (done ? "Pokračovať" : "Začať prvú lekciu") + ' ' + IC.arrow + '</button>';
   } else {
-    html += '<div class="label">Celé učivo</div><h1>Všetkých ' + total + ' lekcií máš za sebou</h1>' +
+    html += '<span class="tpill">Celé učivo</span><h1>Všetkých ' + total + ' lekcií máš za sebou</h1>' +
       '<p class="muted">Teraz už len opakuj. Najprv prídu otázky, ktoré ti idú najmenej.</p>' +
       '<button class="btn" data-act="review" data-val="-1">Opakovať všetko ' + IC.arrow + '</button>';
   }
   html += '<div class="stack tight"><div class="lbar"><span style="width:' + Math.round((done / total) * 100) + '%"></span></div>' +
-    '<span class="small muted">Hotové lekcie: ' + done + ' z ' + total + '</span></div>';
+    '<span class="small muted">Hotové lekcie: <b>' + done + ' z ' + total + '</b></span></div>';
   if(nl >= 0 && any){
     html += '<button class="btn soft" data-act="review" data-val="-1">Zopakovať, čo som sa už učil</button>';
   }
   html += '</div>';
 
-  html += '<div class="box"><h3>Písomka nanečisto</h3>' +
+  html += '<div class="card"><h2>Písomka nanečisto</h2>' +
     '<p class="muted">Otázky zo všetkých lekcií pomiešané, ako u učiteľa. Na konci dostaneš známku.</p>' +
     (P.best ? '<p class="small">Najlepšie: <b>známka ' + P.best.grade + '</b> (' + P.best.pct + ' %)</p>' : '') +
     '<div class="tabs">';
@@ -1056,16 +1144,16 @@ function viewHome(){
   html += '</div><button class="btn ghost" data-act="test">Spustiť písomku</button></div>';
   html += '</div>';
 
-  html += '<div class="topics"><div class="top" style="min-height:0;padding-bottom:8px;"><span class="label">Témy</span><div class="sp"></div><span class="small muted">bodka = jedna otázka</span></div>';
+  html += '<div class="stack"><div class="label" style="padding:4px 4px 0;">Témy</div>';
   TOPICS.forEach(function(t, i){
-    var ls = lessonsOf(i), tq = topicQs(i);
-    html += '<button class="trow" data-act="topic" data-val="' + i + '"><span class="tn">' + (i + 1) + '</span>' +
-      '<span class="tb"><span class="tt">' + t.title + '</span>' + dotsHtml(tq) +
-      '<span class="small muted">vieš ' + countKnow(tq) + ' z ' + tq.length + ' otázok · ' + (ls.length === 1 ? 'lekcia ' + (ls[0] + 1) : 'lekcie ' + (ls[0] + 1) + ' – ' + (ls[ls.length - 1] + 1)) + '</span></span>' + IC.chev + '</button>';
+    var ls = lessonsOf(i), tq = topicQs(i), k = countKnow(tq);
+    html += '<button class="card tcard" data-act="topic" data-val="' + i + '" style="' + tvars(i) + '"><span class="tbadge">' + (i + 1) + '</span>' +
+      '<span class="tb"><span class="tt">' + t.title + '</span><span class="ts">' + t.short + '</span>' +
+      '<span class="lbar"><span style="width:' + Math.round((k / tq.length) * 100) + '%"></span></span>' +
+      '<span class="small muted">vieš ' + k + ' z ' + tq.length + ' otázok · ' + (ls.length === 1 ? 'lekcia ' + (ls[0] + 1) : 'lekcie ' + (ls[0] + 1) + ' – ' + (ls[ls.length - 1] + 1)) + '</span></span>' + IC.chev + '</button>';
   });
-  html += '<div class="legend"><span><span class="dot k"></span>vieš</span><span><span class="dot l"></span>naposledy zle</span><span><span class="dot"></span>ešte nebola</span></div>';
-  html += '<p class="foot" style="margin-top:20px;">Najprv si prečítaš celú lekciu, potom ťa z nej vyskúšam a pridám aj otázky z predošlých lekcií. ' +
-    'Všetky otázky sú písané, ako na písomke. Pokrok sa ukladá len v tomto prehliadači. ' +
+  html += '<p class="foot">V lekcii si najprv prečítaš učivo. <b style="background:linear-gradient(transparent 50%, var(--hl) 50%);">Žlto zvýraznené</b> je to, čo sa učíš na písomku, modré rámčeky ti to vysvetlia jednoduchými slovami. ' +
+    'Potom ťa vyskúšam z lekcie aj z toho, čo už vieš. Pokrok sa ukladá len v tomto prehliadači. ' +
     (any || P.best ? '<button class="linkbtn" data-act="reset">Vymazať pokrok</button>' : '') + '</p>';
   html += '</div></div></div>';
   app.innerHTML = html;
@@ -1073,29 +1161,36 @@ function viewHome(){
 
 function viewTopic(){
   var t = TOPICS[S.ti], ls = lessonsOf(S.ti), nl = nextLesson(), any = answered(topicQs(S.ti)).length > 0, html;
-  html = '<div class="wrap">' +
+  html = '<div class="wrap" style="' + tvars(S.ti) + '">' +
     '<div class="top"><button class="back" data-act="home">' + IC.back + 'Domov</button><div class="sp"></div>' + soundBtn() + '</div>' +
-    '<div class="stack tight"><span class="label">Téma ' + (S.ti + 1) + ' z ' + TOPICS.length + '</span><h1>' + t.title + '</h1><p class="muted">' + t.short + '</p></div>';
-  if(any){ html += '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>'; }
-  html += '<div class="topics"><div class="label" style="padding-bottom:8px;">Lekcie</div>';
+    '<div class="card"><span class="tpill">Téma ' + (S.ti + 1) + ' z ' + TOPICS.length + '</span><h1>' + t.title + '</h1><p class="muted">' + t.short + '</p>' +
+    (any ? '<button class="btn" data-act="review" data-val="' + S.ti + '">Precvičiť túto tému ' + IC.arrow + '</button>' : '') + '</div>' +
+    '<div class="label" style="padding:4px 4px 0;">Lekcie</div>';
   ls.forEach(function(li){
-    var lq = qsOf(li), pill = P.done[li] ? '<span class="pill k">hotová</span>' : (li === nl ? '<span class="pill l">ďalšia</span>' : '');
-    html += '<button class="crow" data-act="open" data-val="' + li + '"><span class="cb"><span class="ct">' + (li + 1) + '. ' + LESSONS[li].h + '</span>' +
-      '<span class="cs">vieš ' + countKnow(lq) + ' z ' + lq.length + ' otázok</span></span>' + pill + IC.chev + '</button>';
+    var lq = qsOf(li), k = countKnow(lq), state = P.done[li] ? "hotová" : (li === nl ? "ďalšia na rade" : "");
+    html += '<button class="card tcard" data-act="open" data-val="' + li + '"><span class="tbadge">' + (li + 1) + '</span>' +
+      '<span class="tb"><span class="tt">' + LESSONS[li].h + '</span>' +
+      '<span class="lbar"><span style="width:' + Math.round((k / lq.length) * 100) + '%"></span></span>' +
+      '<span class="small muted">vieš ' + k + ' z ' + lq.length + ' otázok' + (state ? ' · <b>' + state + '</b>' : '') + '</span></span>' + IC.chev + '</button>';
   });
-  html += '</div></div>';
+  html += '</div>';
   app.innerHTML = html;
 }
 
 function viewLesson(){
-  var L = LESSONS[S.li], n = qsOf(S.li).length, html;
-  html = '<div class="wrap flow">' +
+  var L = LESSONS[S.li], secs = sectionsOf(L), n = qsOf(S.li).length, k, html,
+    olds = S.li > 0 && answered(QS.filter(function(x){ return x.li < S.li; })).length ? OLD_PER_LESSON : 0;
+  html = '<div class="wrap flow" style="' + tvars(L.t) + '">' +
     '<div class="top"><button class="back" data-act="home">' + IC.back + 'Domov</button><div class="sp"></div>' + soundBtn() + '</div>' +
-    '<div class="stack tight"><span class="label">Lekcia ' + (S.li + 1) + ' z ' + LESSONS.length + ' · ' + TOPICS[L.t].title + '</span><h1>' + L.h + '</h1></div>' +
-    '<div class="stack">' + lessonBody(L) + '</div>' +
-    '<div class="dock"><button class="btn" data-act="lesson" data-val="' + S.li + '">Mám prečítané, vyskúšaj ma ' + IC.arrow + '</button>' +
-    '<div class="small muted center">' + n + ' ' + plural(n, "otázka", "otázky", "otázok") + ' z tejto lekcie' +
-    (S.li > 0 && answered(QS.filter(function(x){ return x.li < S.li; })).length ? ' a ' + OLD_PER_LESSON + ' z predošlých' : '') + '</div></div></div>';
+    '<div class="card lc"><span class="tpill">Lekcia ' + (S.li + 1) + ' z ' + LESSONS.length + ' · ' + TOPICS[L.t].title + '</span><h1>' + L.h + '</h1>' +
+    blocksHtml(secs[0].b) +
+    '<div class="legend2"><span><b>žlté</b> = učíš sa na písomku</span><span><span class="es">modré</span> = vysvetlenie jednoduchými slovami</span></div></div>';
+  for(k = 1; k < secs.length; k++){
+    html += '<section class="card lc"><div class="sechead"><span class="secn">' + k + '</span><h2>' + secs[k].h + '</h2></div>' + blocksHtml(secs[k].b) + '</section>';
+  }
+  html += mustHtml(L);
+  html += '<div class="dock"><button class="btn" data-act="lesson" data-val="' + S.li + '">Mám prečítané, vyskúšaj ma ' + IC.arrow + '</button>' +
+    '<div class="small muted center">' + n + ' ' + plural(n, "otázka", "otázky", "otázok") + ' z tejto lekcie' + (olds ? ' a ' + olds + ' z predošlých' : '') + '</div></div></div>';
   app.innerHTML = html;
 }
 
@@ -1103,7 +1198,7 @@ function viewLesson(){
 function renderRun(fresh){
   var R = S.run, total = R.queue.length, pct = Math.round(((R.i + (R.locked ? 1 : 0)) / total) * 100), html, label;
   label = R.kind === "test" ? "Ukončiť písomku" : (R.kind === "lesson" ? "Ukončiť lekciu" : "Ukončiť opakovanie");
-  html = '<div class="wrap flow">' +
+  html = '<div class="wrap flow" style="' + tvars(LESSONS[R.q.li].t) + '">' +
     '<div class="ftop"><button class="ibtn" data-act="quit" aria-label="' + label + '">' + IC.close + '</button>' +
     '<div class="prog"><span style="width:' + pct + '%"></span></div><span class="cnt">' + (R.i + 1) + ' / ' + total + '</span></div>' +
     questionHtml() + '</div>';
@@ -1127,8 +1222,8 @@ function questionHtml(){
   if(R.kind === "test"){ tag = "písomka"; }
   else if(R.kind === "review"){ tag = "opakovanie"; }
   else { tag = role === "old" ? "z predošlej lekcie" : (role === "retry" ? "ešte raz" : "z tejto lekcie"); }
-  html += '<div class="stack tight"><div class="kick"><span class="a">' + KIND[q.t] + '</span><span class="sep">·</span><span>' + LESSONS[q.li].h + '</span><span class="tag">' + tag + '</span></div>' +
-    '<h2>' + q.q + '</h2></div>';
+  html += '<div class="card"><div class="kick"><span class="tpill">' + KIND[q.t] + '</span><span>' + LESSONS[q.li].h + '</span><span class="tag">' + tag + '</span></div>' +
+    '<h2>' + q.q + '</h2>';
 
   html += '<div class="stack">';
   if(q.t === "txt"){
@@ -1147,7 +1242,7 @@ function questionHtml(){
     }
   }
   if(!L){ html += '<div class="hint2">' + HINT[q.t] + '</div>'; }
-  html += '</div>';
+  html += '</div></div>';
 
   if(L){
     html += '<div class="fb ' + (R.ok ? "ok" : "no") + '"><span class="head">' + (R.ok ? "Správne" : "Nie celkom") + '</span>' +
@@ -1191,9 +1286,9 @@ function viewLessonEnd(){
   for(i = 0; i < R.log.length; i++){
     if(!seen[R.log[i].q.id]){ seen[R.log[i].q.id] = true; if(R.log[i].ok){ firstTry++; } }
   }
-  html = '<div class="wrap">' +
+  html = '<div class="wrap" style="' + tvars(R.li >= 0 ? LESSONS[R.li].t : (R.ti >= 0 ? R.ti : 0)) + '">' +
     '<div class="top"><div class="sp"></div>' + soundBtn() + '</div>' +
-    '<div class="stack tight"><span class="label">' + (R.kind === "lesson" ? "Lekcia " + (R.li + 1) + " hotová" : "Opakovanie hotové") + '</span>' +
+    '<div class="card"><span class="tpill">' + (R.kind === "lesson" ? "Lekcia " + (R.li + 1) + " hotová" : "Opakovanie hotové") + '</span>' +
     '<h1>Na prvý raz ' + firstTry + ' z ' + fl.length + ' správne</h1>' +
     '<p class="muted">' + (correct > firstTry ? 'Po oprave na konci máš správne ' + correct + ' z ' + fl.length + '. ' : '') +
     (R.kind === "lesson" ? 'Hotové lekcie: ' + doneCount() + ' z ' + LESSONS.length + '.' : '') + '</p></div>';
@@ -1207,7 +1302,7 @@ function viewLessonEnd(){
   }
   html += '<button class="btn ghost" data-act="home">Domov</button></div>';
   if(correct < fl.length){
-    html += '<div><h2 style="margin-bottom:6px;">Toto si ešte nevedel</h2><p class="muted small" style="margin-bottom:8px;">Spýtam sa ťa na to znova v ďalšej lekcii alebo pri opakovaní.</p>' + missesHtml(fl) + '</div>';
+    html += '<div class="card"><h2>Toto si ešte nevedel</h2><p class="muted small">Spýtam sa ťa na to znova v ďalšej lekcii alebo pri opakovaní.</p><div>' + missesHtml(fl) + '</div></div>';
   }
   html += '</div>';
   app.innerHTML = html;
@@ -1220,12 +1315,12 @@ function viewTestEnd(){
   g = gradeOf(pct);
   html = '<div class="wrap">' +
     '<div class="top"><div class="sp"></div>' + soundBtn() + '</div>' +
-    '<div class="stack"><span class="label center">Písomka nanečisto</span><div class="grade">' + g + '</div>' +
+    '<div class="card"><span class="label center">Písomka nanečisto</span><div class="grade">' + g + '</div>' +
     '<p class="center"><b>' + gradeWord(g) + '</b></p>' +
     '<div class="stats"><div class="stat"><b>' + pct + ' %</b>úspešnosť</div><div class="stat"><b>' + correct + '</b>správne</div><div class="stat"><b>' + (total - correct) + '</b>chyby</div></div>' +
     '<p class="small muted center">Známka: od 90 % = 1, od 75 % = 2, od 50 % = 3, od 30 % = 4</p></div>' +
     '<div class="stack"><button class="btn" data-act="test">Nová písomka</button><button class="btn ghost" data-act="home">Domov</button></div>';
-  if(correct < total){ html += '<div><h2 style="margin-bottom:6px;">Chyby</h2>' + missesHtml(R.log) + '</div>'; }
+  if(correct < total){ html += '<div class="card"><h2>Chyby</h2><div>' + missesHtml(R.log) + '</div></div>'; }
   html += '</div>';
   app.innerHTML = html;
   window.scrollTo(0, 0);
@@ -1233,28 +1328,13 @@ function viewTestEnd(){
 function viewCheat(){
   var html = '<div class="wrap">' +
     '<div class="top"><button class="back" data-act="home">' + IC.back + 'Domov</button></div>' +
-    '<div class="stack tight"><span class="label">Ťahák</span><h1>Všetko na jednom mieste</h1></div>';
-  TOPICS.forEach(function(t, ti){
-    html += '<div class="stack tight"><h2>' + (ti + 1) + '. ' + t.title + '</h2><div class="ch">';
-    lessonsOf(ti).forEach(function(li){ html += cheatHtml(LESSONS[li]); });
-    html += '</div></div>';
+    '<div class="card"><span class="tpill">Ťahák</span><h1>Čo treba vedieť na písomku</h1><p class="muted">Z každej lekcie to najdôležitejšie.</p></div>';
+  LESSONS.forEach(function(L, li){
+    html += '<div class="card lc" style="' + tvars(L.t) + '"><div class="sechead"><span class="secn">' + (li + 1) + '</span><h2>' + L.h + '</h2></div><ul class="mlist">' +
+      L.must.map(function(m){ return '<li>' + IC.check + '<span>' + m + '</span></li>'; }).join("") + '</ul></div>';
   });
   html += '</div>';
   app.innerHTML = html;
-}
-/* tahak: kazda cast lekcie (od nadpisu po nadpis) ako jeden riadok */
-function cheatHtml(L){
-  var html = "", title = L.h, parts = [];
-  function flush(){ if(parts.length){ html += '<div class="ci"><h3>' + title + '</h3><div>' + parts.join("<br>") + '</div></div>'; } parts = []; }
-  L.b.forEach(function(b){
-    if(b.t === "h"){ flush(); title = b.x; }
-    else if(b.t === "p"){ parts.push(b.x); }
-    else if(b.t === "rows"){ parts.push(b.r.map(function(r){ return '<b>' + r[0] + '</b>' + (r[1] ? ' – ' + r[1] : ''); }).join(" · ")); }
-    else if(b.t === "list"){ parts.push(b.li.join(" · ")); }
-    else if(b.t === "powers"){ parts.push("<b>legislatíva</b> – zákonodarná – NR SR · <b>exekutíva</b> – výkonná – prezident + vláda SR · <b>justícia</b> – súdna – Ústavný a Najvyšší súd SR"); }
-  });
-  flush();
-  return html;
 }
 
 function render(){
